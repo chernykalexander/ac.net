@@ -1,0 +1,310 @@
+/*
+    Основной файл стилей
+*/
+
+
+/*-----------------------------------------------------------------------------------------------------------------------------
+    Предопределенные переменные
+------------------------------------------------------------------------------------------------------------------------------*/
+@charset "utf-8";
+
+
+/* Ширина сайта */
+@site-width: 920px;
+
+
+/* Ширина сайдбара (левого меню) */ 
+@sidebar-width: 130px;
+
+
+
+/*-----------------------------------------------------------------------------------------------------------------------------
+    Стили для html-тегов
+------------------------------------------------------------------------------------------------------------------------------*/
+
+body 
+{
+    background: #E9EBEE;
+    font-family: Geneva, Arial, Helvetica, sans-serif;    
+    
+    /* margin определяет пространство за пределами (снаружи) элемента */    
+    margin-top: 0px;        
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+}
+
+
+
+
+/*-----------------------------------------------------------------------------------------------------------------------------
+    Стили для управления классами
+------------------------------------------------------------------------------------------------------------------------------*/
+
+.ParentHeader
+{
+    min-width: 100%;    
+    color: white;    
+    background-color: #3B5998;
+    border: 0px solid #3B5998;
+    
+    position: fixed; /* Фиксированное положение */
+    left: 0px; /* Расстояние от правого края окна браузера */
+    top: 0px; /* Расстояние сверху */            
+        
+    
+    /* margin определяет пространство за пределами (снаружи) элемента */
+    margin-top: auto;    
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;    
+    
+    /* padding определяет пространство внутри элемента */
+    padding-top: 10px;       
+    padding-left: auto;
+    padding-right: auto;
+    padding-bottom: 10px;
+}
+
+
+
+
+.ChaildHeader
+{
+    width: 920px;    
+    background-color: #3B5998;
+    border: 0px solid #3B5998;
+    
+    /* margin определяет пространство за пределами (снаружи) элемента */
+    margin-top: auto;    
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    
+    /* padding определяет пространство внутри элемента */
+    padding-top: auto;    
+    padding-left: auto;
+    padding-right: auto;
+    padding-bottom: auto;
+}
+
+
+
+.MainClass
+{
+    width: 920px;
+    color: black;    
+    background-color: #E9EBEE;
+    
+    /* margin определяет пространство за пределами (снаружи) элемента */
+    margin-top: 100px;    
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    
+    /* padding определяет пространство внутри элемента */
+    padding-top: auto;  
+    padding-left: auto;
+    padding-right: auto;
+    padding-bottom: auto;    
+}
+
+
+.HeaderClass
+{
+    color: white;        
+    background-color: #3B5998;    
+    border: 0px solid #3B5998;
+    
+    /* 
+       Свойство overflow управляет отображением содержания блочного элемента, 
+       если оно целиком не помещается и выходит за область заданных размеров.
+       auto - Полосы прокрутки добавляются только при необходимости
+    */
+    overflow: auto;
+    position: fixed; /* Фиксированное положение */
+    
+    
+    /* margin определяет пространство за пределами (снаружи) элемента */
+    margin-top: 170px;    
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    
+    /* padding определяет пространство внутри элемента */
+    padding-top: 10px;  
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;    
+}
+
+
+.SideBarClass
+{
+    height: 100%;
+    min-width: 180px;    
+    max-width: 180px;
+    background-color: #E9EBEE;    
+    border: 1px solid #E9EBEE;
+
+    overflow: auto;    
+    float: left;
+    position: fixed;  /* Фиксированное положение */
+    
+    /* margin определяет пространство за пределами (снаружи) элемента */
+    margin-top: auto;    
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    
+    /* padding определяет пространство внутри элемента */
+    padding-top: 10px;  
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;    
+}
+
+
+
+.SideBarClass a
+{
+    color: black;
+    border: 1px solid #e9ebee;    
+    text-decoration: none;
+    display: block;
+
+    
+    /* padding определяет пространство внутри элемента */
+    padding-top: 5px;  
+    padding-left: 5px;
+    padding-right: 0px;
+    padding-bottom: 5px;       
+}
+
+
+
+.SideBarClass a:hover
+{
+    color: black;
+    background: #f6f7f9;
+    border: 1px solid #dddfe2;    
+}
+
+
+.SideBarP
+{
+    font-family: monospace,Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 14pt; 
+    font-stretch: ultra-expanded;
+    font-variant: small-caps;
+}
+
+
+.ContentClass
+{
+    background-color: white;    
+    border: 1px solid #d0d1d5;
+
+    /* margin определяет пространство за пределами (снаружи) элемента */
+    margin-top: auto;    
+    margin-left: 210px;
+    margin-right: auto;
+    margin-bottom: auto;
+    
+    /* padding определяет пространство внутри элемента */
+    padding-top: auto;  
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: auto; 
+}
+
+
+.FooterClass
+{
+    background-color: #3B5998;    
+    border: 0px solid #3B5998;
+    overflow: auto;    
+    padding: 10px;    
+}
+
+
+.leftimg {
+    float:left; /* Выравнивание по левому краю */
+    /*margin: 7px 7px 7px 0; Отступы вокруг картинки */
+
+    /* margin определяет пространство за пределами (снаружи) элемента */
+    margin-top: 0;    
+    margin-left: 0;
+    margin-right: 20px;
+    margin-bottom: 0;     
+}
+
+
+
+/*-----------------------------------------------------------------------------------------------------------------------------
+    Стили для управления ID-шниками
+------------------------------------------------------------------------------------------------------------------------------*/
+
+
+#HeaderH1
+{
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    
+    /* margin определяет пространство за пределами (снаружи) элемента */
+    margin-top: 1px;    
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 7px;
+    
+    /* padding определяет пространство внутри элемента */
+    padding-top: auto;  
+    padding-left: auto;
+    padding-right: auto;
+    padding-bottom: auto;           
+}
+
+
+#HeaderH2
+{
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    
+    /* margin определяет пространство за пределами (снаружи) элемента */
+    margin-top: 1px;    
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 7px;
+    
+    /* padding определяет пространство внутри элемента */
+    padding-top: auto;  
+    padding-left: auto;
+    padding-right: auto;
+    padding-bottom: auto;       
+    
+}
+
+/*
+
+#MainMenu
+{
+    background: oldlace;
+    width: 190px;
+    height: 300px;
+    float: left;
+}
+
+
+#MainMenu a
+{
+    color: #2b3845;
+    text-decoration: none;
+    display: block;
+}
+
+#MainMenu a:hover
+{
+    color: #92A9BF;
+    background: blue;
+}
+*/
