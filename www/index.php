@@ -20,12 +20,20 @@
 
             <?php 
                 require_once('template/sidebar.php'); 
-            ?>
-                                
+            ?>                               
     
             
             
             <div class="ContentClass">            
+
+            <h1>Структура базы данных</h1>
+
+            <p>
+                <!-- <img src="img/shema_struct2.png" width="964" height="662" alt="Структура базы данных"> -->
+                <img id="structura_db" src="img/shema_struct2.png" alt="Структура базы данных">
+            </p>
+
+
             <p>                
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu eros libero. Donec mattis nisi mattis nunc viverra convallis. Vestibulum sed semper tortor. Maecenas feugiat non tellus in tincidunt. Nulla velit velit, elementum sit amet dolor a, euismod tempor lacus. In hac habitasse platea dictumst. Praesent consequat nisi id metus lobortis tristique. Cras semper, augue sed tempor bibendum, ipsum nisi laoreet leo, non suscipit turpis nisi eget orci.
             </p>
