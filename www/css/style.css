@@ -141,7 +141,7 @@ body
 
 .SideBarClass
 {
-    height: 100%;
+    height: 60%;
     min-width: 180px;    
     max-width: 180px;
     background-color: #E9EBEE;    
@@ -221,12 +221,45 @@ body
 
 .FooterClass
 {
-    background-color: #3B5998;    
-    border: 0px solid #3B5998;
-    overflow: auto;    
-    padding: 10px;    
+    font-size: 9pt;
+    color: grey;
+    background-color: #E9EBEE;    
+    border: 1px solid #d0d1d5;    
+    /*overflow: auto; */   
+
+    float: bottom;
+    width: 920px;
+
+    margin-top: 5px;    
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    
+    padding-top: 5px;  
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+
 }
 
+/*
+.FooterClass p
+{
+    
+
+
+
+    margin-top: 0px;    
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    
+    padding-top: 0px;  
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;    
+}
+*/
 
 .leftimg {
     float:left; /* Выравнивание по левому краю */
