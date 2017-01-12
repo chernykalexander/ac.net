@@ -2,7 +2,7 @@
     <p class="SideBarP">ОСНОВНОЕ</p>
         <p><img src="img/sidebar/01himik.png" height="21" width="21" align="left"><a href="/"> Главная</a></p>
     <p class="SideBarP">ТАБЛИЦЫ</p>
-        <p><img src="img/sidebar/02strelka.png" height="21" width="21" align="left"><a href="/">Справочник товаров</a></p>
+        <p><img src="img/sidebar/02strelka.png" height="21" width="21" align="left"><a href="/tovar.php">Справочник товаров</a></p>
         <p><img src="img/sidebar/03kost.png" height="21" width="21" align="left"><a href="/">Список товаров</a></p>               
         <p><img src="img/sidebar/04koleso.png" height="21" width="21" align="left"><a href="/">Магазины</a></p>                
         <p><img src="img/sidebar/05diagram.png" height="21" width="21" align="left"><a href="/">Покупатели</a></p>                                

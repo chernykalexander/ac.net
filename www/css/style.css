@@ -236,7 +236,7 @@ body
     /*overflow: auto; */   
 
     float: bottom;
-    width: 920px;
+    width: 420px;
 
     margin-top: 5px;    
     margin-left: auto;
@@ -326,8 +326,25 @@ body
 }
 
 
-#structura_db
+#ImgStructira
 {
-    width: 100%;
-    height: 100%;
+    position: static;
+    width: 40em;
+    transition: width 0.5s;
+    box-shadow: 10px 10px 30px #111;
 }
+
+
+
+#ImgStructira:hover
+{
+    width: 60em;    
+
+    position: fixed;
+    /*
+    left: auto;
+    top: auto;
+    width: auto;
+    */
+}  
+

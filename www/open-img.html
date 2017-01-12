@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<!--
+<link rel="stylesheet" type="text/css" href="tmp.css" />
+-->
+<style type="text/css">
+td {
+	position: relative;
+}
+.clone {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.clone > img {
+	width: 100%;
+	height: 100%;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+	$('td a').click(function () {
+		var o=$(this).parent();
+		var url=o.find('img').attr('src');
+		var html='<a href="#" class="clone"><img src="'+url+'" /></a>'
+		o.append(html);
+		o=o.find('.clone');
+		o.animate({width:'200%',height:'200%'});
+		o.click(function () {
+			$(this).remove();
+		});
+	});
+});
+</script>
+</head>
+<body>
+<table>
+	<td>
+		<a href='#'><img src='http://javascript.ru/forum/images/ca_serenity/misc/logo.gif' /></a>
+	</td>
+</table>
+</body>
+</html>

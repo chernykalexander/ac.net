@@ -1,0 +1,6 @@
+http://www.spravkaweb.ru/mysql/sql/createdb
+mysql> CREATE DATABASE db_magazine CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+mysql> GRANT ALL PRIVILEGES ON db_magazine.* TO "user_magazine"@"localhost" IDENTIFIED BY "line9dom5";
+
+mysql> FLUSH PRIVILEGES;
