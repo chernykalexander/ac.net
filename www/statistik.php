@@ -78,24 +78,22 @@
                     echo "</tr>";                    
                 }
                 echo "</table>";
-                //$mysqli->close();
 
                 echo "<pre class='code'>";                
                 echo "select <br>";
                 echo "  c.fio, <br>";
                 echo "  sum(ch.kolichestvo * t.price) as summa <br>";
                 echo "from <br>";
-                echo "  mgz_client c <br>";
-                echo "  right outer join mgz_pokupki p <br>";
+                echo "  client c <br>";
+                echo "  right outer join pokupki p <br>";
                 echo "  on c.id = p.id_client <br>";  
-                echo "  right outer join mgz_check ch <br>";
+                echo "  right outer join check ch <br>";
                 echo "  on p.id = ch.id_pokupki <br>";
-                echo "  left outer join mgz_tovar t <br>";
+                echo "  left outer join tovar t <br>";
                 echo "  on ch.id_tovar = t.id <br>";
                 echo "group by c.fio <br>";
                 echo "order by summa desc; <br>";
                 echo "</pre>";
-
 
                 // -------------------------------------------------------------------------------------------------------------
                 echo "<br>";                
@@ -139,7 +137,6 @@
                     echo "</tr>";                    
                 }
                 echo "</table>";
-                $mysqli->close();
 
                 echo "<pre class='code'>";                
                 echo "select <br>";
@@ -150,9 +147,65 @@
                 echo "  from mgz_check c <br>";
                 echo "  where c.id_tovar = t.id) <br>";
                 echo "  * t.price as summa_dohoda <br>";
-                echo "from mgz_tovar t <br>";
+                echo "from tovar t <br>";
                 echo "order by summa_dohoda desc; <br>";
                 echo "</pre>";                
+
+                // -------------------------------------------------------------------------------------------------------------
+                echo "<br>";                
+                echo "<br>";                
+                echo "<br>";                
+                // -------------------------------------------------------------------------------------------------------------
+
+                echo "<h2>Самый рентабельный магазин</h2>";
+
+                $res_ren_magaz = $mysqli->query("
+                                                select
+                                                  m.descr,
+                                                  sum(ch.kolichestvo * t.price) as summa
+                                                from
+                                                  mgz_magazine m right outer join mgz_pokupki p
+                                                  on m.id = p.id_magazine
+                                                  right outer join mgz_check ch
+                                                  on p.id = ch.id_pokupki
+                                                  left outer join mgz_tovar t
+                                                  on ch.id_tovar = t.id
+                                                group by m.descr
+                                                order by summa desc;
+                                            ");
+
+                echo "<table class='dbtable' width='100%'' cellspacing='0' border='1'>";
+                echo "<caption>Самый рентабельный магазин";
+                echo "<tr>";
+                echo "<th>descr</th>";
+                echo "<th>summa</th>";
+                echo "</tr>";
+
+                //  Перемещает указатель результата на выбранную строку
+                $res_ren_magaz->data_seek(0);
+                while ($row = $res_ren_magaz->fetch_assoc()) 
+                {
+                    echo "<tr>"; 
+                    echo "<td>" . $row['descr'] . "</td>";
+                    echo "<td>" . $row['summa'] . "</td>";
+                    echo "</tr>";                    
+                }
+                echo "</table>";
+
+                echo "<pre class='code'>";                
+                echo "select <br>";
+                echo "  m.descr, <br>";
+                echo "  sum(ch.kolichestvo * t.price) as summa <br>";
+                echo "from <br>";
+                echo "  magazine m right outer join pokupki p <br>";
+                echo "  on m.id = p.id_magazine <br>";
+                echo "  right outer join check ch <br>";
+                echo "  on p.id = ch.id_pokupki <br>";
+                echo "  left outer join tovar t <br>";
+                echo "  on ch.id_tovar = t.id <br>";
+                echo "group by m.descr <br>";
+                echo "order by summa desc; <br>";
+                echo "</pre>";                                
             ?>
 
             </div>

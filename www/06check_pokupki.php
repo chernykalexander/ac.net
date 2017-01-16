@@ -4,7 +4,7 @@
     <head>
 
         <?php
-            $page_title = 'Справочник товаров';
+            $page_title = 'Чек покупки';
             require_once('template/head.php'); 
         ?>
 
@@ -25,7 +25,7 @@
      
             <div class="ContentClass">            
 
-            <h1>Справочник товаров</h1>
+            <h1>Чек покупки</h1>
 
 
             <?php
@@ -43,34 +43,51 @@
                 $mysqli->query("SET CHARACTER SET 'utf8'");
                 $mysqli->query("SET SESSION collation_connection = 'utf8_general_ci'");
 
-                // Выбираем из таблицы mgz_tovar
-                $res = $mysqli->query("SELECT id, descr, price FROM mgz_tovar ORDER BY id ASC");
+                // Выбираем из таблицы mgz_tovar_list
+                $res_tovar_list = $mysqli->query("
+                                                    select
+                                                      ch.id, 
+                                                      ch.id_pokupki, 
+                                                      ch.id_tovar, 
+                                                      ch.kolichestvo
+                                                    from
+                                                      mgz_check ch
+                                                    order by ch.id asc;
+                                                ");
 
                 echo "<table class='dbtable' width='100%'' cellspacing='0' border='1'>";
-                echo "<caption>Таблица товаров</caption>";
+                echo "<caption>Чек покупки</caption>";
                 echo "<tr>";
                 echo "<th>id</th>";
-                echo "<th>descr</th>";
-                echo "<th>price</th>";                
+                echo "<th>id_pokupki</th>";
+                echo "<th>id_tovar</th>";
+                echo "<th>kolichestvo</th>";
                 echo "</tr>";
+
                 //  Перемещает указатель результата на выбранную строку
-                $res->data_seek(0);
-                while ($row = $res->fetch_assoc()) 
+                $res_tovar_list->data_seek(0);
+                while ($row = $res_tovar_list->fetch_assoc()) 
                 {
                     echo "<tr>";
                     echo "<td>" . $row['id'] . "</td>";
-                    echo "<td>" . $row['descr'] . "</td>";
-                    echo "<td>" . $row['price'] . "</td>";
+                    echo "<td>" . $row['id_pokupki'] . "</td>";
+                    echo "<td>" . $row['id_tovar'] . "</td>";
+                    echo "<td>" . $row['kolichestvo'] . "</td>";
                     echo "</tr>";                    
                 }
                 echo "</table>";
-                $mysqli->close();
+                //$mysqli->close();
 
                 echo "<pre class='code'>";
-                echo "SELECT <br>";
-                echo "  id, descr, price <br>";
-                echo "FROM tovar <br>";
-                echo "ORDER BY id ASC <br>";
+
+                echo "selectselect <br>";
+                echo "select  ch.id, <br>";
+                echo "select  ch.id_pokupki, <br>";
+                echo "select  ch.id_tovar, <br>";
+                echo "select  ch.kolichestvo <br>";
+                echo "selectfrom <br>";
+                echo "select  check ch <br>";
+                echo "selectorder by ch.id asc; <br>";
                 echo "</pre>";                
             ?>                               
 
