@@ -10,5 +10,5 @@
         <p><img src="img/sidebar/08kist.png" height="21" width="21" align="left"><a href="/">Список покупок</a></p>                
     <p class="SideBarP">ЗАПРОСЫ</p>
         <p><img src="img/sidebar/09kubik.png" height="21" width="21" align="left"><a href="/demo.php">Финансовые отчеты</a></p>
-        <p><img src="img/sidebar/10fish.png" height="21" width="21" align="left"><a href="/">Здесь будут2</a></p>                
+        <p><img src="img/sidebar/10fish.png" height="21" width="21" align="left"><a href="/statistik.php">Статистические отчеты</a></p>                
 </div>  
