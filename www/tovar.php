@@ -25,46 +25,53 @@
      
             <div class="ContentClass">            
 
-            <h1><?php $page_title ?></h1>
+            <h1>Справочник товаров</h1>
 
 
-            <?php 
-                $dbHost = 'localhost'; // чаще всего это так, но иногда требуется прописать ip адрес базы данных
-                $dbUser = 'user_magazine'; // пользователь базы данных
-                $dbPass = 'line9dom5'; // пароль пользователя
-                $dbName = 'db_magazine'; // название вашей базы
+            <?php
+                include 'config.php'; 
                 
-                /*
-                $myConnect = mysql_connect($dbHost, $dbUser, $dbPass));
-                mysql_select_db($dbName, $myConnect);
-                */
-
                 // Пытаемся подключиться к БД
                 $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
                 if ($mysqli->connect_errno) {
                     echo "Не удалось подключиться к MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
                 }
-                echo $mysqli->host_info . "<br>";                
+                //echo $mysqli->host_info . "<br>";                
 
                 // Самый 100%ый код для 100%ого UTF-8 :D
-                /*
-                mysql_query("SET NAMES 'utf8'"); 
-                mysql_query("SET CHARACTER SET 'utf8'");
-                mysql_query("SET SESSION collation_connection = 'utf8_general_ci'");
-                */
+                $mysqli->query("SET NAMES 'utf8'"); 
+                $mysqli->query("SET CHARACTER SET 'utf8'");
+                $mysqli->query("SET SESSION collation_connection = 'utf8_general_ci'");
 
                 // Выбираем из таблицы mgz_tovar
                 $res = $mysqli->query("SELECT id, descr, price FROM mgz_tovar ORDER BY id ASC");
 
-                echo "<table>";
+                echo "<table class='dbtable' width='100%'' cellspacing='0' border='1'>";
+                echo "<caption>Таблица товаров</caption>";
+                echo "<tr>";
+                echo "<th>id</th>";
+                echo "<th>descr</th>";
+                echo "<th>price</th>";                
+                echo "</tr>";
                 //  Перемещает указатель результата на выбранную строку
                 $res->data_seek(0);
                 while ($row = $res->fetch_assoc()) 
                 {
-                    echo " id = " . $row['id'] . "<br>";
+                    echo "<tr>";
+                    echo "<td>" . $row['id'] . "</td>";
+                    echo "<td>" . $row['descr'] . "</td>";
+                    echo "<td>" . $row['price'] . "</td>";
+                    echo "</tr>";                    
                 }
                 echo "</table>";
                 $mysqli->close();
+
+                echo "<pre class='code'>";
+                echo "SELECT <br>";
+                echo "  id, descr, price <br>";
+                echo "FROM tovar <br>";
+                echo "ORDER BY id ASC <br>";
+                echo "</pre>";                
             ?>                               
 
 

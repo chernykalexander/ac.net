@@ -210,6 +210,7 @@ body
 {
     background-color: white;    
     border: 1px solid #d0d1d5;
+    min-height: 990px;
 
     overflow: hidden;    
 
@@ -281,6 +282,24 @@ body
 }
 
 
+.dbtable 
+{
+    margin-top: 20px;    
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;    
+}
+
+.code
+{
+    font-family: monospace;
+    background-color: #F8F7F2;
+
+    padding-top: 10px;  
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;    
+}
 
 /*-----------------------------------------------------------------------------------------------------------------------------
     Стили для управления ID-шниками
