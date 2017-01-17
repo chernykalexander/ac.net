@@ -71,7 +71,7 @@
                     echo "</tr>";                    
                 }
                 echo "</table>";
-                $mysqli->close();
+                //$mysqli->close();
 
                 echo "<pre class='code'>";
                 echo "select <br>";
@@ -83,13 +83,19 @@
                 echo "</pre>";                
             ?>                               
 
-
+            <!-- Форма добавление товара -->
+            <form name="add_tovar" action="01_add_tovar.php" method="POST">
+                <p><strong>Добавление нового товара</strong></p>
+                <p>Описание: </p>
+                <p><input name="descr" type="text" size="30" maxlength="30"></p>
+                <p>Цена: </p>                
+                <p><input name="price" type="text" size="10" maxlength="10"></p>                
+                <p><input name="done" type="submit"></p>
+            </form>
             </div>
-
         </div>        
-
 <?php 
-    require_once('template/footer.php'); 
-?>         
+    require_once('template/footer.php');
+?>    
     </body>
 </html>
