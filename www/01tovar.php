@@ -97,5 +97,6 @@
 <?php 
     require_once('template/footer.php');
 ?>    
+    <script src="js/01tovar.js"></script>
     </body>
 </html>

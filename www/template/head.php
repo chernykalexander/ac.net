@@ -9,3 +9,4 @@
 <meta name="keywords" content="магазин, система управления, ERP система">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
+<script src = "/lib/jquery-3.1.1.min.js"></script>
