@@ -72,6 +72,13 @@ $( document ).ready( function(){
 			};
 
 
+			$.ajax({
+				url: 'js/test-ajax.php',
+				success: function(data) {
+				$('.results').html(data);
+				}
+			});
+
 
 	       // var article_title = $('input[name=article_title_new]').val();
 	       // // отправляем AJAX запрос

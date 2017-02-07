@@ -110,6 +110,9 @@
 
                 <input id="button_insert" type="button"  value="Добавить">
             </form>
+            
+            <div class="results">Ждем ответа</div>
+
             </div>
         </div>        
 <?php 
