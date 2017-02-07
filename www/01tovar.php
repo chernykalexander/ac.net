@@ -8,6 +8,7 @@
             require_once('template/head.php'); 
         ?>
 
+    <script src="js/01tovar.js"></script>
     </head>
 
     <body>        
@@ -78,25 +79,41 @@
                 echo "    t.id, <br>";
                 echo "    t.descr, <br>";
                 echo "    t.price <br>";
-                echo "from mgz_tovar t <br>";
+                echo "from tovar t <br>";
                 echo "order by t.id <br>";
                 echo "</pre>";                
             ?>                               
 
             <!-- Форма добавление товара -->
-            <form name="add_tovar" action="01_add_tovar.php" method="POST">
-                <p><strong>Добавление нового товара</strong></p>
-                <p>Описание: </p>
-                <p><input name="descr" type="text" size="30" maxlength="30"></p>
-                <p>Цена: </p>                
-                <p><input name="price" type="text" size="10" maxlength="10"></p>                
-                <p><input name="done" type="submit"></p>
+            <!-- <form name="add_tovar" action="01_add_tovar.php" method="POST"> -->
+            <form name="add_tovar" action="" method="POST">
+                
+                <p><strong>Детальное описание товара:</strong></p>
+                <div>
+                    <p><label for="id_input">ID: </label></p>
+                    <p><input id="id_input" name="id_input" type="text" size="10" maxlength="10" disabled></p>
+                </div>
+                <div>                
+                    <p><label for="descr_input">Описание: </label></p>
+                    <p>
+                        <input id="descr_input" name="descr_input" type="text" size="30" maxlength="30" title="От 1 до 30 символов">
+                        <span id="descr_error" class="msg_error"></span>
+                    </p>
+                </div>
+                <div>
+                    <p><label for="price_input">Цена: </label></p>
+                    <p>
+                        <input id="price_input" name="price_input" type="text" size="10" maxlength="10" title="Цена должна быть положительной">
+                        <span id="price_error" class="msg_error"></span>
+                    </p> 
+                </div>
+
+                <input id="button_insert" type="button"  value="Добавить">
             </form>
             </div>
         </div>        
 <?php 
     require_once('template/footer.php');
 ?>    
-    <script src="js/01tovar.js"></script>
     </body>
 </html>
