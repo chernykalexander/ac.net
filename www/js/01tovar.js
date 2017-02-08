@@ -72,13 +72,14 @@ $( document ).ready( function(){
 			};
 
 
-			$.ajax({
-				url: 'js/test-ajax.php',
-				success: function(data) {
-				$('.results').html(data);
-				}
-			});
+			// $.ajax({
+			// 	url: 'js/test-ajax.php',
+			// 	success: function(data) {
+			// 	$('.results').html(data);
+			// 	}
+			// });
 
+			$.ajax( 'model/01tovar_ins.php' );
 
 	       // var article_title = $('input[name=article_title_new]').val();
 	       // // отправляем AJAX запрос

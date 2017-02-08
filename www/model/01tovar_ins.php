@@ -1,5 +1,5 @@
 <?php
-    include 'config.php'; 
+    include '../config.php'; 
     
     // Пытаемся подключиться к БД
     $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
@@ -23,7 +23,7 @@
 
     if ($res) { 
         echo "<p>Товар в базу данных успешно добавлен.</p>";
-        $mysqli->close();
+        // $mysqli->close();
     } else {
         echo "<p>Ошибка.";
         echo "<br>Товар в базу данных не добавлен.</p>";
