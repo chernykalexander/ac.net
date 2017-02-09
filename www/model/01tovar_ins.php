@@ -16,10 +16,10 @@
     $mysqli->query("SET SESSION collation_connection = 'utf8_general_ci'");
 
 
-    $tmp_firstname = $_POST['firstname']; 
-    $tmp_age = $_POST['age'];
-    // $tmp_firstname = 'TestText3'; 
-    // $tmp_age = 27;
+    // $tmp_firstname = $_POST['firstname']; 
+    // $tmp_age = $_POST['age'];
+    $tmp_firstname = 'TestText4'; 
+    $tmp_age = 5;
 
 
     // Выбираем из таблицы mgz_tovar

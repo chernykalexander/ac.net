@@ -71,49 +71,34 @@ $( document ).ready( function(){
 			};
 
 
-			// $.ajax({
-			// 	url: 'js/test-ajax.php',
-			// 	success: function(data) {
-			// 	$('.results').html(data);
-			// 	}
-			// });
 			console.log( 'BEGIN------------------------------------------------' );
 
-			$.ajax( 'model/01tovar_ins.php',
-			{
-				type: 'POST',
-				dataType: 'text', // json в каком формате получать данные
-				data: 'firstname=Proverka2&age=16',
-				success: function( mydata ) { 
-					console.log( 'Ajax-запрос выполнился удачно ###' ); 
-					console.log( 'От сервера прибыли дынные: ' + mydata ); 
-				},
-				error: function( mydata ) { 
-					console.log( 'Попытка выполнить ajax-запрос провалилась ###' ); 
-					console.log( 'От сервера прибыли дынные: ' + mydata ); 
+			dataSend = { "SentFirstname": "Pascal", "SentAge": "15" };
+
+			$.getJSON(
+				'model/01tovar_ins.php',
+				dataSend,
+				function( dataReturned, statusReturned ) {
+					console.log( 'Ajax запрос выполнился успешно' );
 				}
-			});
+			);
 
 			console.log( 'END--------------------------------------------------' );
-	       // var article_title = $('input[name=article_title_new]').val();
-	       // // отправляем AJAX запрос
-	       // $.ajax(
-	       //    {
-	       //       type: "POST",
-	       //       url: "http://localhost/MyAjax/addArticle.php",
-	       //       data: "article_title=" + article_title,
-	       //       success: function(response) 
-	       //       {
-	       //          if ( response == "OK" )
-	       //          {
-	       //             alert("Товар " + article_title + " добавлен!");
-	       //             location.reload();
-	       //          }
-	       //          else
-	       //          alert("Ошибка в запросе! Сервер вернул вот что: " + response);
-	       //       }
-	       //    }
-	       //  );
+
+			// $.ajax( 'model/01tovar_ins.php',
+			// {
+			// 	type: 'POST',
+			// 	dataType: 'text', // json в каком формате получать данные
+			// 	data: 'firstname=Proverka2&age=16',
+			// 	success: function( mydata ) { 
+			// 		console.log( 'Ajax-запрос выполнился удачно ###' ); 
+			// 		console.log( 'От сервера прибыли дынные: ' + mydata ); 
+			// 	},
+			// 	error: function( mydata ) { 
+			// 		console.log( 'Попытка выполнить ajax-запрос провалилась ###' ); 
+			// 		console.log( 'От сервера прибыли дынные: ' + mydata ); 
+			// 	}
+			// });
 	    }
 	);
 
