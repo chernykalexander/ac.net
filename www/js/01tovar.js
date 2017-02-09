@@ -1,7 +1,7 @@
 $( document ).ready( function(){
 
 	
-	console.log( 'Hi hi hi' );
+	// console.log( 'Hi hi hi' );
 	var myvar,
 		myindex;
 	var TovarID;
@@ -27,7 +27,6 @@ $( document ).ready( function(){
 			$(" input[name='price_input'] ").val( TovarPrice );
 			
 			console.log( myvar );
-			console.log( '----------------------------------' );
 		}
 	);
 	
@@ -78,9 +77,24 @@ $( document ).ready( function(){
 			// 	$('.results').html(data);
 			// 	}
 			// });
+			console.log( 'BEGIN------------------------------------------------' );
 
-			$.ajax( 'model/01tovar_ins.php' );
+			$.ajax( 'model/01tovar_ins.php',
+			{
+				type: 'POST',
+				dataType: 'text', // json в каком формате получать данные
+				data: 'firstname=Proverka2&age=16',
+				success: function( mydata ) { 
+					console.log( 'Ajax-запрос выполнился удачно ###' ); 
+					console.log( 'От сервера прибыли дынные: ' + mydata ); 
+				},
+				error: function( mydata ) { 
+					console.log( 'Попытка выполнить ajax-запрос провалилась ###' ); 
+					console.log( 'От сервера прибыли дынные: ' + mydata ); 
+				}
+			});
 
+			console.log( 'END--------------------------------------------------' );
 	       // var article_title = $('input[name=article_title_new]').val();
 	       // // отправляем AJAX запрос
 	       // $.ajax(
@@ -100,7 +114,6 @@ $( document ).ready( function(){
 	       //       }
 	       //    }
 	       //  );
-	    	console.log( '****************************************** )' );
 	    }
 	);
 

@@ -86,7 +86,7 @@
 
             <!-- Форма добавление товара -->
             <!-- <form name="add_tovar" action="01_add_tovar.php" method="POST"> -->
-            <form name="add_tovar" action="" method="POST">
+            <form name="add_tovar">
                 
                 <p><strong>Детальное описание товара:</strong></p>
                 <div>

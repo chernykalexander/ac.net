@@ -1,4 +1,6 @@
 <?php
+    // header("HTTP/1.1 404 Not Found");
+
     include '../config.php'; 
     
     // Пытаемся подключиться к БД
@@ -13,10 +15,17 @@
     $mysqli->query("SET CHARACTER SET 'utf8'");
     $mysqli->query("SET SESSION collation_connection = 'utf8_general_ci'");
 
+
+    $tmp_firstname = $_POST['firstname']; 
+    $tmp_age = $_POST['age'];
+    // $tmp_firstname = 'TestText3'; 
+    // $tmp_age = 27;
+
+
     // Выбираем из таблицы mgz_tovar
     $res = $mysqli->query("
-                            insert into mgz_test(firstname)
-                            values('sublime')
+                            insert into mgz_test(firstname, age)
+                            values('" . $tmp_firstname . "', " . $tmp_age . ") 
                         ");
 
 
