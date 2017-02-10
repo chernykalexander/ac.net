@@ -16,10 +16,20 @@
     $mysqli->query("SET SESSION collation_connection = 'utf8_general_ci'");
 
 
+    $tmp_firstname = $_POST[ 'firstname' ];
+    $tmp_age = $_POST[ 'age' ];
+    
+    // $MyJSON = json_decode( $_POST[ 'JSONfullInfoArray' ] );
+    // $tmp_firstname = $MyJSON[ 'firstname' ];
+    // $tmp_age = $MyJSON[ 'age' ];
+    
+    // $tmp_firstname = $JSON[ 'firstname' ];
+    // $tmp_age = $_POST[ 'age' ];
+    
     // $tmp_firstname = $_POST['firstname']; 
     // $tmp_age = $_POST['age'];
-    $tmp_firstname = 'TestText4'; 
-    $tmp_age = 5;
+    // $tmp_firstname = 'TestText4'; 
+    // $tmp_age = 5;
 
 
     // Выбираем из таблицы mgz_tovar
@@ -30,14 +40,21 @@
 
 
 
-    if ($res) { 
-        echo "<p>Товар в базу данных успешно добавлен.</p>";
-        // $mysqli->close();
-    } else {
-        echo "<p>Ошибка.";
-        echo "<br>Товар в базу данных не добавлен.</p>";
-    };
+    // if ($res) { 
+    //     echo "<p>Товар в базу данных успешно добавлен.</p>";
+    //     // $mysqli->close();
+    // } else {
+    //     echo "<p>Ошибка.";
+    //     echo "<br>Товар в базу данных не добавлен.</p>";
+    // };
 
     $mysqli->close();
-    echo '<p>Вернуться в <a href="/01tovar.php">справочник товаров</a></p>';
+    // echo '<p>Вернуться в <a href="/01tovar.php">справочник товаров</a></p>';
+
+echo '{';
+echo '  "one": "Матрица",';
+echo '  "two": "Матрица. Перезагрузка",';
+echo '  "three": "Матрица. Революция"';
+echo '}';
+
 ?>
