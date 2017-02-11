@@ -77,21 +77,31 @@ $( document ).ready( function(){
 
             console.log( 'BEGIN------------------------------------------------' );
 
-            // dataSend = { "firstname": "Pascal", "age": 15 };
+            dataSend = { "firstname": "Pascal", age: 15 };
+
+            // $.ajax( {
+            //   dataType: "json",
+            //   url: 'model/01tovar_ins.php',
+            //   data: JSON.stringify( dataSend ),
+            //   success: function() {
+            //         console.log( 'Ajax запрос выполнился успешно' );
+            //     }
+            // } );
 
             $.getJSON(
                 'model/01tovar_ins.php',
-                { "firstname": "Pascal", "age": 15 }
+                // { "firstname": "Pascal", "age": 15 },
                 // Сериализация процесс перевода структуры данных в последовательность битов.
                 // dataSend,
                 // Сериализация процесс перевода структуры данных в последовательность битов.
-                // JSON.stringify(dataSend), 
+                // dataSend,
+                JSON.stringify( dataSend ), 
                 function( dataReturned, statusReturned ) {
                     console.log( 'Ajax запрос выполнился успешно' );
                 }
             )
                 .done(function( json ) {
-                    console.log( "JSON Data: " + json);
+                    console.log( "JSON Data: " + json );
                     
                     var items = [];
                     $.each( json, function( key, val ) {
@@ -106,7 +116,7 @@ $( document ).ready( function(){
                 })
                 .fail(function( jqxhr, textStatus, error ) {
                     var err = textStatus + ", " + error;
-                    console.log( "Request Failed: " + err );
+                    console.log( "MY Request Failed: " + err );
                     // console.log( "Request Failed: " )
             });
 
