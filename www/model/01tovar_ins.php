@@ -92,6 +92,7 @@
     echo '{';
     echo '  "one": "' . $text_error_json  .'",';
     echo '  "two": "Матрица. Перезагрузка",';
+    echo '  "half": "Матрица. Революция"';
     echo '  "three": "Матрица. Революция"';
     echo '}';
 
