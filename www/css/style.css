@@ -53,7 +53,7 @@ form
     padding-bottom: 5px;    
 }
 
-#form_edit
+#form_insert_update, #form_delete
 {
     display: none;
 }

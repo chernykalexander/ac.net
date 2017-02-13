@@ -86,13 +86,12 @@
 
             <form id="control_grid">
                 <input id="button_insert" type="button" value=" Добавить ">
-                <input id="button_update" type="button" value=" Изменить ">
-                <input id="button_delete" type="button" value=" Удалить ">
+                <input id="button_update" type="button" disabled value=" Изменить ">
+                <input id="button_delete" type="button" disabled value=" Удалить ">
             </form>
 
-            <!-- Форма добавление товара -->
-            <!-- <form name="add_tovar" action="01_add_tovar.php" method="POST"> -->
-            <form id="form_edit">
+            <!-- Форма добавление изменение товара -->
+            <form id="form_insert_update">
                 
                 <p><strong>Детальное описание товара:</strong></p>
                 <div>
@@ -118,7 +117,12 @@
                 <input id="button_cancel" type="button"  value=" Отмена ">
             </form>
             
-            <!-- <div class="results">Ждем ответа</div> -->
+            <!-- Форма удаления товара -->
+            <form id="form_delete">            
+                <p><strong>Вы действительно хотите удалить товар?</strong></p>
+                <input id="button_yes" type="button"  value="  Да  ">
+                <input id="button_no" type="button"  value=" Нет ">
+            </form>
 
             </div>
         </div>        
