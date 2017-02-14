@@ -10,8 +10,15 @@ $( document ).ready( function(){
     // При клике на строку таблицы
     $( 'table.dbtable tr' ).not( ':first' ).click( function() {
         
-        if ($( '#form_delete' ).is(':visible')) {
-            // $element виден
+        // Если вызвана диалоговая форма добавить/изменить 
+        // то переходить на другие строки нельзя
+        if ( $( '#form_insert_update' ).is( ':visible' ) ) {
+            return;
+        };
+
+        // Если задан вопрос удалять строку или нет 
+        // то переходить на другие строки нельзя
+        if ( $( '#form_delete' ).is( ':visible' ) ) {
             return;
         };
 
@@ -103,27 +110,32 @@ $( document ).ready( function(){
     // *********************** Добавление запси *******************************************
     // ************************************************************************************
     $( '#button_insert' ).click( function() {
-        //
+
+        $( '#button_insert' ).attr( 'disabled', true );
+        $( '#button_update' ).attr( 'disabled', true );
+        $( '#button_delete' ).attr( 'disabled', true );
+
+        // Очищаем поля формы
+        $( '#id_input' ).val( '' );
+        $( '#descr_input' ).val( '' );
+        $( '#price_input' ).val( '' );
+
         $( '#form_insert_update' ).show();
         
-
         $( '#button_ok' ).click( function() {
         
-            if ( isCheckDataTovar() === false) {
-                return;
-                console.log( 'Товар содержит ошибку' );
-            } else {
+            if ( isCheckDataTovar() === true) {
                 console.log( 'Товар успешно Добавлен' );
+            } else {
+                console.log( 'Товар содержит ошибку' );
             };
-
-            console.log( 'Нажата кнопка ОК' );
-        
 
         } );
 
         $( '#button_cancel' ).click( function() {
+
             $( '#form_insert_update' ).hide();
-            console.log( 'Нажата кнопка Cancel' );
+
         } );
 
     } );
@@ -132,28 +144,37 @@ $( document ).ready( function(){
     // ************************************************************************************
     // *********************** Изменение запси *******************************************
     // ************************************************************************************
-    $( '#button_updata' ).click( function() {
-        //
+    $( '#button_update' ).click( function() {
+
+        $( '#button_insert' ).attr( 'disabled', true );
+        $( '#button_update' ).attr( 'disabled', true );
+        $( '#button_delete' ).attr( 'disabled', true );
+
+        // Заполняем поля формы
+        $( '#id_input' ).val( TovarID );
+        $( '#descr_input' ).val( TovarDescr );
+        $( '#price_input' ).val( TovarPrice );
+
         $( '#form_insert_update' ).show();
 
         $( '#button_ok' ).click( function() {
         
+            console.log( 'Нажата кнопка ОК' );
+            
             if ( isCheckDataTovar() === false) {
                 return;
                 console.log( 'Товар содержит ошибку' );
             } else {
-                console.log( 'Товар успешно Добавлен' );
+                console.log( 'Товар успешно изменен' );
             };
-
-            console.log( 'Нажата кнопка ОК' );
-        
 
         } );
 
         $( '#button_cancel' ).click( function() {
-            $( '#form_insert_update' ).hide();
             console.log( 'Нажата кнопка Cancel' );
+            $( '#form_insert_update' ).hide();
         } );
+
     } );
     
 
@@ -161,19 +182,37 @@ $( document ).ready( function(){
     // *********************** Удаление запси *******************************************
     // ************************************************************************************
     $( '#button_delete' ).click( function() {
-        //
+        
+        $( '#button_insert' ).attr( 'disabled', true );
+        $( '#button_update' ).attr( 'disabled', true );
+        $( '#button_delete' ).attr( 'disabled', true );
+
+        $( '#p_delete' ).text( 'id: ' + TovarID + ', ' + TovarDescr);
         $( '#form_delete' ).show();
 
         $( '#button_yes' ).click( function() {
-            console.log( 'Нажата кнопка YES в форме удаления записи' );
+            
             $( '#form_delete' ).hide();
-            // return;
+
+            $( '#button_insert' ).removeAttr( 'disabled' );
+            $( '#button_update' ).attr( 'disabled', true );
+            $( '#button_delete' ).attr( 'disabled', true );
+
+            $( 'table.dbtable tr' ).removeClass( 'marked' );
+
+            TovarID = null;
+            TovarDescr = null;
+            TovarPrice = null;
         });
 
         $( '#button_no' ).click( function() {
-            console.log( 'Нажата кнопка NO в форме удаления записи' );
+            
             $( '#form_delete' ).hide();
-            // return;
+
+            $( '#button_insert' ).removeAttr( 'disabled' );
+            $( '#button_update' ).removeAttr( 'disabled' );
+            $( '#button_delete' ).removeAttr( 'disabled' );
+
         });
 
     });

@@ -120,6 +120,7 @@
             <!-- Форма удаления товара -->
             <form id="form_delete">            
                 <p><strong>Вы действительно хотите удалить товар?</strong></p>
+                <p id="p_delete"></p>
                 <input id="button_yes" type="button"  value="  Да  ">
                 <input id="button_no" type="button"  value=" Нет ">
             </form>
