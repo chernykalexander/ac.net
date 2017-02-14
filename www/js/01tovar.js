@@ -1,4 +1,4 @@
-$( document ).ready( function(){
+$( document ).ready( function() {
 
     // console.log( 'Hi hi hi' );
     var myvar = null;
@@ -110,24 +110,57 @@ $( document ).ready( function(){
     // *********************** Добавление запси *******************************************
     // ************************************************************************************
     $( '#button_insert' ).click( function() {
-
+        
         $( '#button_insert' ).attr( 'disabled', true );
         $( '#button_update' ).attr( 'disabled', true );
         $( '#button_delete' ).attr( 'disabled', true );
-
+        
         // Очищаем поля формы
         $( '#id_input' ).val( '' );
         $( '#descr_input' ).val( '' );
         $( '#price_input' ).val( '' );
-
+        
         $( '#form_insert_update' ).show();
         
         $( '#button_ok' ).click( function() {
         
             if ( isCheckDataTovar() === true) {
+
+                myJson = { firstname: 'test3', age: 33 };
+
+                $.ajax(
+                {
+                    url: 'model/01tovar_ins.php', // Вызываем этот скрипт
+                    data: JSON.stringify( myJson ), // И отправляем ему данные
+                    type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
+                    dataType: 'json' // В каком формате получать данные от сервера
+                    // data: myJson,
+                    // data: { json: JSON.stringify( myJson ) },
+
+                    // contentType: "application/json; charset=utf-8",
+                    // data: JSON.stringify( { 'Absence' : JSON.stringify( myJson ) } ),
+                    // // data: JSON.stringify(myJson),
+                    // // data: 'myJson' + $.toJSON(myJson),
+                    // method: 'POST', // HTTP метод используемый в запросе (например POST, GET и т.д.)
+                    // dataType: 'json', // json в каком формате получать данные от сервера
+
+                    // success: function( mydata ) { 
+                    //     console.log( 'Ajax-запрос выполнился удачно ###' ); 
+                    //     console.log( 'От сервера прибыли дынные: ' + mydata ); 
+                    // },
+                    // error: function( mydata ) { 
+                    //     console.log( 'Попытка выполнить ajax-запрос провалилась ###' ); 
+                    //     console.log( 'От сервера прибыли дынные: ' + mydata ); 
+                    // }
+
+                } );
+
                 console.log( 'Товар успешно Добавлен' );
+
             } else {
+
                 console.log( 'Товар содержит ошибку' );
+
             };
 
         } );
@@ -135,9 +168,9 @@ $( document ).ready( function(){
         $( '#button_cancel' ).click( function() {
 
             $( '#form_insert_update' ).hide();
-
+        
         } );
-
+        
     } );
     
 
@@ -171,8 +204,10 @@ $( document ).ready( function(){
         } );
 
         $( '#button_cancel' ).click( function() {
+            
             console.log( 'Нажата кнопка Cancel' );
             $( '#form_insert_update' ).hide();
+
         } );
 
     } );
@@ -333,4 +368,4 @@ $( document ).ready( function(){
     //  $('table tr').removeClass('marked');
     //  $(this).addClass('marked');
     // });
-});
+} );
