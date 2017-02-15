@@ -126,32 +126,22 @@ $( document ).ready( function() {
         
             if ( isCheckDataTovar() === true) {
 
-                myJson = { firstname: 'test3', age: 33 };
+                myJson = { firstname: 'test4', age: 44 };
 
                 $.ajax(
                 {
                     url: 'model/01tovar_ins.php', // Вызываем этот скрипт
                     data: JSON.stringify( myJson ), // И отправляем ему данные
                     type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
-                    dataType: 'json' // В каком формате получать данные от сервера
-                    // data: myJson,
-                    // data: { json: JSON.stringify( myJson ) },
-
-                    // contentType: "application/json; charset=utf-8",
-                    // data: JSON.stringify( { 'Absence' : JSON.stringify( myJson ) } ),
-                    // // data: JSON.stringify(myJson),
-                    // // data: 'myJson' + $.toJSON(myJson),
-                    // method: 'POST', // HTTP метод используемый в запросе (например POST, GET и т.д.)
-                    // dataType: 'json', // json в каком формате получать данные от сервера
-
-                    // success: function( mydata ) { 
-                    //     console.log( 'Ajax-запрос выполнился удачно ###' ); 
-                    //     console.log( 'От сервера прибыли дынные: ' + mydata ); 
-                    // },
-                    // error: function( mydata ) { 
-                    //     console.log( 'Попытка выполнить ajax-запрос провалилась ###' ); 
-                    //     console.log( 'От сервера прибыли дынные: ' + mydata ); 
-                    // }
+                    dataType: 'json', // В каком формате получать данные от сервера
+                    success: function( mydata ) { 
+                        console.log( 'Ajax-запрос выполнился удачно ###' ); 
+                        console.log( 'От сервера прибыли дынные: ' + mydata['two'] ); 
+                    },
+                    error: function( mydata ) { 
+                        console.log( 'Попытка выполнить ajax-запрос провалилась ###' ); 
+                        console.log( 'От сервера прибыли дынные: ' + mydata ); 
+                    }
 
                 } );
 
