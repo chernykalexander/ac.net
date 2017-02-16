@@ -54,7 +54,7 @@
                                         order by t.id
                                     ");
 
-                echo "<table class='dbtable' width='100%'' cellspacing='0' border='1'>";
+                echo "<table id='dbtable' width='100%'' cellspacing='0' border='1'>";
                 echo "<caption>Справочник товаров</caption>";
                 echo "<tr>";
                 echo "<th>id</th>";

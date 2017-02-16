@@ -310,7 +310,7 @@ form
 }
 
 
-.dbtable 
+#dbtable 
 {
     margin-top: 20px;    
     margin-left: auto;
@@ -318,7 +318,7 @@ form
     margin-bottom: 20px;    
 }
 
-.dbtable tr:hover 
+#dbtable tr:hover 
 {
     background-color: #97DBF8;
 }

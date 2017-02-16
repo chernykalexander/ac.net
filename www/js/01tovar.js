@@ -1,14 +1,82 @@
 $( document ).ready( function() {
 
     // console.log( 'Hi hi hi' );
-    var myvar = null;
-    var TovarID = null;
-    var TovarDescr = null;
-    var TovarPrice = null;
+    
+    // var myvar = null;
+    // var TovarID = null;
+    // var TovarDescr = null;
+    // var TovarPrice = null;
+
+    var tovar = {
+        
+        // Поля таблицы БД
+        id: null,
+        descr: null,
+        price: null,
+        
+        // Очистить объект
+        clearObj() {
+            // 
+            id = null;
+            descr = null;
+            price = null;
+        },
+
+        // Очистить форму
+        clearForma() {
+            // 
+            $( '#id_input' ).val( '' );
+            $( '#descr_input' ).val( '' );
+            $( '#price_input' ).val( '' );
+        },
+
+        // Получить данные из формы и записать их в объект
+        getForma() {
+            // 
+            id = $( '#id_input' ).val();
+            descr = $( '#descr_input' ).val();
+            price = $( '#price_input' ).val();
+        },
+
+        // Отправить данные из объекта в форму
+        pushForma() {
+            // 
+            $( '#id_input' ).val( this.id );
+            $( '#descr_input' ).val( this.descr );
+            $( '#price_input' ).val( this.price );
+        },
+
+        // Проверить данные в форме
+        checkForma() {
+            // 
+        },
+
+        // Получить данные из текущей строки html-таблицы и записать их в объект
+        getTable( currentRow ) {
+            // 
+            this.id = $( currentRow ).find( 'td:eq(0)' ).html();
+            this.descr = $( currentRow ).find( 'td:eq(1)' ).html();
+            this.price = $( currentRow ).find( 'td:eq(2)' ).html();
+        },
+
+        // Отправить данные из объекта в последнюю строку html-таблицы
+        pushTable() {
+            // 
+        },
+
+        // Вывести значения объекта в консоль
+        writeConsole() {
+            // 
+            console.log ( '|| ID: ' + this.id + ' DESCR: ' + this.descr + ' PRICE: ' + this.price + ' ||');
+        },
+        foo: null
+    };
+
+
 
 
     // При клике на строку таблицы
-    $( 'table.dbtable tr' ).not( ':first' ).click( function() {
+    $( '#dbtable tr' ).not( ':first' ).click( function() {
         
         // Если вызвана диалоговая форма добавить/изменить 
         // то переходить на другие строки нельзя
@@ -23,7 +91,7 @@ $( document ).ready( function() {
         };
 
         // Красим строку
-        $( 'table.dbtable tr' ).removeClass( 'marked' );
+        $( '#dbtable tr' ).removeClass( 'marked' );
         $( this ).addClass( 'marked' );
 
         // поскольку строка выбрана то кнопки изменить и удалить активны
@@ -31,22 +99,29 @@ $( document ).ready( function() {
         $( '#button_delete' ).removeAttr( 'disabled' );
 
         // Считываем значения из html таблицы
-        TovarID = $( this ).find( 'td:eq(0)' ).html();
-        TovarDescr = $( this ).find( 'td:eq(1)' ).html();
-        TovarPrice = $( this ).find( 'td:eq(2)' ).html();
-        myvar = String( TovarID ) + " - " + String( TovarDescr ) + " - " + String( TovarPrice );
+        // tovar.id = $( this ).find( 'td:eq(0)' ).html();
+        // tovar.descr = $( this ).find( 'td:eq(1)' ).html();
+        // tovar.price = $( this ).find( 'td:eq(2)' ).html();
+
+        // Получить данные из текущей строки таблицы и записать их в объект товар
+        tovar.getTable( this );
+
+        // myvar = String( TovarID ) + " - " + String( TovarDescr ) + " - " + String( TovarPrice );
+
+        // Вывести в консольсодержимое объекта товар
+        tovar.writeConsole();
 
         // Записываем эти значения в поля формы
-        $( "input[name='id_input']" ).val( TovarID );
-        $( "input[name='descr_input']" ).val( TovarDescr );
-        $( "input[name='price_input']" ).val( TovarPrice );
+        // $( "input[name='id_input']" ).val( tovar.id );
+        // $( "input[name='descr_input']" ).val( tovar.descr );
+        // $( "input[name='price_input']" ).val( tovar.price );
         
-        console.log( myvar );
+        // console.log( myvar );
     } );
     
 
     // Кнопки updata и delete активны только при выделенной записи
-    // if ( $( 'table.dbtable' ).hasClass( 'marked' ) ) {
+    // if ( $( 'table#dbtable' ).hasClass( 'marked' ) ) {
     //     console.log( 'Marked - найден' );
     //     // $( '#button_insert' ).removeAttr( 'disabled' );
     //     // $( '#button_update' ).removeAttr( 'disabled' );
@@ -65,7 +140,7 @@ $( document ).ready( function() {
     // ************************************************************************************
     // *********************** Проверка данных *******************************************
     // ************************************************************************************
-    function isCheckDataTovar() {
+    function isCheckForma() {
         //
         // Очищаем все <span>ы от ошибок
         $(' .msg_error ').text( '' );
@@ -116,40 +191,44 @@ $( document ).ready( function() {
         $( '#button_delete' ).attr( 'disabled', true );
         
         // Очищаем поля формы
-        $( '#id_input' ).val( '' );
-        $( '#descr_input' ).val( '' );
-        $( '#price_input' ).val( '' );
+        tovar.clearForma();
+        // $( '#id_input' ).val( '' );
+        // $( '#descr_input' ).val( '' );
+        // $( '#price_input' ).val( '' );
         
         $( '#form_insert_update' ).show();
+
+        // Добавление строки в конец таблицы
+        // $( '#dbtable' ).append( '<tr><td>my data</td><td>more data</td></tr>' );
+        // $( '#dbtable tr:last' ).after( '<tr>Test new row</tr>' );
+        $( '#dbtable tr:last' ).after( '<tr><td>Unreal</td><td>Unreal</td><td>Unreal</td></tr>' );
+
+
+        // $( '#dbtable' ).insertBefore( '<tr>' );
+
+        // $( '#dbtable' ).append( '<tr>' );
+        // $( '#dbtable > tr:last').append( '<td>' );
+        // $( '#dbtable > tr:last > td:first' ).val( 'Im a td!' );
         
         $( '#button_ok' ).click( function() {
         
-            if ( isCheckDataTovar() === true) {
-
-                myJson = { firstname: 'test4', age: 44 };
+            if ( isCheckForma() === true ) {
 
                 $.ajax(
                 {
                     url: 'model/01tovar_ins.php', // Вызываем этот скрипт
-                    data: JSON.stringify( myJson ), // И отправляем ему данные
+                    data: JSON.stringify( tovar ), // И отправляем ему данные
                     type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
                     dataType: 'json', // В каком формате получать данные от сервера
-                    success: function( mydata ) { 
+                    success: function( responseJSON ) { 
                         console.log( 'Ajax-запрос выполнился удачно ###' ); 
-                        console.log( 'От сервера прибыли дынные: ' + mydata['two'] ); 
+                        console.log( 'От сервера прибыли дынные: ' + responseJSON['two'] ); 
                     },
-                    error: function( mydata ) { 
+                    error: function( responseJSON ) { 
                         console.log( 'Попытка выполнить ajax-запрос провалилась ###' ); 
-                        console.log( 'От сервера прибыли дынные: ' + mydata ); 
+                        console.log( 'От сервера прибыли дынные: ' + responseJSON ); 
                     }
-
-                } );
-
-                console.log( 'Товар успешно Добавлен' );
-
-            } else {
-
-                console.log( 'Товар содержит ошибку' );
+                });
 
             };
 
@@ -157,6 +236,7 @@ $( document ).ready( function() {
 
         $( '#button_cancel' ).click( function() {
 
+            $( '#button_insert' ).removeAttr( 'disabled' );
             $( '#form_insert_update' ).hide();
         
         } );
@@ -174,9 +254,12 @@ $( document ).ready( function() {
         $( '#button_delete' ).attr( 'disabled', true );
 
         // Заполняем поля формы
-        $( '#id_input' ).val( TovarID );
-        $( '#descr_input' ).val( TovarDescr );
-        $( '#price_input' ).val( TovarPrice );
+        // $( '#id_input' ).val( tovar.id );
+        // $( '#descr_input' ).val( tovar.descr );
+        // $( '#price_input' ).val( tovar.price );
+
+        tovar.pushForma();
+
 
         $( '#form_insert_update' ).show();
 
@@ -195,8 +278,11 @@ $( document ).ready( function() {
 
         $( '#button_cancel' ).click( function() {
             
-            console.log( 'Нажата кнопка Cancel' );
             $( '#form_insert_update' ).hide();
+            
+            $( '#button_insert' ).removeAttr( 'disabled' );
+            $( '#button_update' ).removeAttr( 'disabled' );
+            $( '#button_delete' ).removeAttr( 'disabled' );
 
         } );
 
@@ -212,7 +298,7 @@ $( document ).ready( function() {
         $( '#button_update' ).attr( 'disabled', true );
         $( '#button_delete' ).attr( 'disabled', true );
 
-        $( '#p_delete' ).text( 'id: ' + TovarID + ', ' + TovarDescr);
+        $( '#p_delete' ).text( 'id: ' + tovar.id + ', ' + tovar.descr);
         $( '#form_delete' ).show();
 
         $( '#button_yes' ).click( function() {
@@ -223,11 +309,13 @@ $( document ).ready( function() {
             $( '#button_update' ).attr( 'disabled', true );
             $( '#button_delete' ).attr( 'disabled', true );
 
-            $( 'table.dbtable tr' ).removeClass( 'marked' );
+            $( '#dbtable tr' ).removeClass( 'marked' );
 
-            TovarID = null;
-            TovarDescr = null;
-            TovarPrice = null;
+            // tovar.id = null;
+            // tovar.descr = null;
+            // tovar.price = null;
+
+            tovar.clearObj;
         });
 
         $( '#button_no' ).click( function() {
