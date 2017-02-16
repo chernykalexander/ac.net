@@ -33,9 +33,9 @@ $( document ).ready( function() {
         // Получить данные из формы и записать их в объект
         getForma() {
             // 
-            id = $( '#id_input' ).val();
-            descr = $( '#descr_input' ).val();
-            price = $( '#price_input' ).val();
+            this.id = $( '#id_input' ).val();
+            this.descr = $( '#descr_input' ).val();
+            this.price = $( '#price_input' ).val();
         },
 
         // Отправить данные из объекта в форму
@@ -190,29 +190,29 @@ $( document ).ready( function() {
         $( '#button_update' ).attr( 'disabled', true );
         $( '#button_delete' ).attr( 'disabled', true );
         
+        // Очищаем свойства объекта
+        tovar.clearObj();
         // Очищаем поля формы
         tovar.clearForma();
-        // $( '#id_input' ).val( '' );
-        // $( '#descr_input' ).val( '' );
-        // $( '#price_input' ).val( '' );
         
         $( '#form_insert_update' ).show();
 
         // Добавление строки в конец таблицы
-        // $( '#dbtable' ).append( '<tr><td>my data</td><td>more data</td></tr>' );
-        // $( '#dbtable tr:last' ).after( '<tr>Test new row</tr>' );
-        $( '#dbtable tr:last' ).after( '<tr><td>Unreal</td><td>Unreal</td><td>Unreal</td></tr>' );
+        $( '#dbtable tr:last' ).after( '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' );
+        // Красим строку
+        $( '#dbtable tr' ).removeClass( 'marked' );
+        $( '#dbtable tr:last' ).addClass( 'marked' );
 
+        console.log( JSON.stringify( tovar ) );
 
-        // $( '#dbtable' ).insertBefore( '<tr>' );
-
-        // $( '#dbtable' ).append( '<tr>' );
-        // $( '#dbtable > tr:last').append( '<td>' );
-        // $( '#dbtable > tr:last > td:first' ).val( 'Im a td!' );
-        
         $( '#button_ok' ).click( function() {
         
             if ( isCheckForma() === true ) {
+
+                // Заполняем объект данными из формы
+                tovar.getForma();
+
+                console.log( JSON.stringify( tovar ) );
 
                 $.ajax(
                 {
@@ -222,11 +222,11 @@ $( document ).ready( function() {
                     dataType: 'json', // В каком формате получать данные от сервера
                     success: function( responseJSON ) { 
                         console.log( 'Ajax-запрос выполнился удачно ###' ); 
-                        console.log( 'От сервера прибыли дынные: ' + responseJSON['two'] ); 
+                        console.log( 'От сервера прибыли дынные: ' + responseJSON[ 'response' ] ); 
                     },
                     error: function( responseJSON ) { 
                         console.log( 'Попытка выполнить ajax-запрос провалилась ###' ); 
-                        console.log( 'От сервера прибыли дынные: ' + responseJSON ); 
+                        console.log( 'От сервера прибыли дынные: ' + responseJSON[ 'response' ] ); 
                     }
                 });
 
@@ -238,6 +238,11 @@ $( document ).ready( function() {
 
             $( '#button_insert' ).removeAttr( 'disabled' );
             $( '#form_insert_update' ).hide();
+
+            // Удаляем выделение
+            $( '#dbtable tr' ).removeClass( 'marked' );
+            // Удалить последюю строку
+            $( '#dbtable tr:last' ).remove();
         
         } );
         
