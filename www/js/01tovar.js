@@ -60,8 +60,11 @@ $( document ).ready( function() {
         },
 
         // Отправить данные из объекта в последнюю строку html-таблицы
-        pushTable() {
+        pushTable() {            
             // 
+            $( '#dbtable tr:last td:eq(0)' ).html( this.id );
+            $( '#dbtable tr:last td:eq(1)' ).html( this.descr );
+            $( '#dbtable tr:last td:eq(2)' ).html( this.price );
         },
 
         // Вывести значения объекта в консоль
@@ -105,6 +108,8 @@ $( document ).ready( function() {
 
         // Получить данные из текущей строки таблицы и записать их в объект товар
         tovar.getTable( this );
+        // Из объекта товар записать в форму
+        tovar.pushForma();
 
         // myvar = String( TovarID ) + " - " + String( TovarDescr ) + " - " + String( TovarPrice );
 
@@ -198,7 +203,24 @@ $( document ).ready( function() {
         $( '#form_insert_update' ).show();
 
         // Добавление строки в конец таблицы
-        $( '#dbtable tr:last' ).after( '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' );
+        
+        $( '#dbtable' ).append( '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' );
+
+        // $( '#dbtable tr' ).innerHTML( 'TETSTSTS' );
+
+        // var newLi = document.createElement( 'tr' );
+        // newLi.innerHTML = '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
+        // dbtable.appendChild(newLi);
+
+        // $( '#dbtable' )[ 0 ].insertAdjacentHTML( 'beforeend', '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' );
+        // $( '#dbtable' ).append( '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' );
+        // $( '#dbtable' ).append( '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' );
+        // $( '#dbtable tr:last' ).after( '<tr></tr>' );
+        // $( '#dbtable tr:last' ).innerHTML = '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
+        // $( '#dbtable tr:last' ).innerHTML += '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
+        // $( '#dbtable tr:last' ).after( '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' );
+        // $( '#dbtable tr:last' ).append( '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' ).show();
+        
         // Красим строку
         $( '#dbtable tr' ).removeClass( 'marked' );
         $( '#dbtable tr:last' ).addClass( 'marked' );
@@ -223,12 +245,22 @@ $( document ).ready( function() {
                     success: function( responseJSON ) { 
                         console.log( 'Ajax-запрос выполнился удачно ###' ); 
                         console.log( 'От сервера прибыли дынные: ' + responseJSON[ 'response' ] ); 
+                        tovar.id = responseJSON[ 'response' ];
+                        tovar.pushTable();
                     },
                     error: function( responseJSON ) { 
                         console.log( 'Попытка выполнить ajax-запрос провалилась ###' ); 
                         console.log( 'От сервера прибыли дынные: ' + responseJSON[ 'response' ] ); 
                     }
                 });
+
+                $( '#button_insert' ).removeAttr( 'disabled' );
+                $( '#button_update' ).removeAttr( 'disabled' );
+                $( '#button_delete' ).removeAttr( 'disabled' );
+                
+                // tovar.clearForma();
+                // tovar.clearObj();
+                $( '#form_insert_update' ).hide();
 
             };
 
@@ -272,11 +304,43 @@ $( document ).ready( function() {
         
             console.log( 'Нажата кнопка ОК' );
             
-            if ( isCheckDataTovar() === false) {
-                return;
-                console.log( 'Товар содержит ошибку' );
-            } else {
+            if ( isCheckForma() === true) {
+
+                // Заполняем объект данными из формы
+                tovar.getForma();
+
+                console.log( JSON.stringify( tovar ) );
+
+                $.ajax(
+                {
+                    url: 'model/01tovar_upd.php', // Вызываем этот скрипт
+                    data: JSON.stringify( tovar ), // И отправляем ему данные
+                    type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
+                    dataType: 'json', // В каком формате получать данные от сервера
+                    success: function( responseJSON ) { 
+                        console.log( 'Ajax-запрос выполнился удачно ###' ); 
+                        console.log( 'От сервера прибыли дынные: ' + responseJSON[ 'response' ] ); 
+                        // tovar.id = responseJSON[ 'response' ];
+                        tovar.pushTable();
+                    },
+                    error: function( responseJSON ) { 
+                        console.log( 'Попытка выполнить ajax-запрос провалилась ###' ); 
+                        console.log( 'От сервера прибыли дынные: ' + responseJSON[ 'response' ] ); 
+                    }
+                });
+
+                $( '#button_insert' ).removeAttr( 'disabled' );
+                $( '#button_update' ).removeAttr( 'disabled' );
+                $( '#button_delete' ).removeAttr( 'disabled' );
+                
+                // tovar.clearForma();
+                // tovar.clearObj();
+                $( '#form_insert_update' ).hide();                
+
                 console.log( 'Товар успешно изменен' );
+
+            } else {
+                console.log( 'Товар содержит ошибку' );
             };
 
         } );
@@ -308,19 +372,33 @@ $( document ).ready( function() {
 
         $( '#button_yes' ).click( function() {
             
+            $.ajax(
+            {
+                url: 'model/01tovar_del.php', // Вызываем этот скрипт
+                data: JSON.stringify( tovar ), // И отправляем ему данные
+                type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
+                dataType: 'json', // В каком формате получать данные от сервера
+                success: function( responseJSON ) { 
+                    console.log( 'Ajax-запрос выполнился удачно ###' ); 
+                    console.log( 'От сервера прибыли дынные: ' + responseJSON[ 'response' ] ); 
+                },
+                error: function( responseJSON ) { 
+                    console.log( 'Попытка выполнить ajax-запрос провалилась ###' ); 
+                    console.log( 'От сервера прибыли дынные: ' + responseJSON[ 'response' ] ); 
+                }
+            });
+            
             $( '#form_delete' ).hide();
 
             $( '#button_insert' ).removeAttr( 'disabled' );
             $( '#button_update' ).attr( 'disabled', true );
             $( '#button_delete' ).attr( 'disabled', true );
 
-            $( '#dbtable tr' ).removeClass( 'marked' );
+            $( '.marked' ).remove();
+            // $( '#dbtable tr' ).removeClass( 'marked' );
 
-            // tovar.id = null;
-            // tovar.descr = null;
-            // tovar.price = null;
-
-            tovar.clearObj;
+            tovar.clearObj();
+            tovar.clearForma();
         });
 
         $( '#button_no' ).click( function() {
