@@ -65,6 +65,8 @@ $( document ).ready( function() {
             // 
             console.log ( '|| ID: ' + this.id + ' DESCR: ' + this.descr + ' PRICE: ' + this.price + ' ||');
         },
+        // тип операции: insert, update, delete
+        manipulation: null,
         foo: null
     };
 
@@ -186,9 +188,11 @@ $( document ).ready( function() {
 
                 console.log( JSON.stringify( tovar ) );
 
+                tovar.manipulation = 'insert';
+
                 $.ajax(
                 {
-                    url: 'model/01tovar_ins.php', // Вызываем этот скрипт
+                    url: 'model/01tovar_manipulation.php', // Вызываем этот скрипт
                     data: JSON.stringify( tovar ), // И отправляем ему данные
                     type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
                     dataType: 'json', // В каком формате получать данные от сервера
@@ -255,9 +259,11 @@ $( document ).ready( function() {
 
                 console.log( JSON.stringify( tovar ) );
 
+                tovar.manipulation = 'update';
+
                 $.ajax(
                 {
-                    url: 'model/01tovar_upd.php', // Вызываем этот скрипт
+                    url: 'model/01tovar_manipulation.php', // Вызываем этот скрипт
                     data: JSON.stringify( tovar ), // И отправляем ему данные
                     type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
                     dataType: 'json', // В каком формате получать данные от сервера
@@ -316,9 +322,11 @@ $( document ).ready( function() {
 
         $( '#button_yes' ).click( function() {
             
+            tovar.manipulation = 'delete';
+
             $.ajax(
             {
-                url: 'model/01tovar_del.php', // Вызываем этот скрипт
+                url: 'model/01tovar_manipulation.php', // Вызываем этот скрипт
                 data: JSON.stringify( tovar ), // И отправляем ему данные
                 type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
                 dataType: 'json', // В каком формате получать данные от сервера
