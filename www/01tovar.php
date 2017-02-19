@@ -31,6 +31,8 @@
 
             <?php
                 include 'config.php'; 
+
+                echo '<h3>Nachalnoe znachenie</h3>';
                 
                 // Пытаемся подключиться к БД
                 $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
