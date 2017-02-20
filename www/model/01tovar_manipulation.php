@@ -40,8 +40,9 @@
 
 
     // тип операции: insert, update, delete
-    switch ( strtolower( $request_client[ manipulation ] ) ) {
+    switch ( $request_client[ manipulation ] ) {
         
+            
         case 'insert':
             
             $mysqli->query(' insert into mgz_tovar(descr, price)
@@ -74,7 +75,7 @@
             $response_server[ response ] = 'Запись изменена успешно';
 
             break;
-        
+
         case 'delete':
             
             $mysqli->query(' delete from mgz_tovar

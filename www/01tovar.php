@@ -8,7 +8,8 @@
             require_once('template/head.php'); 
         ?>
 
-    <script src="js/01tovar.js"></script>
+    <script src="js/01tovar_edit.js"></script>
+    <!-- <script src="js/01tovar.js"></script> -->
     </head>
 
     <body>        

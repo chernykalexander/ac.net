@@ -158,7 +158,9 @@ $( document ).ready( function() {
     // *********************** Добавление запси *******************************************
     // ************************************************************************************
     $( '#button_insert' ).click( function() {
-        
+
+        tovar.manipulation = 'insert';
+
         $( '#button_insert' ).attr( 'disabled', true );
         $( '#button_update' ).attr( 'disabled', true );
         $( '#button_delete' ).attr( 'disabled', true );
@@ -184,12 +186,15 @@ $( document ).ready( function() {
         
             if ( isCheckForma() === true ) {
 
+                if ( tovar.manipulation !== 'insert' )
+                    return;
+
                 // Заполняем объект данными из формы
                 tovar.getForma();
 
                 console.log( JSON.stringify( tovar ) );
 
-                tovar.manipulation = 'insert';
+                // tovar.manipulation = 'insert';
 
                 $.ajax(
                 {
@@ -216,6 +221,8 @@ $( document ).ready( function() {
                 // tovar.clearForma();
                 // tovar.clearObj();
                 $( '#form_insert_update' ).hide();
+                console.log( 'Товар успешно добавлен' );
+                return;
 
             };
 
@@ -241,11 +248,14 @@ $( document ).ready( function() {
     // ************************************************************************************
     $( '#button_update' ).click( function() {
 
+        tovar.manipulation = 'update';
+
         $( '#button_insert' ).attr( 'disabled', true );
         $( '#button_update' ).attr( 'disabled', true );
         $( '#button_delete' ).attr( 'disabled', true );
 
-        tovar.pushForma();
+        tovar.getForma();
+        // tovar.pushForma();
 
         $( '#form_insert_update' ).show();
 
@@ -255,12 +265,16 @@ $( document ).ready( function() {
             
             if ( isCheckForma() === true) {
 
+                if ( tovar.manipulation !== 'update' )
+                    return;
+
+                // tovar.getTable();
                 // Заполняем объект данными из формы
-                tovar.getForma();
+                // tovar.getForma();
 
                 console.log( JSON.stringify( tovar ) );
 
-                tovar.manipulation = 'update';
+                // tovar.manipulation = 'update';
 
                 $.ajax(
                 {
@@ -289,6 +303,8 @@ $( document ).ready( function() {
                 $( '#form_insert_update' ).hide();                
 
                 console.log( 'Товар успешно изменен' );
+
+                return;
 
             } else {
                 console.log( 'Товар содержит ошибку' );
