@@ -86,16 +86,23 @@
                 echo "</pre>";                
             ?>                               
 
-            <form id="control_grid">
+            <form id="form_control">
                 <input id="button_insert" type="button" value=" Добавить ">
                 <input id="button_update" type="button" disabled value=" Изменить ">
                 <input id="button_delete" type="button" disabled value=" Удалить ">
             </form>
 
             <!-- Форма добавление изменение товара -->
-            <form id="form_insert_update">
-                
+            <form id="form_input">
+
+                <strong>
+                <p id="p_message"></p>
+                </strong>
+<!-- 
                 <p><strong>Детальное описание товара:</strong></p>
+                <p><strong>Вы действительно хотите удалить товар?</strong></p>
+
+ -->
                 <div>
                     <p><label for="id_input">ID: </label></p>
                     <p><input id="id_input" type="text" size="10" maxlength="10" disabled></p>
@@ -120,13 +127,14 @@
             </form>
             
             <!-- Форма удаления товара -->
-            <form id="form_delete">            
+
+<!--             <form id="form_delete">            
                 <p><strong>Вы действительно хотите удалить товар?</strong></p>
                 <p id="p_delete"></p>
                 <input id="button_yes" type="button"  value="  Да  ">
                 <input id="button_no" type="button"  value=" Нет ">
             </form>
-
+ -->
             </div>
         </div>        
 <?php 

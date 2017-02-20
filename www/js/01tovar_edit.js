@@ -66,9 +66,9 @@ $( document ).ready( function() {
 	};
 
 
-	// ************************************************************************************
-	// *********************** Проверка данных *******************************************
-	// ************************************************************************************
+	// ------------------------------------------------------------------------------------
+	// ----------------------- Проверка данных -------------------------------------------
+	// ------------------------------------------------------------------------------------
 	function isCheckForma() {
 	    //
 	    // Очищаем все <span>ы от ошибок
@@ -110,7 +110,15 @@ $( document ).ready( function() {
 	};
 
 
-	// При клике на строку таблицы
+	// 
+	// ------------------- Если открыта диалоговое окно то прячим управляющие кнопки ----------
+	// 
+	// $( '#form_input' ).show();
+
+
+	// 
+	// ----------------------- При клике на строку таблицы -------------------------------------
+	// 
 	$( '#dbtable tr' ).not( ':first' ).click( function() {
 	    
 	    // Если вызвана диалоговая форма добавить/изменить 
@@ -125,14 +133,6 @@ $( document ).ready( function() {
 	        return;
 	    };
 
-	    // Красим строку
-	    $( '#dbtable tr' ).removeClass( 'marked' );
-	    $( this ).addClass( 'marked' );
-
-	    // поскольку строка выбрана то кнопки изменить и удалить активны
-	    $( '#button_update' ).removeAttr( 'disabled' );
-	    $( '#button_delete' ).removeAttr( 'disabled' );
-
 	    // Получить данные из текущей строки таблицы и записать их в объект товар
 	    tovar.TableToObject( this );
 	    // Из объекта товар записать в форму
@@ -141,69 +141,122 @@ $( document ).ready( function() {
 	    // Вывести в консольсодержимое объекта товар
 	    console.log( 'При клике на строку таблицы' );
 	    tovar.writeConsole();
+
+	    // Красим строку
+	    $( '#dbtable tr' ).removeClass( 'marked' );
+	    $( this ).addClass( 'marked' );
 	 
+	    // поскольку строка выбрана то кнопки изменить и удалить активны
+	    $( '#button_update' ).removeAttr( 'disabled' );
+	    $( '#button_delete' ).removeAttr( 'disabled' );
 	} );
 
 
-	// ************************************************************************************
-	// *********************** Удаление запси *******************************************
-	// ************************************************************************************
+	// 
+	// ----------------------- Добавление запси -------------------------------------------
+	// 
+	$( '#button_insert' ).click( function() {
+		// 
+		tovar.manipulation = 'insert';
+		$( '#p_message' ).text = 'Форма добавления товара в БД';
+		$( '#form_input' ).show();		
+
+		// Когда вызвана диалоговая форма, кнопки становятся не активными
+		$( '#button_insert' ).attr( 'disabled', true );
+		$( '#button_update' ).attr( 'disabled', true );
+		$( '#button_delete' ).attr( 'disabled', true );
+	} );
+
+
+	// 
+	// ----------------------- Изменение запси -------------------------------------------
+	// 
+	$( '#button_update' ).click( function() {
+		// 
+		tovar.manipulation = 'update';
+		$( '#p_message' ).text = 'Что вы хотите поменять в товаре?';
+		$( '#form_input' ).show();
+
+		// Когда вызвана диалоговая форма, кнопки становятся не активными
+		$( '#button_insert' ).attr( 'disabled', true );
+		$( '#button_update' ).attr( 'disabled', true );
+		$( '#button_delete' ).attr( 'disabled', true );
+	} );
+
+
+	// 
+	// ----------------------- Удаление запси -------------------------------------------
+	// 
 	$( '#button_delete' ).click( function() {
-	    
-	    // Пока есть диалоговое окно - все кнопки недоступны
-	    $( '#button_insert' ).attr( 'disabled', true );
-	    $( '#button_update' ).attr( 'disabled', true );
-	    $( '#button_delete' ).attr( 'disabled', true );
+		// 
+		tovar.manipulation = 'delete';
+		$( '#p_message' ).text = 'Вы действительно хотите удалить товар?';
+		$( '#form_input' ).show();
 
-	    $( '#p_delete' ).text( 'id: ' + tovar.id + ', ' + tovar.descr);
-	    $( '#form_delete' ).show();
+		// Когда вызвана диалоговая форма, кнопки становятся не активными
+		$( '#button_insert' ).attr( 'disabled', true );
+		$( '#button_update' ).attr( 'disabled', true );
+		$( '#button_delete' ).attr( 'disabled', true );
+	} );   
 
-	    $( '#button_yes' ).click( function() {
-	        
-	        tovar.manipulation = 'delete';
 
-	        $.ajax(
-	        {
-	            url: 'model/01tovar_manipulation.php', // Вызываем этот скрипт
-	            data: JSON.stringify( tovar ), // И отправляем ему данные
-	            type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
-	            dataType: 'json', // В каком формате получать данные от сервера
-	            success: function( responseJSON ) { 
-	                console.log( 'Ajax-запрос выполнился удачно ###' ); 
-	                console.log( 'От сервера прибыли дынные: ' + responseJSON[ 'response' ] ); 
-	            },
-	            error: function( responseJSON ) { 
-	                console.log( 'Попытка выполнить ajax-запрос провалилась ###' ); 
-	                console.log( 'От сервера прибыли дынные: ' + responseJSON[ 'response' ] ); 
-	            }
-	        });
-	        
-	        // Прячем диалоговую форму удаления записи
-	        $( '#form_delete' ).hide();
+	//  ------------------------------------------------------------------------------------
+	//  ------------------------------------------------------------------------------------
+	//  ------------------------------------------------------------------------------------
+	//  ------------------------------------------------------------------------------------
+	//  ------------------------------------------------------------------------------------
 
-	        // Запись удалили - активна только одна кнопка добавить
-	        $( '#button_insert' ).removeAttr( 'disabled' );
-	        $( '#button_update' ).attr( 'disabled', true );
-	        $( '#button_delete' ).attr( 'disabled', true );
 
-	        // Удаляем данные из формы и объекта
-	        tovar.ClearFormaObject();
-	        
-	        // Удаляем выделенную запись
-	        $( '.marked' ).remove();
+	// 
+	// ----------------------- Отмена операции -------------------------------------------
+	// 
+	$( '#button_cancel' ).click( function() {
+		// 
+		tovar.manipulation = null;
+		$( '#p_message' ).text = null;
+		$( '#form_input' ).hide();
 
-	    });
+		// Все кнопки снова доступны
+		$( '#button_insert' ).removeAttr( 'disabled' );
+		$( '#button_update' ).removeAttr( 'disabled' );
+		$( '#button_delete' ).removeAttr( 'disabled' );
+	} );
 
-	    $( '#button_no' ).click( function() {
-	        
-	        // Прячем диалоговую форму удаления записи
-	        $( '#form_delete' ).hide();
 
-	        // Отказались от удаления - записи все кнопки активны
-	        $( '#button_insert' ).removeAttr( 'disabled' );
-	        $( '#button_update' ).removeAttr( 'disabled' );
-	        $( '#button_delete' ).removeAttr( 'disabled' );
+	// 
+	// ------------------- Выполнение операции ---------------------------------------------
+	// 
+	$( '#button_ok' ).click( function() {
+		// 
 
-	    });
+		$.ajax(
+		{
+		    url: 'model/01tovar_manipulation.php', // Вызываем этот скрипт
+		    data: JSON.stringify( tovar ), // И отправляем ему данные
+		    type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
+		    dataType: 'json', // В каком формате получать данные от сервера
+		    success: function( responseJSON ) { 
+		        console.log( 'Ajax-запрос выполнился удачно ###' ); 
+		        console.log( 'От сервера прибыли дынные: ' + responseJSON[ 'response' ] ); 
+		        // tovar.id = responseJSON[ 'response' ];
+		        tovar.pushTable();
+		    },
+		    error: function( responseJSON ) { 
+		        console.log( 'Попытка выполнить ajax-запрос провалилась ###' ); 
+		        console.log( 'От сервера прибыли дынные: ' + responseJSON[ 'response' ] ); 
+		    }
+		});
+
+		if ( tovar.manipulation !== 'delete' ) {
+			$( '#button_insert' ).removeAttr( 'disabled' );
+			$( '#button_update' ).removeAttr( 'disabled' );
+			$( '#button_delete' ).removeAttr( 'disabled' );
+		} else {
+			// 
+			$( '#button_insert' ).removeAttr( 'disabled' );
+			$( '#button_update' ).attr( 'disabled', true );
+			$( '#button_delete' ).attr( 'disabled', true );
+		};
+	} );
 
 } );
