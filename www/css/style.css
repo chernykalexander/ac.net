@@ -51,9 +51,10 @@ form
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 5px;    
+
 }
 
-#form_insert_update, #form_delete
+#form_insert_update, #form_delete, #form_input
 {
     display: none;
 }
