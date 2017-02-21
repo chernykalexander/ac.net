@@ -92,12 +92,6 @@
                 <input id="button_delete" type="button" disabled value=" Удалить ">
             </form>
 
-            <form id="form_test">
-                <input id="button_insert_test" type="button" value=" ДОБАВИТЬ 2 ">
-                <input id="button_update_test" type="button" value=" ИЗМЕНИТЬ 2 ">
-                <input id="button_delete_test" type="button" value=" УДАЛИТЬ 2 ">
-            </form>
-
             <!-- Форма добавление изменение товара -->
             <form id="form_input">
 

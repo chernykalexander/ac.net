@@ -47,6 +47,10 @@ $( document ).ready( function() {
 	    	$( '#price_input' ).val( '' );
 	    },
 
+	    changeTable() {
+	    	// 
+	    };
+
 	    // Вывести значения объекта в консоль
 	    writeConsole() {
 	        // 
@@ -256,8 +260,9 @@ $( document ).ready( function() {
 		    success: function( responseJSON ) { 
 		        console.log( 'Ajax-запрос выполнился удачно ###' ); 
 		        console.log( 'От сервера прибыли дынные: ' + responseJSON[ 'response' ] ); 
+
 		        // tovar.id = responseJSON[ 'response' ];
-		        // tovar.pushTable();
+		        tovar.changeTable();
 		    },
 		    error: function( responseJSON ) { 
 		        console.log( 'Попытка выполнить ajax-запрос провалилась ###' ); 
