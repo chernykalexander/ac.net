@@ -278,14 +278,24 @@ $( document ).ready( function() {
 	// 
 	$( '#button_cancel' ).click( function() {
 		// 
-		tovar.manipulation = null;
-		$( '#p_message' ).text = null;
+		// tovar.manipulation = null;
+		// $( '#p_message' ).text = null;
 		$( '#form_input' ).hide();
 
-		// Все кнопки снова доступны
+		// Кнопка добавить всегда доступна
 		$( '#button_insert' ).removeAttr( 'disabled' );
-		$( '#button_update' ).removeAttr( 'disabled' );
-		$( '#button_delete' ).removeAttr( 'disabled' );
+
+		// Если есть выделенная строка
+		if ( $( '#dbtable tr' ).hasClass( 'marked' ) ) {
+			
+			$( '#button_update' ).removeAttr( 'disabled' );
+			$( '#button_delete' ).removeAttr( 'disabled' );
+
+		};
+		
+
+		// $( '#button_update' ).removeAttr( 'disabled' );
+		// $( '#button_delete' ).removeAttr( 'disabled' );
 	} );
 
 
@@ -294,7 +304,7 @@ $( document ).ready( function() {
 	// 
 	$( '#button_ok' ).click( function() {
 		
-		// 
+		// Отправить данные из формы в объект 
 		tovar.FormaToObject()
 
 		// Вывести в консольсодержимое объекта товар
