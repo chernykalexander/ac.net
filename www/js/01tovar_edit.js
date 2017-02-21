@@ -49,7 +49,30 @@ $( document ).ready( function() {
 
 	    changeTable() {
 	    	// 
-	    };
+	    	switch ( this.manipulation ) {
+	    	  
+	    	  case 'insert':
+	    	    
+	    	    $( '#dbtable' ).append( '<tr><td>' + this.id + '</td><td>' + this.descr + '</td><td>' + this.price + '</td></tr>' );
+
+	    	    break;
+	    	  
+	    	  case 'update':
+	    	    
+	    	    $( '.marked' ).find( 'td:eq(0)' ).html( this.id );
+	    	    $( '.marked' ).find( 'td:eq(1)' ).html( this.descr );
+	    	    $( '.marked' ).find( 'td:eq(2)' ).html( this.price );
+	    	    
+	    	    break;
+	    	  
+	    	  case 'delete':
+	    	    
+	    	    $( '.marked' ).remove();
+	    	    
+	    	    break;
+
+	    	};
+	    },
 
 	    // Вывести значения объекта в консоль
 	    writeConsole() {
@@ -258,15 +281,23 @@ $( document ).ready( function() {
 		    type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
 		    dataType: 'json', // В каком формате получать данные от сервера
 		    success: function( responseJSON ) { 
-		        console.log( 'Ajax-запрос выполнился удачно ###' ); 
-		        console.log( 'От сервера прибыли дынные: ' + responseJSON[ 'response' ] ); 
+		        console.log( 'Сервер прислал корректный json' );
 
-		        // tovar.id = responseJSON[ 'response' ];
-		        tovar.changeTable();
+		        // Если серверный скрипт выполнился без ошибок
+		        if ( responseJSON[ 'error' ] === false) {
+		        	console.log( 'Серверный скрипт выполнен успешно' + responseJSON[ 'message' ] );
+			        // При выполнении insert - сервер пришлет новый id
+			        if ( responseJSON[ 'id' ] !== null ) {
+			        	tovar.id = responseJSON[ 'id' ];
+			        };
+			        tovar.changeTable();
+		    	} else {
+		    		console.log( 'Ошибка при выполнении серверного скрипта: ' + responseJSON[ 'message' ] );
+		    	};
+
 		    },
 		    error: function( responseJSON ) { 
-		        console.log( 'Попытка выполнить ajax-запрос провалилась ###' ); 
-		        console.log( 'От сервера прибыли дынные: ' + responseJSON[ 'response' ] ); 
+		        console.log( 'От сервера пришол НЕ валидный json: ' + responseJSON[ 'message' ] ); 
 		    }
 		});
 
@@ -284,29 +315,5 @@ $( document ).ready( function() {
 		};
 
 	} );
-
-
-	// --------------------------------------------------------------------------------------------------
-
-	// Тестовые функции
-	$( '#button_insert_test' ).click( function() {
-		// 
-		$( '#dbtable' ).append( '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>' );
-	});
-
-
-	$( '#button_update_test' ).click( function() {
-		// 
-		$( '.marked' ).find( 'td:eq(0)' ).html( 'Test' );
-		$( '.marked' ).find( 'td:eq(1)' ).html( 'Test' );
-		$( '.marked' ).find( 'td:eq(2)' ).html( 'Test' );
-	});
-
-
-	$( '#button_delete_test' ).click( function() {
-		// 
-		$( '.marked' ).remove();
-
-	});
 
 } );

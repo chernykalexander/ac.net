@@ -13,9 +13,11 @@
 
     // объевлем массив который будет содержать ответ сервера для клиента
     $response_server = array(
-        response => 'Ответ сервера по умолчанию'
+        'id' => null,
+        'message' => null,
+        'error' => false
     );
-    
+   
     // читаем, сырые данные из потока post-запроса от клиента
     $request_stream_row = file_get_contents( 'php://input' );
     // декодируем эти данные из двоичных в json-формат (php-массив)
@@ -26,10 +28,11 @@
     include '../config.php';
 
     // пытаемся подключиться к БД
-    $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
+    $mysqli = new mysqli( $dbHost, $dbUser, $dbPass, $dbName );
 
     if ( $mysqli->connect_errno ) {        
-        $response_server[ response ] = 'Не удалось подключиться к MySQL: (' . $mysqli->connect_errno . ') ';
+        $response_server[ message ] = 'Не удалось подключиться к MySQL: (' . $mysqli->connect_errno . ') ';
+        $response_server[ error ] = true;
         exit( json_encode( $response_server ) );
     };
 
@@ -50,12 +53,14 @@
                                         . $request_client[ price ] . '  ); ');
 
             if ( $mysqli->error ) {        
-                $response_server[ response ] = 'Не удалось выполнить INSERT INTO: (' . $mysqli->error . ') ';
-                exit( json_encode( $response_server ) );
-            };
-
-            // записываем последний idшник только что добавленной строки
-            $response_server[ response ] = $mysqli->insert_id;
+                $response_server[ message ] = 'Не удалось выполнить INSERT INTO: (' . $mysqli->error . ') ';
+                $response_server[ error ] = true;
+                // exit( json_encode( $response_server ) );
+            } else {
+                // записываем последний idшник только что добавленной строки
+                $response_server[ id ] = $mysqli->insert_id;
+                $response_server[ message ] = 'Добавлена новая запись с ID ' . $response_server[ id ];
+            }
 
             break;
         
@@ -67,28 +72,28 @@
                           where id = ' . $request_client[ id ] .'; ');
 
             if ( $mysqli->error ) {        
-                $response_server[ response ] = 'Не удалось выполнить UPDATE: (' . $request_client[ id ] . ') ';
-                exit( json_encode( $response_server ) );
+                $response_server[ message ] = 'Не удалось выполнить UPDATE: (' . $request_client[ id ] . ') ';
+                $response_server[ error ] = true;
+                // exit( json_encode( $response_server ) );
+            } else {
+                // записываем последний idшник только что добавленной строки
+                $response_server[ message ] = 'Запись с ID ' . $request_client[ id ] . ' изменена успешно';
             };
-
-            // записываем последний idшник только что добавленной строки
-            $response_server[ response ] = 'Запись изменена успешно';
 
             break;
 
         case 'delete':
             
-            $mysqli->query(' delete from mgz_tovar
-                             where id = ' . $request_client[ id ] . '; ' );
+            $mysqli->query(' delete from mgz_tovar where id = ' . $request_client[ id ] . '; ' );
 
             if ( $mysqli->error ) {        
-                $response_server[ response ] = 'Не удалось выполнить DELETE: (' . $request_client[ id ] . ') ';
-                // $response_server[ response ] = 'Не удалось выполнить DELETE: (' . $mysqli->error . ') ';
-                exit( json_encode( $response_server ) );
+                $response_server[ message ] = 'Не удалось выполнить DELETE: (' . $request_client[ id ] . ') ';
+                $response_server[ error ] = true;
+                // exit( json_encode( $response_server ) );
+            } else {
+                // записываем последний idшник только что добавленной строки
+                $response_server[ message ] = 'Запись с ID ' . $request_client[ id ] . ' удалена успешно';
             };
-
-            // записываем последний idшник только что добавленной строки
-            $response_server[ response ] = 'Запись удалена успешно';
 
             break;
     };
