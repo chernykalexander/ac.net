@@ -1,4 +1,19 @@
 $( document ).ready( function() {
+	
+	// 
+
+	// 
+
+	// $( '#div_test' ).html( '<p>Новье!</p>' );
+
+	drawTable();
+
+	function drawTable() {
+	    // 
+	    $( '#div_test' ).html( '<p>Новье!</p>' );
+	    // $( '#div_test' ).hide( 'slow' );
+	};
+
 	// 
 	var tovar = {
 	    

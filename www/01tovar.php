@@ -33,7 +33,8 @@
             <?php
                 include 'config.php'; 
 
-               
+                echo '<div id="div_test"> Test </div>';
+                
                 // Пытаемся подключиться к БД
                 $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
                 if ($mysqli->connect_errno) {
