@@ -1,5 +1,11 @@
 $( document ).ready( function() {
 
+    drawTable();
+
+    function drawTable() {
+        // 
+    };
+
     var tovar = {
         
         // Поля таблицы БД

@@ -7,14 +7,6 @@ $( document ).ready( function() {
 	    descr: null,
 	    price: null,
 
-	    // Получить данные из текущей строки html-таблицы и записать их в объект
-	    // TableToObject() {
-	    //     // 
-	    //     this.id = $( '.marked' ).find( 'td:eq(0)' ).html();
-	    //     this.descr = $( '.marked' ).find( 'td:eq(1)' ).html();
-	    //     this.price = $( '.marked' ).find( 'td:eq(2)' ).html();
-	    // },
-	    
 	    // Получить данные из текущей строки html-таблицы и записать их в форму
 	    tableToForma() {
 	        // 
@@ -31,14 +23,6 @@ $( document ).ready( function() {
             this.price = $( '#price_input' ).val();
         },
 
-	    // Отправить данные из объекта в последнюю строку html-таблицы
-	    // ObjectToTable() {            
-	    //     // 
-	    //     $( '#dbtable tr:last td:eq(0)' ).html( this.id );
-	    //     $( '#dbtable tr:last td:eq(1)' ).html( this.descr );
-	    //     $( '#dbtable tr:last td:eq(2)' ).html( this.price );
-	    // },
-
 	    // Очищаем форму
 	    clearForma() {
 	    	// 
@@ -47,6 +31,7 @@ $( document ).ready( function() {
 	    	$( '#price_input' ).val( '' );
 	    },
 
+	    // Переносит данные из объекта в таблицу
 	    changeTable() {
 	    	// 
 	    	switch ( this.manipulation ) {
@@ -285,7 +270,7 @@ $( document ).ready( function() {
 
 		        // Если серверный скрипт выполнился без ошибок
 		        if ( responseJSON[ 'error' ] === false) {
-		        	console.log( 'Серверный скрипт выполнен успешно' + responseJSON[ 'message' ] );
+		        	console.log( 'Серверный скрипт выполнен успешно: ' + responseJSON[ 'message' ] );
 			        // При выполнении insert - сервер пришлет новый id
 			        if ( responseJSON[ 'id' ] !== null ) {
 			        	tovar.id = responseJSON[ 'id' ];
