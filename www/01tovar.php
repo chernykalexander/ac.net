@@ -33,8 +33,6 @@
             <?php
                 include 'config.php'; 
 
-                echo '<div id="div_test"> Test </div>';
-                
                 // Пытаемся подключиться к БД
                 $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
                 if ($mysqli->connect_errno) {
@@ -59,6 +57,7 @@
 
                 echo "<table id='dbtable' width='100%'' cellspacing='0' border='1'>";
                 echo "<caption>Справочник товаров</caption>";
+                echo "<tbody>";
                 echo "<tr>";
                 echo "<th>id</th>";
                 echo "<th>descr</th>";
@@ -74,6 +73,7 @@
                     echo "<td>" . $row['price'] . "</td>";
                     echo "</tr>";                    
                 }
+                echo "</tbody>";
                 echo "</table>";
                 //$mysqli->close();
 
