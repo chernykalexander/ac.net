@@ -54,7 +54,7 @@ form
 
 }
 
-#form_insert_update, #form_delete, #form_input
+#form_dialog
 {
     display: none;
 }

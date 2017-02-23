@@ -1,6 +1,6 @@
 $( document ).ready( function() {
 	
-	// 
+	// Объект товара в магазине
 	var tovar = {
 	    
 	    // Поля таблицы БД
@@ -10,51 +10,55 @@ $( document ).ready( function() {
 
 	    // Получить данные из текущей строки html-таблицы и записать их в форму
 	    tableToForma() {
-	        // 
-	        $( '#id_input' ).val( $( '.marked' ).find( 'td:eq(0)' ).html() );
-	        $( '#descr_input' ).val( $( '.marked' ).find( 'td:eq(1)' ).html() );
-	        $( '#price_input' ).val( $( '.marked' ).find( 'td:eq(2)' ).html() );
+
+	        $( '#input_id' ).val( $( '.marked' ).find( 'td:eq(0)' ).html() );
+	        $( '#input_descr' ).val( $( '.marked' ).find( 'td:eq(1)' ).html() );
+	        $( '#input_price' ).val( $( '.marked' ).find( 'td:eq(2)' ).html() );
+
 	    },
 			    
         // Отправить данные из формы в объект
         formaToObject() {
-            // 
-            this.id = $( '#id_input' ).val();
-            this.descr = $( '#descr_input' ).val();
-            this.price = $( '#price_input' ).val();
+
+            this.id = $( '#input_id' ).val();
+            this.descr = $( '#input_descr' ).val();
+            this.price = $( '#input_price' ).val();
+
         },
 
-	    // Очищаем форму
-	    clearForma() {
-	    	// 
-	    	$( '#id_input' ).val( '' );
-	    	$( '#descr_input' ).val( '' );
-	    	$( '#price_input' ).val( '' );
-	    },
+        // Очищаем форму
+        ClearForma() {
+
+        	$( '#input_id' ).val( '' );
+        	$( '#input_descr' ).val( '' );
+        	$( '#input_price' ).val( '' );
+
+        },
 
 	    // Переносит данные из объекта в таблицу
 	    changeTable() {
-	    	// 
+	    	
+	    	// В зависимости от операции над объектом
 	    	switch ( this.manipulation ) {
 	    	  
+	    	  // Добавляем новую строку в таблицу 
 	    	  case 'insert':
 	    	    
 	    	    $( '#dbtable' ).append( '<tr><td>' + this.id + '</td><td>' + this.descr + '</td><td>' + this.price + '</td></tr>' );
-
 	    	    break;
 	    	  
+	    	  // Изменяем текущую строку таблицы
 	    	  case 'update':
 	    	    
 	    	    $( '.marked' ).find( 'td:eq(0)' ).html( this.id );
 	    	    $( '.marked' ).find( 'td:eq(1)' ).html( this.descr );
-	    	    $( '.marked' ).find( 'td:eq(2)' ).html( this.price );
-	    	    
+	    	    $( '.marked' ).find( 'td:eq(2)' ).html( this.price );	    	    
 	    	    break;
 	    	  
+	    	  // Удаляем текущую строку таблицы
 	    	  case 'delete':
 	    	    
-	    	    $( '.marked' ).remove();
-	    	    
+	    	    $( '.marked' ).remove();	    	    
 	    	    break;
 
 	    	};
@@ -77,14 +81,11 @@ $( document ).ready( function() {
 	// ----------------------- Сделать кнопки доступными --------------------------------
 	// 
 	function buttonEnable( ControlButton ) {
-		// 
-		// $( '#button_insert' ).removeAttr( 'disabled' );
-		// $( '#button_update' ).removeAttr( 'disabled' );
-		// $( '#button_delete' ).removeAttr( 'disabled' );
 
 		ControlButton.forEach( function( item ) {
 			$( '#button_' + item ).removeAttr( 'disabled' );
 		} );
+
 	};
 	
 
@@ -92,54 +93,72 @@ $( document ).ready( function() {
 	// ----------------------- Сделать кнопки НЕ доступными --------------------------------
 	// 
 	function buttonDisable( ControlButton ) {
-		// 
-
-		// $( '#button_insert' ).attr( 'disabled', true );
-		// $( '#button_update' ).attr( 'disabled', true );
-		// $( '#button_delete' ).attr( 'disabled', true );
 
 		ControlButton.forEach( function( item ) {
 			$( '#button_' + item ).attr( 'disabled', true );
 		} );
+
 	};
 
 
-	// ------------------------------------------------------------------------------------
+	// 
+	// ----------------------- Активировать поля ввода -------------------------------------
+	// 
+	function inputEnable() {
+
+		$( '#input_descr' ).removeAttr( 'disabled' );
+		$( '#input_price' ).removeAttr( 'disabled' );
+		
+	};
+
+
+	// 
+	// ----------------------- ДЕактивировать поля ввода -------------------------------------
+	// 
+	function inputDisable() {
+
+		$( '#input_descr' ).attr( 'disabled', true );
+		$( '#input_price' ).attr( 'disabled', true );
+
+	};
+
+
+	// 
 	// ----------------------- Проверка данных -------------------------------------------
-	// ------------------------------------------------------------------------------------
-	function isCheckForma() {
+	// 
+	function CheckForma() {
 	    //
 	    // Очищаем все <span>ы от ошибок
-	    $( '.msg_error' ).text( '' );
+	    $( '.span_msg_err' ).text( '' );
 
 	    // Делаем валидацию для таблицы товаров
-	    if ( $( '#descr_input' ).val() === '' ) {
-	        $( '#descr_error' ).text( 'Описание товара не должно быть пустым' );
-	        $( '#descr_input' ).focus();
+	    if ( $( '#input_descr' ).val() === '' ) {
+	        $( '#span_descr' ).text( 'Описание товара не должно быть пустым' );
+	        $( '#input_descr' ).focus();
 	        return false;
 	    };
 
-	    if ( $( '#descr_input' ).val().length >= 30 ) {
-	        $( '#descr_error' ).text( 'Описание товара не должно быть слишком длинным' );
-	        $( '#descr_input' ).focus();
+	    if ( $( '#input_descr' ).val().length >= 30 ) {
+	        $( '#span_descr' ).text( 'Описание товара не должно быть слишком длинным' );
+	        $( '#input_descr' ).focus();
 	        return false;
 	    };
 
-	    if ( $( '#price_input' ).val() === '' ) {
-	        $( '#price_error' ).text( 'Цена товара должна быть заполнена' );
-	        $( '#price_input' ).focus();
+	    if ( $( '#input_price' ).val() === '' ) {
+	        $( '#span_price' ).text( 'Цена товара должна быть заполнена' );
+	        $( '#input_price' ).focus();
 	        return false;
 	    };
 
-	    if ( ! $.isNumeric( $( '#price_input' ).val() ) )  {
-	        $( '#price_error' ).text( 'Цена товара это числовое значение' );
-	        $( '#price_input' ).focus();
+	    if ( ! $.isNumeric( $( '#input_price' ).val() ) )  {
+	        $( '#span_price' ).text( 'Цена товара это числовое значение' );
+	        $( '#input_price' ).focus();
 	        return false;
 	    };
 
-	    if ( + $( '#price_input' ).val() <= 0)  {
-	        $( '#price_error' ).text( 'Число должно быть положительным' );
-	        $( '#price_input' ).focus();
+	    if ( + $( '#input_price' ).val() <= 0)  {
+	        $( '#span_price' ).text( 'Число должно быть положительным' );
+	        $( '#input_price' ).focus();
 	        return false;
 	    };
 
@@ -153,11 +172,9 @@ $( document ).ready( function() {
 	// 
 	$( '#dbtable tr' ).not( ':first' ).click( function() {
 	    
-		console.log( 'dbtable tr' );
-
 	    // Если вызвана диалоговая форма добавить/изменить/удалить
 	    // то переходить на другие строки нельзя
-	    if ( $( '#form_input' ).is( ':visible' ) ) {
+	    if ( $( '#form_dialog' ).is( ':visible' ) ) {
 	        return;
 	    };
 
@@ -167,10 +184,6 @@ $( document ).ready( function() {
 
 	    // поскольку строка выбрана то кнопки изменить и удалить сделаем активными
 	    buttonEnable( ['update', 'delete'] );
-
-
-	    // $( '#button_update' ).removeAttr( 'disabled' );
-	    // $( '#button_delete' ).removeAttr( 'disabled' );
 
 	} );
 
@@ -184,19 +197,17 @@ $( document ).ready( function() {
 		tovar.manipulation = 'insert';
 		$( '#p_message' ).text = 'Форма добавления товара в БД';
 
-		// Обнуление полей формы и объекта
-		tovar.clearForma();
+		// Обнуление полей формы
+		tovar.ClearForma();
 
-		// Перед показом формы, делаем только поле id неактивным
-		$( '#descr_input' ).removeAttr( 'disabled' );
-		$( '#price_input' ).removeAttr( 'disabled' );
-		$( '#form_input' ).show();
+		// Поля формы делаем доступными для ввода
+		inputEnable();
+		
+		// Показываем диалоговую форму
+		$( '#form_dialog' ).show();
 
 		// Когда вызвана диалоговая форма, все кнопки становятся не активными
 		buttonDisable( ['insert', 'update', 'delete'] );
-		// $( '#button_insert' ).attr( 'disabled', true );
-		// $( '#button_update' ).attr( 'disabled', true );
-		// $( '#button_delete' ).attr( 'disabled', true );
 
 	} );
 
@@ -213,16 +224,14 @@ $( document ).ready( function() {
 	    // Получить данные из текущей строки таблицы и записать их форму
 	    tovar.tableToForma();
 
-		// При изменении записи поля ввода делаем активными
-		$( '#descr_input' ).removeAttr( 'disabled' );
-		$( '#price_input' ).removeAttr( 'disabled' );
-		$( '#form_input' ).show();
+		// Поля формы делаем доступными для ввода
+		inputEnable();
+		
+		// Показываем диалоговую форму
+		$( '#form_dialog' ).show();
 
 		// Когда вызвана диалоговая форма, все кнопки становятся не активными
 		buttonDisable( ['insert', 'update', 'delete'] );
-		// $( '#button_insert' ).attr( 'disabled', true );
-		// $( '#button_update' ).attr( 'disabled', true );
-		// $( '#button_delete' ).attr( 'disabled', true );
 
 	} );
 
@@ -239,16 +248,14 @@ $( document ).ready( function() {
 		// Получить данные из текущей строки таблицы и записать их в форму
 		tovar.tableToForma( this );
 		
-		// При удалении записи все поля неактивны
-		$( '#descr_input' ).attr( 'disabled', true );
-		$( '#price_input' ).attr( 'disabled', true );
-		$( '#form_input' ).show();
+		// Поля формы делаем не доступными
+		inputDisable();
+		
+		// Показываем диалоговую форму
+		$( '#form_dialog' ).show();
 
 		// Когда вызвана диалоговая форма, все кнопки становятся не активными
 		buttonDisable( ['insert', 'update', 'delete'] );
-		// $( '#button_insert' ).attr( 'disabled', true );
-		// $( '#button_update' ).attr( 'disabled', true );
-		// $( '#button_delete' ).attr( 'disabled', true );
 
 	} );   
 
@@ -266,20 +273,14 @@ $( document ).ready( function() {
 	$( '#button_cancel' ).click( function() {
 		
 		// Прячим форму ввода
-		$( '#form_input' ).hide();
+		$( '#form_dialog' ).hide();
 
 		// Кнопка добавить всегда доступна
 		buttonEnable( ['insert'] );
-		// $( '#button_insert' ).removeAttr( 'disabled' );
 
 		// Если есть выделенная строка то кнопки изменить, удалить тоже активны
 		if ( $( '#dbtable tr' ).hasClass( 'marked' ) ) {
-			
 			buttonEnable( ['update', 'delete'] );
-
-			// $( '#button_update' ).removeAttr( 'disabled' );
-			// $( '#button_delete' ).removeAttr( 'disabled' );
-
 		};
 
 	} );
@@ -291,7 +292,7 @@ $( document ).ready( function() {
 	$( '#button_ok' ).click( function() {
 		
 		// Проверяем корректность данных введенных в форме
-		if ( isCheckForma() !== true ) {
+		if ( CheckForma() !== true ) {
 			return;
 		};
 
@@ -304,7 +305,7 @@ $( document ).ready( function() {
 
 		$.ajax(
 		{
-		    url: 'model/01tovar_manipulation.php', // Вызываем этот скрипт
+		    url: 'model/01tovar_db.php', // Вызываем этот скрипт
 		    data: JSON.stringify( tovar ), // И отправляем ему данные
 		    type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
 		    dataType: 'json', // В каком формате получать данные от сервера
@@ -313,14 +314,20 @@ $( document ).ready( function() {
 
 		        // Если серверный скрипт выполнился без ошибок
 		        if ( responseJSON[ 'error' ] === false) {
+		        	
 		        	console.log( 'Серверный скрипт выполнен успешно: ' + responseJSON[ 'message' ] );
+			        
 			        // При выполнении insert - сервер пришлет новый id
 			        if ( responseJSON[ 'id' ] !== null ) {
 			        	tovar.id = responseJSON[ 'id' ];
 			        };
+			        
 			        tovar.changeTable();
+
 		    	} else {
+		    		
 		    		console.log( 'Ошибка при выполнении серверного скрипта: ' + responseJSON[ 'message' ] );
+
 		    	};
 
 		    },
@@ -329,23 +336,20 @@ $( document ).ready( function() {
 		    }
 		});
 
-		$( '#form_input' ).hide();
+		// Прячем диалоговую форму
+		$( '#form_dialog' ).hide();
 
 		// Если произошло добавление или редактирование то все кнопки доступны
 		if ( tovar.manipulation !== 'delete' ) {
 			
 			buttonEnable( ['insert', 'update', 'delete'] );
-			// $( '#button_insert' ).removeAttr( 'disabled' );
-			// $( '#button_update' ).removeAttr( 'disabled' );
-			// $( '#button_delete' ).removeAttr( 'disabled' );
+
 		// а если произошло удаление то доступна только кнопка insert
 		} else {
-			// 
+
 			buttonEnable( ['insert'] );
 			buttonDisable( ['update', 'delete'] );
-			// $( '#button_insert' ).removeAttr( 'disabled' );
-			// $( '#button_update' ).attr( 'disabled', true );
-			// $( '#button_delete' ).attr( 'disabled', true );
+
 		};
 
 	} );

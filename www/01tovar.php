@@ -94,28 +94,28 @@
             </form>
 
             <!-- Форма добавление изменение товара -->
-            <form id="form_input">
+            <form id="form_dialog">
 
                 <strong>
                 <p id="p_message"></p>
                 </strong>
 
                 <div>
-                    <p><label for="id_input">ID: </label></p>
-                    <p><input id="id_input" type="text" size="10" maxlength="10" disabled></p>
+                    <p><label for="input_id">ID: </label></p>
+                    <p><input id="input_id" type="text" size="10" maxlength="10" disabled></p>
                 </div>
                 <div>                
-                    <p><label for="descr_input">Описание: </label></p>
+                    <p><label for="input_descr">Описание: </label></p>
                     <p>
-                        <input id="descr_input" type="text" size="30" maxlength="30" title="От 1 до 30 символов">
-                        <span id="descr_error" class="msg_error"></span>
+                        <input id="input_descr" type="text" size="30" maxlength="30" title="От 1 до 30 символов">
+                        <span id="span_descr" class="span_msg_err"></span>
                     </p>
                 </div>
                 <div>
-                    <p><label for="price_input">Цена: </label></p>
+                    <p><label for="input_price">Цена: </label></p>
                     <p>
-                        <input id="price_input" type="text" size="10" maxlength="10" title="Цена должна быть положительной">
-                        <span id="price_error" class="msg_error"></span>
+                        <input id="input_price" type="text" size="10" maxlength="10" title="Цена должна быть положительной">
+                        <span id="span_price" class="span_msg_err"></span>
                     </p> 
                 </div>
 

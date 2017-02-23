@@ -18,25 +18,25 @@ $( document ).ready( function() {
         // Очистить форму
         clearForma() {
             // 
-            $( '#id_input' ).val( '' );
-            $( '#descr_input' ).val( '' );
-            $( '#price_input' ).val( '' );
+            $( '#input_id' ).val( '' );
+            $( '#input_descr' ).val( '' );
+            $( '#input_price' ).val( '' );
         },
 
         // Получить данные из формы и записать их в объект
         getForma() {
             // 
-            this.id = $( '#id_input' ).val();
-            this.descr = $( '#descr_input' ).val();
-            this.price = $( '#price_input' ).val();
+            this.id = $( '#input_id' ).val();
+            this.descr = $( '#input_descr' ).val();
+            this.price = $( '#input_price' ).val();
         },
 
         // Отправить данные из объекта в форму
         pushForma() {
             // 
-            $( '#id_input' ).val( this.id );
-            $( '#descr_input' ).val( this.descr );
-            $( '#price_input' ).val( this.price );
+            $( '#input_id' ).val( this.id );
+            $( '#input_descr' ).val( this.descr );
+            $( '#input_price' ).val( this.price );
         },
 
         // Проверить данные в форме
@@ -116,36 +116,36 @@ $( document ).ready( function() {
     function isCheckForma() {
         //
         // Очищаем все <span>ы от ошибок
-        $(' .msg_error ').text( '' );
+        $(' .span_msg_err ').text( '' );
 
         // Делаем валидацию для таблицы товаров
-        if ( $( '#descr_input' ).val() === '' ) {
-            $( '#descr_error' ).text( 'Описание товара не должно быть пустым' );
-            $( '#descr_input' ).focus();
+        if ( $( '#input_descr' ).val() === '' ) {
+            $( '#span_descr' ).text( 'Описание товара не должно быть пустым' );
+            $( '#input_descr' ).focus();
             return false;
         };
 
-        if ( $( '#descr_input' ).val().length >= 30 ) {
-            $( '#descr_error' ).text( 'Описание товара не должно быть слишком длинным' );
-            $( '#descr_input' ).focus();
+        if ( $( '#input_descr' ).val().length >= 30 ) {
+            $( '#span_descr' ).text( 'Описание товара не должно быть слишком длинным' );
+            $( '#input_descr' ).focus();
             return false;
         };
 
-        if ( $( '#price_input' ).val() === '' ) {
-            $( '#price_error' ).text( 'Цена товара должна быть заполнена' );
-            $( '#price_input' ).focus();
+        if ( $( '#input_price' ).val() === '' ) {
+            $( '#span_price' ).text( 'Цена товара должна быть заполнена' );
+            $( '#input_price' ).focus();
             return false;
         };
 
-        if ( ! $.isNumeric( $( '#price_input' ).val() ) )  {
-            $( '#price_error' ).text( 'Цена товара это числовое значение' );
-            $( '#price_input' ).focus();
+        if ( ! $.isNumeric( $( '#input_price' ).val() ) )  {
+            $( '#span_price' ).text( 'Цена товара это числовое значение' );
+            $( '#input_price' ).focus();
             return false;
         };
 
-        if ( + $( '#price_input' ).val() <= 0)  {
-            $( '#price_error' ).text( 'Число должно быть положительным' );
-            $( '#price_input' ).focus();
+        if ( + $( '#input_price' ).val() <= 0)  {
+            $( '#span_price' ).text( 'Число должно быть положительным' );
+            $( '#input_price' ).focus();
             return false;
         };
 
