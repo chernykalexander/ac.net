@@ -76,16 +76,31 @@ $( document ).ready( function() {
 	// 
 	// ----------------------- Сделать кнопки доступными --------------------------------
 	// 
-	function buttonEnable() {
+	function buttonEnable( ControlButton ) {
 		// 
+		// $( '#button_insert' ).removeAttr( 'disabled' );
+		// $( '#button_update' ).removeAttr( 'disabled' );
+		// $( '#button_delete' ).removeAttr( 'disabled' );
+
+		ControlButton.forEach( function( item ) {
+			$( '#button_' + item ).removeAttr( 'disabled' );
+		} );
 	};
 	
 
 	// 
 	// ----------------------- Сделать кнопки НЕ доступными --------------------------------
 	// 
-	function buttonDisable() {
+	function buttonDisable( ControlButton ) {
 		// 
+
+		// $( '#button_insert' ).attr( 'disabled', true );
+		// $( '#button_update' ).attr( 'disabled', true );
+		// $( '#button_delete' ).attr( 'disabled', true );
+
+		ControlButton.forEach( function( item ) {
+			$( '#button_' + item ).attr( 'disabled', true );
+		} );
 	};
 
 
@@ -150,9 +165,12 @@ $( document ).ready( function() {
 	    $( '#dbtable tr' ).removeClass( 'marked' );
 	    $( this ).addClass( 'marked' );
 
-	    // поскольку строка выбрана то кнопки изменить и удалить активны
-	    $( '#button_update' ).removeAttr( 'disabled' );
-	    $( '#button_delete' ).removeAttr( 'disabled' );
+	    // поскольку строка выбрана то кнопки изменить и удалить сделаем активными
+	    buttonEnable( ['update', 'delete'] );
+
+
+	    // $( '#button_update' ).removeAttr( 'disabled' );
+	    // $( '#button_delete' ).removeAttr( 'disabled' );
 
 	} );
 
@@ -174,10 +192,11 @@ $( document ).ready( function() {
 		$( '#price_input' ).removeAttr( 'disabled' );
 		$( '#form_input' ).show();
 
-		// Когда вызвана диалоговая форма, кнопки становятся не активными
-		$( '#button_insert' ).attr( 'disabled', true );
-		$( '#button_update' ).attr( 'disabled', true );
-		$( '#button_delete' ).attr( 'disabled', true );
+		// Когда вызвана диалоговая форма, все кнопки становятся не активными
+		buttonDisable( ['insert', 'update', 'delete'] );
+		// $( '#button_insert' ).attr( 'disabled', true );
+		// $( '#button_update' ).attr( 'disabled', true );
+		// $( '#button_delete' ).attr( 'disabled', true );
 
 	} );
 
@@ -199,10 +218,11 @@ $( document ).ready( function() {
 		$( '#price_input' ).removeAttr( 'disabled' );
 		$( '#form_input' ).show();
 
-		// Когда вызвана диалоговая форма, кнопки становятся не активными
-		$( '#button_insert' ).attr( 'disabled', true );
-		$( '#button_update' ).attr( 'disabled', true );
-		$( '#button_delete' ).attr( 'disabled', true );
+		// Когда вызвана диалоговая форма, все кнопки становятся не активными
+		buttonDisable( ['insert', 'update', 'delete'] );
+		// $( '#button_insert' ).attr( 'disabled', true );
+		// $( '#button_update' ).attr( 'disabled', true );
+		// $( '#button_delete' ).attr( 'disabled', true );
 
 	} );
 
@@ -224,10 +244,11 @@ $( document ).ready( function() {
 		$( '#price_input' ).attr( 'disabled', true );
 		$( '#form_input' ).show();
 
-		// Когда вызвана диалоговая форма, кнопки становятся не активными
-		$( '#button_insert' ).attr( 'disabled', true );
-		$( '#button_update' ).attr( 'disabled', true );
-		$( '#button_delete' ).attr( 'disabled', true );
+		// Когда вызвана диалоговая форма, все кнопки становятся не активными
+		buttonDisable( ['insert', 'update', 'delete'] );
+		// $( '#button_insert' ).attr( 'disabled', true );
+		// $( '#button_update' ).attr( 'disabled', true );
+		// $( '#button_delete' ).attr( 'disabled', true );
 
 	} );   
 
@@ -248,13 +269,16 @@ $( document ).ready( function() {
 		$( '#form_input' ).hide();
 
 		// Кнопка добавить всегда доступна
-		$( '#button_insert' ).removeAttr( 'disabled' );
+		buttonEnable( ['insert'] );
+		// $( '#button_insert' ).removeAttr( 'disabled' );
 
 		// Если есть выделенная строка то кнопки изменить, удалить тоже активны
 		if ( $( '#dbtable tr' ).hasClass( 'marked' ) ) {
 			
-			$( '#button_update' ).removeAttr( 'disabled' );
-			$( '#button_delete' ).removeAttr( 'disabled' );
+			buttonEnable( ['update', 'delete'] );
+
+			// $( '#button_update' ).removeAttr( 'disabled' );
+			// $( '#button_delete' ).removeAttr( 'disabled' );
 
 		};
 
@@ -307,15 +331,21 @@ $( document ).ready( function() {
 
 		$( '#form_input' ).hide();
 
+		// Если произошло добавление или редактирование то все кнопки доступны
 		if ( tovar.manipulation !== 'delete' ) {
-			$( '#button_insert' ).removeAttr( 'disabled' );
-			$( '#button_update' ).removeAttr( 'disabled' );
-			$( '#button_delete' ).removeAttr( 'disabled' );
+			
+			buttonEnable( ['insert', 'update', 'delete'] );
+			// $( '#button_insert' ).removeAttr( 'disabled' );
+			// $( '#button_update' ).removeAttr( 'disabled' );
+			// $( '#button_delete' ).removeAttr( 'disabled' );
+		// а если произошло удаление то доступна только кнопка insert
 		} else {
 			// 
-			$( '#button_insert' ).removeAttr( 'disabled' );
-			$( '#button_update' ).attr( 'disabled', true );
-			$( '#button_delete' ).attr( 'disabled', true );
+			buttonEnable( ['insert'] );
+			buttonDisable( ['update', 'delete'] );
+			// $( '#button_insert' ).removeAttr( 'disabled' );
+			// $( '#button_update' ).attr( 'disabled', true );
+			// $( '#button_delete' ).attr( 'disabled', true );
 		};
 
 	} );
