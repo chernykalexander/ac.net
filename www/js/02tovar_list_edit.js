@@ -1,28 +1,28 @@
 $( document ).ready( function() {
 	
-	// Объект магазин
-	var magazine = {
+	// Объект товара в магазине
+	var tovar = {
 	    
 	    // Поля таблицы БД
 	    id : null,
 	    descr : null,
-	    adresphone : null,
+	    price : null,
 
 	    // Получить данные из текущей строки html-таблицы и записать их в форму
 	    tableToForma() {
 
 	        $( '#input_id' ).val( $( '.marked' ).find( 'td:eq(0)' ).html() );
 	        $( '#input_descr' ).val( $( '.marked' ).find( 'td:eq(1)' ).html() );
-	        $( '#input_adresphone' ).val( $( '.marked' ).find( 'td:eq(2)' ).html() );
+	        $( '#input_price' ).val( $( '.marked' ).find( 'td:eq(2)' ).html() );
 
 	    },
 			    
         // Отправить данные из формы в объект
         formaToObject() {
 
-            this.id = $( '#input_id' ).val()
-            this.descr = $( '#input_descr' ).val()
-            this.adresphone = $( '#input_adresphone' ).val()
+            this.id = $( '#input_id' ).val();
+            this.descr = $( '#input_descr' ).val();
+            this.price = $( '#input_price' ).val();
 
         },
 
@@ -31,7 +31,7 @@ $( document ).ready( function() {
 
         	$( '#input_id' ).val( '' );
         	$( '#input_descr' ).val( '' );
-        	$( '#input_adresphone' ).val( '' );
+        	$( '#input_price' ).val( '' );
 
         },
 
@@ -44,7 +44,7 @@ $( document ).ready( function() {
 	    	  // Добавляем новую строку в таблицу 
 	    	  case 'insert':
 	    	    
-	    	    $( '#dbtable' ).append( '<tr><td>' + this.id + '</td><td>' + this.descr + '</td><td>' + this.adresphone + '</td></tr>' );
+	    	    $( '#dbtable' ).append( '<tr><td>' + this.id + '</td><td>' + this.descr + '</td><td>' + this.price + '</td></tr>' );
 	    	    break;
 	    	  
 	    	  // Изменяем текущую строку таблицы
@@ -52,7 +52,7 @@ $( document ).ready( function() {
 	    	    
 	    	    $( '.marked' ).find( 'td:eq(0)' ).html( this.id );
 	    	    $( '.marked' ).find( 'td:eq(1)' ).html( this.descr );
-	    	    $( '.marked' ).find( 'td:eq(2)' ).html( this.adresphone );	    	    
+	    	    $( '.marked' ).find( 'td:eq(2)' ).html( this.price );	    	    
 	    	    break;
 	    	  
 	    	  // Удаляем текущую строку таблицы
@@ -67,7 +67,7 @@ $( document ).ready( function() {
 	    // Вывести значения объекта в консоль
 	    writeConsole() {
 	        // 
-	        console.log ( '|| ID: ' + this.id + ' DESCR: ' + this.descr + ' ADRESPHONE: ' + this.adresphone + ' MAN: ' + this.manipulation +' ||');
+	        console.log ( '|| ID: ' + this.id + ' DESCR: ' + this.descr + ' PRICE: ' + this.price + ' MAN: ' + this.manipulation +' ||');
 	    },
 
         // тип операции: insert, update, delete
@@ -107,7 +107,7 @@ $( document ).ready( function() {
 	function inputEnable() {
 
 		$( '#input_descr' ).removeAttr( 'disabled' );
-		$( '#input_adresphone' ).removeAttr( 'disabled' );
+		$( '#input_price' ).removeAttr( 'disabled' );
 		
 	};
 
@@ -118,7 +118,7 @@ $( document ).ready( function() {
 	function inputDisable() {
 
 		$( '#input_descr' ).attr( 'disabled', true );
-		$( '#input_adresphone' ).attr( 'disabled', true );
+		$( '#input_price' ).attr( 'disabled', true );
 
 	};
 
@@ -133,20 +133,32 @@ $( document ).ready( function() {
 
 	    // Делаем валидацию для таблицы товаров
 	    if ( $( '#input_descr' ).val() === '' ) {
-	        $( '#span_descr' ).text( 'Название магазина не должно быть пустым' );
+	        $( '#span_descr' ).text( 'Описание товара не должно быть пустым' );
 	        $( '#input_descr' ).focus();
 	        return false;
 	    };
 
-	    if ( $( '#input_descr' ).val().length >= 50 ) {
-	        $( '#span_descr' ).text( 'Название магазина не должно быть слишком длинным' );
+	    if ( $( '#input_descr' ).val().length >= 30 ) {
+	        $( '#span_descr' ).text( 'Описание товара не должно быть слишком длинным' );
 	        $( '#input_descr' ).focus();
 	        return false;
 	    };
 
-	    if ( $( '#input_adresphone' ).val() === '' ) {
-	        $( '#span_adresphone' ).text( 'Адрес и телефон должны быть заполнены' );
-	        $( '#input_adresphone' ).focus();
+	    if ( $( '#input_price' ).val() === '' ) {
+	        $( '#span_price' ).text( 'Цена товара должна быть заполнена' );
+	        $( '#input_price' ).focus();
+	        return false;
+	    };
+
+	    if ( ! $.isNumeric( $( '#input_price' ).val() ) )  {
+	        $( '#span_price' ).text( 'Цена товара это числовое значение' );
+	        $( '#input_price' ).focus();
+	        return false;
+	    };
+
+	    if ( + $( '#input_price' ).val() <= 0)  {
+	        $( '#span_price' ).text( 'Число должно быть положительным' );
+	        $( '#input_price' ).focus();
 	        return false;
 	    };
 
@@ -182,11 +194,11 @@ $( document ).ready( function() {
 	$( '#button_insert' ).click( function() {
 		
 		// Записываем тип операции
-		magazine.manipulation = 'insert';
-		$( '#p_message' ).text = 'Форма добавления магазина в БД';
+		tovar.manipulation = 'insert';
+		$( '#p_message' ).text = 'Форма добавления товара в БД';
 
 		// Обнуление полей формы
-		magazine.ClearForma();
+		tovar.ClearForma();
 
 		// Поля формы делаем доступными для ввода
 		inputEnable();
@@ -206,11 +218,11 @@ $( document ).ready( function() {
 	$( '#button_update' ).click( function() {
 		
 		// Записываем тип операции
-		magazine.manipulation = 'update';
-		$( '#p_message' ).text = 'Что вы хотите поменять в магазине?';
+		tovar.manipulation = 'update';
+		$( '#p_message' ).text = 'Что вы хотите поменять в товаре?';
 
 	    // Получить данные из текущей строки таблицы и записать их форму
-	    magazine.tableToForma();
+	    tovar.tableToForma();
 
 		// Поля формы делаем доступными для ввода
 		inputEnable();
@@ -230,11 +242,11 @@ $( document ).ready( function() {
 	$( '#button_delete' ).click( function() {
 		
 		// Записываем тип операции
-		magazine.manipulation = 'delete';
-		$( '#p_message' ).text = 'Вы действительно хотите удалить магазин?';
+		tovar.manipulation = 'delete';
+		$( '#p_message' ).text = 'Вы действительно хотите удалить товар?';
 
 		// Получить данные из текущей строки таблицы и записать их в форму
-		magazine.tableToForma( this );
+		tovar.tableToForma( this );
 		
 		// Поля формы делаем не доступными
 		inputDisable();
@@ -285,16 +297,16 @@ $( document ).ready( function() {
 		};
 
 		// Отправить данные из формы в объект 
-		magazine.formaToObject();
+		tovar.formaToObject();
 
 		// Вывести в консольсодержимое объекта товар
 		console.log( 'При нажатии кнопки ОК' );
-		magazine.writeConsole();
+		tovar.writeConsole();
 
 		$.ajax(
 		{
-		    url: 'model/03magazine_db.php', // Вызываем этот скрипт
-		    data: JSON.stringify( magazine ), // И отправляем ему данные
+		    url: 'model/01tovar_db.php', // Вызываем этот скрипт
+		    data: JSON.stringify( tovar ), // И отправляем ему данные
 		    type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
 		    dataType: 'json', // В каком формате получать данные от сервера
 		    success: function( responseJSON ) { 
@@ -307,10 +319,10 @@ $( document ).ready( function() {
 			        
 			        // При выполнении insert - сервер пришлет новый id
 			        if ( responseJSON[ 'id' ] !== null ) {
-			        	magazine.id = responseJSON[ 'id' ];
+			        	tovar.id = responseJSON[ 'id' ];
 			        };
 			        
-			        magazine.changeTable();
+			        tovar.changeTable();
 
 		    	} else {
 		    		
@@ -328,7 +340,7 @@ $( document ).ready( function() {
 		$( '#form_dialog' ).hide();
 
 		// Если произошло добавление или редактирование то все кнопки доступны
-		if ( magazine.manipulation !== 'delete' ) {
+		if ( tovar.manipulation !== 'delete' ) {
 			
 			buttonEnable( ['insert', 'update', 'delete'] );
 
