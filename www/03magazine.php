@@ -36,17 +36,17 @@
                 // Пытаемся подключиться к БД
                 $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
                 if ($mysqli->connect_errno) {
-                    echo "Не удалось подключиться к MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+                    echo 'Не удалось подключиться к MySQL: (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error;
                 }
                 //echo $mysqli->host_info . "<br>";                
 
                 // Самый 100%ый код для 100%ого UTF-8 :D
-                $mysqli->query("SET NAMES 'utf8'"); 
-                $mysqli->query("SET CHARACTER SET 'utf8'");
-                $mysqli->query("SET SESSION collation_connection = 'utf8_general_ci'");
+                $mysqli->query('SET NAMES \'utf8\''); 
+                $mysqli->query('SET CHARACTER SET \'utf8\'');
+                $mysqli->query('SET SESSION collation_connection = \'utf8_general_ci\'');
 
                 // Выбираем из таблицы mgz_tovar_list
-                $res_tovar_list = $mysqli->query("
+                $res_tovar_list = $mysqli->query('
                                                     select
                                                       m.id, 
                                                       m.descr, 
@@ -54,40 +54,40 @@
                                                     from
                                                       mgz_magazine m
                                                     order by m.id;
-                                                ");
+                                                ');
 
-                echo "<table id='dbtable' width='100%'' cellspacing='0' border='1'>";
-                echo "<caption>Справочник магазинов</caption>";
-                echo "<tbody>";
-                echo "<tr>";
-                echo "<th>id</th>";
-                echo "<th>descr</th>";
-                echo "<th>adresphone</th>";                
-                echo "</tr>";
+                echo '<table id="dbtable" width="100%" cellspacing="0" border="1">';
+                echo '<caption>Справочник магазинов</caption>';
+                echo '<tbody>';
+                echo '<tr>';
+                echo '<th>id</th>';
+                echo '<th>descr</th>';
+                echo '<th>adresphone</th>';                
+                echo '</tr>';
 
                 //  Перемещает указатель результата на выбранную строку
                 $res_tovar_list->data_seek(0);
                 while ($row = $res_tovar_list->fetch_assoc()) 
                 {
-                    echo "<tr>";
-                    echo "<td>" . $row['id'] . "</td>";
-                    echo "<td>" . $row['descr'] . "</td>";
-                    echo "<td>" . $row['adresphone'] . "</td>";
-                    echo "</tr>";                    
+                    echo '<tr>';
+                    echo '<td>' . $row['id'] . '</td>';
+                    echo '<td>' . $row['descr'] . '</td>';
+                    echo '<td>' . $row['adresphone'] . '</td>';
+                    echo '</tr>';                    
                 }
-                echo "</tbody>";
-                echo "</table>";
+                echo '</tbody>';
+                echo '</table>';
                 $mysqli->close();
 
-                echo "<pre class='code'>";
-                echo "select <br>";
-                echo "  m.id, <br>"; 
-                echo "  m.descr, <br>";
-                echo "  m.adresphone <br>";
-                echo "from <br>";
-                echo "  magazine m <br>";
-                echo "order by m.id; <br>";
-                echo "</pre>";                
+                echo '<pre class="code">';
+                echo 'select <br>';
+                echo '  m.id, <br>'; 
+                echo '  m.descr, <br>';
+                echo '  m.adresphone <br>';
+                echo 'from <br>';
+                echo '  magazine m <br>';
+                echo 'order by m.id; <br>';
+                echo '</pre>';                
             ?>                               
 
             <!-- Управляющие кнопки -->
@@ -118,8 +118,8 @@
                 <div>
                     <p><label for="input_adresphone">Адрес и телефон: </label></p>
                     <p>
-                        <input id="input_adresphone" type="text" size="40" maxlength="40" title="От 1 до 50 символов">
-                        <span id="span_price" class="span_msg_err"></span>
+                        <input id="input_adresphone" type="text" size="40" maxlength="40" title="От 1 до 40 символов">
+                        <span id="span_adresphone" class="span_msg_err"></span>
                     </p> 
                 </div>
 

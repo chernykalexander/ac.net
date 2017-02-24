@@ -1,19 +1,17 @@
 $( document ).ready( function() {
 	
 	// Объект товара в магазине
-	var tovar = {
+	var pokupateli = {
 	    
 	    // Поля таблицы БД
 	    id : null,
-	    descr : null,
-	    price : null,
+	    fio : null,
 
 	    // Получить данные из текущей строки html-таблицы и записать их в форму
 	    tableToForma() {
 
 	        $( '#input_id' ).val( $( '.marked' ).find( 'td:eq(0)' ).html() );
-	        $( '#input_descr' ).val( $( '.marked' ).find( 'td:eq(1)' ).html() );
-	        $( '#input_price' ).val( $( '.marked' ).find( 'td:eq(2)' ).html() );
+	        $( '#input_fio' ).val( $( '.marked' ).find( 'td:eq(1)' ).html() );
 
 	    },
 			    
@@ -21,8 +19,7 @@ $( document ).ready( function() {
         formaToObject() {
 
             this.id = $( '#input_id' ).val();
-            this.descr = $( '#input_descr' ).val();
-            this.price = $( '#input_price' ).val();
+            this.fio = $( '#input_fio' ).val();
 
         },
 
@@ -30,8 +27,7 @@ $( document ).ready( function() {
         ClearForma() {
 
         	$( '#input_id' ).val( '' );
-        	$( '#input_descr' ).val( '' );
-        	$( '#input_price' ).val( '' );
+        	$( '#input_fio' ).val( '' );
 
         },
 
@@ -44,15 +40,14 @@ $( document ).ready( function() {
 	    	  // Добавляем новую строку в таблицу 
 	    	  case 'insert':
 	    	    
-	    	    $( '#dbtable' ).append( '<tr><td>' + this.id + '</td><td>' + this.descr + '</td><td>' + this.price + '</td></tr>' );
+	    	    $( '#dbtable' ).append( '<tr><td>' + this.id + '</td><td>' + this.fio + '</td></tr>' );
 	    	    break;
 	    	  
 	    	  // Изменяем текущую строку таблицы
 	    	  case 'update':
 	    	    
 	    	    $( '.marked' ).find( 'td:eq(0)' ).html( this.id );
-	    	    $( '.marked' ).find( 'td:eq(1)' ).html( this.descr );
-	    	    $( '.marked' ).find( 'td:eq(2)' ).html( this.price );	    	    
+	    	    $( '.marked' ).find( 'td:eq(1)' ).html( this.fio );
 	    	    break;
 	    	  
 	    	  // Удаляем текущую строку таблицы
@@ -67,7 +62,7 @@ $( document ).ready( function() {
 	    // Вывести значения объекта в консоль
 	    writeConsole() {
 	        // 
-	        console.log ( '|| ID: ' + this.id + ' DESCR: ' + this.descr + ' PRICE: ' + this.price + ' MAN: ' + this.manipulation +' ||');
+	        console.log ( '|| ID: ' + this.id + ' FIO: ' + this.fio  + ' MAN: ' + this.manipulation +' ||');
 	    },
 
         // тип операции: insert, update, delete
@@ -106,8 +101,7 @@ $( document ).ready( function() {
 	// 
 	function inputEnable() {
 
-		$( '#input_descr' ).removeAttr( 'disabled' );
-		$( '#input_price' ).removeAttr( 'disabled' );
+		$( '#input_fio' ).removeAttr( 'disabled' );
 		
 	};
 
@@ -117,8 +111,7 @@ $( document ).ready( function() {
 	// 
 	function inputDisable() {
 
-		$( '#input_descr' ).attr( 'disabled', true );
-		$( '#input_price' ).attr( 'disabled', true );
+		$( '#input_fio' ).attr( 'disabled', true );
 
 	};
 
@@ -132,33 +125,15 @@ $( document ).ready( function() {
 	    $( '.span_msg_err' ).text( '' );
 
 	    // Делаем валидацию для таблицы товаров
-	    if ( $( '#input_descr' ).val() === '' ) {
-	        $( '#span_descr' ).text( 'Описание товара не должно быть пустым' );
-	        $( '#input_descr' ).focus();
+	    if ( $( '#input_fio' ).val() === '' ) {
+	        $( '#span_fio' ).text( 'Поле ФИО не должно быть пустым' );
+	        $( '#input_fio' ).focus();
 	        return false;
 	    };
 
-	    if ( $( '#input_descr' ).val().length >= 30 ) {
-	        $( '#span_descr' ).text( 'Описание товара не должно быть слишком длинным' );
-	        $( '#input_descr' ).focus();
-	        return false;
-	    };
-
-	    if ( $( '#input_price' ).val() === '' ) {
-	        $( '#span_price' ).text( 'Цена товара должна быть заполнена' );
-	        $( '#input_price' ).focus();
-	        return false;
-	    };
-
-	    if ( ! $.isNumeric( $( '#input_price' ).val() ) )  {
-	        $( '#span_price' ).text( 'Цена товара это числовое значение' );
-	        $( '#input_price' ).focus();
-	        return false;
-	    };
-
-	    if ( + $( '#input_price' ).val() <= 0)  {
-	        $( '#span_price' ).text( 'Число должно быть положительным' );
-	        $( '#input_price' ).focus();
+	    if ( $( '#input_fio' ).val().length >= 60 ) {
+	        $( '#span_fio' ).text( 'ФИО не должно быть слишком длинным' );
+	        $( '#input_fio' ).focus();
 	        return false;
 	    };
 
@@ -194,11 +169,11 @@ $( document ).ready( function() {
 	$( '#button_insert' ).click( function() {
 		
 		// Записываем тип операции
-		tovar.manipulation = 'insert';
-		$( '#p_message' ).text = 'Форма добавления товара в БД';
+		pokupateli.manipulation = 'insert';
+		$( '#p_message' ).text = 'Форма клиента в БД';
 
 		// Обнуление полей формы
-		tovar.ClearForma();
+		pokupateli.ClearForma();
 
 		// Поля формы делаем доступными для ввода
 		inputEnable();
@@ -218,11 +193,11 @@ $( document ).ready( function() {
 	$( '#button_update' ).click( function() {
 		
 		// Записываем тип операции
-		tovar.manipulation = 'update';
-		$( '#p_message' ).text = 'Что вы хотите поменять в товаре?';
+		pokupateli.manipulation = 'update';
+		$( '#p_message' ).text = 'Что вы хотите изменить в клиенте?';
 
 	    // Получить данные из текущей строки таблицы и записать их форму
-	    tovar.tableToForma();
+	    pokupateli.tableToForma();
 
 		// Поля формы делаем доступными для ввода
 		inputEnable();
@@ -242,11 +217,11 @@ $( document ).ready( function() {
 	$( '#button_delete' ).click( function() {
 		
 		// Записываем тип операции
-		tovar.manipulation = 'delete';
-		$( '#p_message' ).text = 'Вы действительно хотите удалить товар?';
+		pokupateli.manipulation = 'delete';
+		$( '#p_message' ).text = 'Вы действительно хотите удалить клиента?';
 
 		// Получить данные из текущей строки таблицы и записать их в форму
-		tovar.tableToForma( this );
+		pokupateli.tableToForma( this );
 		
 		// Поля формы делаем не доступными
 		inputDisable();
@@ -297,16 +272,16 @@ $( document ).ready( function() {
 		};
 
 		// Отправить данные из формы в объект 
-		tovar.formaToObject();
+		pokupateli.formaToObject();
 
 		// Вывести в консольсодержимое объекта товар
 		console.log( 'При нажатии кнопки ОК' );
-		tovar.writeConsole();
+		pokupateli.writeConsole();
 
 		$.ajax(
 		{
-		    url: 'model/01tovar_db.php', // Вызываем этот скрипт
-		    data: JSON.stringify( tovar ), // И отправляем ему данные
+		    url: 'model/04pokupateli_db.php', // Вызываем этот скрипт
+		    data: JSON.stringify( pokupateli ), // И отправляем ему данные
 		    type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
 		    dataType: 'json', // В каком формате получать данные от сервера
 		    success: function( responseJSON ) { 
@@ -319,10 +294,10 @@ $( document ).ready( function() {
 			        
 			        // При выполнении insert - сервер пришлет новый id
 			        if ( responseJSON[ 'id' ] !== null ) {
-			        	tovar.id = responseJSON[ 'id' ];
+			        	pokupateli.id = responseJSON[ 'id' ];
 			        };
 			        
-			        tovar.changeTable();
+			        pokupateli.changeTable();
 
 		    	} else {
 		    		
@@ -340,7 +315,7 @@ $( document ).ready( function() {
 		$( '#form_dialog' ).hide();
 
 		// Если произошло добавление или редактирование то все кнопки доступны
-		if ( tovar.manipulation !== 'delete' ) {
+		if ( pokupateli.manipulation !== 'delete' ) {
 			
 			buttonEnable( ['insert', 'update', 'delete'] );
 
