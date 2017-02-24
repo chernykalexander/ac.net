@@ -87,13 +87,14 @@
                 echo "</pre>";                
             ?>                               
 
+            <!-- Управляющие кнопки -->
             <form id="form_control">
                 <input id="button_insert" type="button" value=" Добавить ">
                 <input id="button_update" type="button" disabled value=" Изменить ">
                 <input id="button_delete" type="button" disabled value=" Удалить ">
             </form>
 
-            <!-- Форма добавление изменение товара -->
+            <!-- Диалоговая форма добавление изменение товара -->
             <form id="form_dialog">
 
                 <strong>

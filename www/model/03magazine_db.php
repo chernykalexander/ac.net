@@ -48,9 +48,9 @@
             
         case 'insert':
             
-            $mysqli->query(' insert into mgz_tovar(descr, price)
-                            values(\'' . $request_client[ descr ] .  '\',  '
-                                       . $request_client[ price ] . '); ');
+            $mysqli->query(' insert into mgz_magazine(descr, adresphone)
+                            values(\'' . $request_client[ descr ] .  '\',  \''
+                                        . $request_client[ adresphone ] . '\'  ); ');
 
             if ( $mysqli->error ) {        
                 $response_server[ message ] = 'Не удалось выполнить INSERT INTO: (' . $mysqli->error . ') ';
@@ -65,10 +65,9 @@
             break;
         
         case 'update':
-            
-            $mysqli->query(' update mgz_tovar
+            $mysqli->query(' update mgz_magazine
                           set descr =  \'' . $request_client[ descr ] . '\' , 
-                              price = ' . $request_client[ price ] . '
+                        adresphone = \'' . $request_client[ adresphone ] . '\'
                           where id = ' . $request_client[ id ] .'; ');
 
             if ( $mysqli->error ) {        
@@ -84,7 +83,7 @@
 
         case 'delete':
             
-            $mysqli->query(' delete from mgz_tovar where id = ' . $request_client[ id ] . '; ' );
+            $mysqli->query(' delete from mgz_magazine where id = ' . $request_client[ id ] . '; ' );
 
             if ( $mysqli->error ) {        
                 $response_server[ message ] = 'Не удалось выполнить DELETE: (' . $request_client[ id ] . ') ';

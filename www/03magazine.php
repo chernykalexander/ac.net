@@ -8,7 +8,7 @@
             require_once('template/head.php'); 
         ?>
 
-        <script src="js/01magazine_edit.js"></script>
+        <script src="js/03magazine_edit.js"></script>
 
     </head>
 
@@ -56,7 +56,7 @@
                                                     order by m.id;
                                                 ");
 
-                echo "<table class='dbtable' width='100%'' cellspacing='0' border='1'>";
+                echo "<table id='dbtable' width='100%'' cellspacing='0' border='1'>";
                 echo "<caption>Справочник магазинов</caption>";
                 echo "<tbody>";
                 echo "<tr>";
@@ -90,9 +90,44 @@
                 echo "</pre>";                
             ?>                               
 
+            <!-- Управляющие кнопки -->
+            <form id="form_control">
+                <input id="button_insert" type="button" value=" Добавить ">
+                <input id="button_update" type="button" disabled value=" Изменить ">
+                <input id="button_delete" type="button" disabled value=" Удалить ">
+            </form>
+
+            <!-- Диалоговая форма добавление изменение товара -->
+            <form id="form_dialog">
+
+                <strong>
+                <p id="p_message"></p>
+                </strong>
+
+                <div>
+                    <p><label for="input_id">ID: </label></p>
+                    <p><input id="input_id" type="text" size="10" maxlength="10" disabled></p>
+                </div>
+                <div>                
+                    <p><label for="input_descr">Описание: </label></p>
+                    <p>
+                        <input id="input_descr" type="text" size="50" maxlength="50" title="От 1 до 50 символов">
+                        <span id="span_descr" class="span_msg_err"></span>
+                    </p>
+                </div>
+                <div>
+                    <p><label for="input_adresphone">Адрес и телефон: </label></p>
+                    <p>
+                        <input id="input_adresphone" type="text" size="40" maxlength="40" title="От 1 до 50 символов">
+                        <span id="span_price" class="span_msg_err"></span>
+                    </p> 
+                </div>
+
+                <input id="button_ok" type="button"  value="    OK    ">
+                <input id="button_cancel" type="button"  value=" Отмена ">
+            </form>
 
             </div>
-
         </div>        
 
 <?php 
