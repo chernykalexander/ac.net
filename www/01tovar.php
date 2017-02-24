@@ -9,7 +9,7 @@
         ?>
 
     <script src="js/01tovar_edit.js"></script>
-    <!-- <script src="js/01tovar.js"></script> -->
+    
     </head>
 
     <body>        

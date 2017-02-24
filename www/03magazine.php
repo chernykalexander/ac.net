@@ -8,6 +8,8 @@
             require_once('template/head.php'); 
         ?>
 
+        <script src="js/01magazine_edit.js"></script>
+
     </head>
 
     <body>        
@@ -56,6 +58,7 @@
 
                 echo "<table class='dbtable' width='100%'' cellspacing='0' border='1'>";
                 echo "<caption>Справочник магазинов</caption>";
+                echo "<tbody>";
                 echo "<tr>";
                 echo "<th>id</th>";
                 echo "<th>descr</th>";
@@ -72,6 +75,7 @@
                     echo "<td>" . $row['adresphone'] . "</td>";
                     echo "</tr>";                    
                 }
+                echo "</tbody>";
                 echo "</table>";
                 $mysqli->close();
 

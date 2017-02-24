@@ -297,7 +297,7 @@ $( document ).ready( function() {
 		};
 
 		// Отправить данные из формы в объект 
-		tovar.formaToObject()
+		tovar.formaToObject();
 
 		// Вывести в консольсодержимое объекта товар
 		console.log( 'При нажатии кнопки ОК' );
