@@ -41,9 +41,9 @@
                 //echo $mysqli->host_info . "<br>";                
 
                 // Самый 100%ый код для 100%ого UTF-8 :D
-                $mysqli->query('SET NAMES \'utf8\''); 
-                $mysqli->query('SET CHARACTER SET \'utf8\'');
-                $mysqli->query('SET SESSION collation_connection = \'utf8_general_ci\'');
+                $mysqli->query( 'SET NAMES \'utf8\'' );
+                $mysqli->query( 'SET CHARACTER SET \'utf8\'' );
+                $mysqli->query( 'SET SESSION collation_connection = \'utf8_general_ci\'' );
 
                 // Выбираем из таблицы mgz_tovar
                 $res = $mysqli->query('

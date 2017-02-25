@@ -1,12 +1,14 @@
 $( document ).ready( function() {
 	
 	// Объект товара в магазине
-	var tovar = {
+	var tovar_list = {
 	    
 	    // Поля таблицы БД
 	    id : null,
-	    descr : null,
-	    price : null,
+	    id_magazine : null, // idm
+	    mag_descr : null,
+	    id_tovar : null, // idt
+	    tov_descr : null,
 
 	    // Получить данные из текущей строки html-таблицы и записать их в форму
 	    tableToForma() {

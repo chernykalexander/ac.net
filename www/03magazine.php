@@ -97,7 +97,7 @@
                 <input id="button_delete" type="button" disabled value=" Удалить ">
             </form>
 
-            <!-- Диалоговая форма добавление изменение товара -->
+            <!-- Диалоговая форма добавление изменение магазина -->
             <form id="form_dialog">
 
                 <strong>
