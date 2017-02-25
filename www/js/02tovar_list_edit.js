@@ -1,5 +1,63 @@
 $( document ).ready( function() {
 	
+	var	t_id = null,
+		t_id_magazine = null, // idm
+		t_mag_descr = null,
+		t_id_tovar = null, // idt
+		t_tov_descr = null;
+
+	$( 'tr:eq(2)' ).addClass( 'marked' );
+
+	console.log( '02tovar_list_edit.js подключен' );
+
+	console.log( 't_id: ' + t_id );
+	console.log( 't_id_magazine: ' + t_id_magazine );
+	console.log( 't_mag_descr: ' + t_mag_descr );
+	console.log( 't_id_tovar: ' + t_id_tovar );
+	console.log( 't_tov_descr: ' + t_tov_descr );
+
+	console.log( '-----------------------------------------------' );
+
+	t_id = $( '.marked' ).find( 'td:eq(0)' ).html();
+	t_id_magazine = $( '.marked' ).find( 'td:eq(1)' ).html();
+	t_mag_descr = $( '.marked' ).find( 'td:eq(2)' ).html();
+	t_id_tovar = $( '.marked' ).find( 'td:eq(3)' ).html();
+	t_tov_descr = $( '.marked' ).find( 'td:eq(4)' ).html();
+
+
+	console.log( 't_id: ' + t_id );
+	console.log( 't_id_magazine: ' + t_id_magazine );
+	console.log( 't_mag_descr: ' + t_mag_descr );
+	console.log( 't_id_tovar: ' + t_id_tovar );
+	console.log( 't_tov_descr: ' + t_tov_descr );
+
+	// $( '#input_id' ).val( t_id );
+	// $( '#select_magazine' ).val( t_id_magazine );
+	// $( '#select_tovar' ).val( t_id_tovar );
+
+	$( '#button_test' ).click( function() { 
+		// 
+		console.log( $( '#select_magazine' ).val() );
+		// if ( $( '#select_magazine' ).val() === 'none' ) {
+		// 	// 
+		// 	console.log( 'none' );
+		// };
+	} );
+
+
+
+	// $( '#input_id' ).val( '' );
+	// $( '#select_magazine' ).val( 'none' );
+	// $( '#select_tovar' ).val( 'none' );
+
+	// $( '#select_magazine' ).attr( 'disabled', true );
+	// $( '#select_tovar' ).attr( 'disabled', true );
+
+	// $( '#select_magazine option:selected' ).text( t_mag_descr );
+	// $( '#select_tovar option:selected' ).text( t_tov_descr );
+
+	return;
+	
 	// Объект товара в магазине
 	var tovar_list = {
 	    
@@ -14,8 +72,8 @@ $( document ).ready( function() {
 	    tableToForma() {
 
 	        $( '#input_id' ).val( $( '.marked' ).find( 'td:eq(0)' ).html() );
-	        $( '#input_descr' ).val( $( '.marked' ).find( 'td:eq(1)' ).html() );
-	        $( '#input_price' ).val( $( '.marked' ).find( 'td:eq(2)' ).html() );
+	        $( '#select_magazine' ).val( $( '.marked' ).find( 'td:eq(1)' ).html() );
+	        $( '#select_tovar' ).val( $( '.marked' ).find( 'td:eq(2)' ).html() );
 
 	    },
 			    
@@ -23,8 +81,10 @@ $( document ).ready( function() {
         formaToObject() {
 
             this.id = $( '#input_id' ).val();
-            this.descr = $( '#input_descr' ).val();
-            this.price = $( '#input_price' ).val();
+            this.id_magazine = $( '#select_magazine' ).val();
+            this.mag_descr = $( '#select_magazine option:selected' ).text();
+            this.id_tovar = $( '#select_tovar' ).val();
+            this.tov_descr = $( '#select_tovar option:selected' ).text();
 
         },
 
@@ -32,8 +92,8 @@ $( document ).ready( function() {
         ClearForma() {
 
         	$( '#input_id' ).val( '' );
-        	$( '#input_descr' ).val( '' );
-        	$( '#input_price' ).val( '' );
+        	$( '#select_magazine' ).val( 'none' );
+        	$( '#select_tovar' ).val( 'none' );
 
         },
 
@@ -46,15 +106,22 @@ $( document ).ready( function() {
 	    	  // Добавляем новую строку в таблицу 
 	    	  case 'insert':
 	    	    
-	    	    $( '#dbtable' ).append( '<tr><td>' + this.id + '</td><td>' + this.descr + '</td><td>' + this.price + '</td></tr>' );
+	    	    $( '#dbtable' ).append( '<tr><td>' + this.id + 
+	    	    						'</td><td>' + this.id_magazine + 
+	    	    						'</td><td>' + this.mag_descr + 
+	    	    						'</td><td>' + this.id_tovar + 
+	    	    						'</td><td>' + this.tov_descr + 
+	    	    						'</td></tr>' );
 	    	    break;
 	    	  
 	    	  // Изменяем текущую строку таблицы
 	    	  case 'update':
 	    	    
 	    	    $( '.marked' ).find( 'td:eq(0)' ).html( this.id );
-	    	    $( '.marked' ).find( 'td:eq(1)' ).html( this.descr );
-	    	    $( '.marked' ).find( 'td:eq(2)' ).html( this.price );	    	    
+	    	    $( '.marked' ).find( 'td:eq(1)' ).html( this.id_magazine );
+	    	    $( '.marked' ).find( 'td:eq(2)' ).html( this.mag_descr );
+	    	    $( '.marked' ).find( 'td:eq(3)' ).html( this.id_tovar );
+	    	    $( '.marked' ).find( 'td:eq(4)' ).html( this.tov_descr );
 	    	    break;
 	    	  
 	    	  // Удаляем текущую строку таблицы
@@ -69,7 +136,12 @@ $( document ).ready( function() {
 	    // Вывести значения объекта в консоль
 	    writeConsole() {
 	        // 
-	        console.log ( '|| ID: ' + this.id + ' DESCR: ' + this.descr + ' PRICE: ' + this.price + ' MAN: ' + this.manipulation +' ||');
+	        console.log ( '|| ID: ' + this.id 
+	        			+ ' ID_MAGAZINE: ' + this.id_magazine 
+	        			+ ' MAG_DESCR: ' + this.mag_descr 
+	        			+ ' ID_TOVAR: ' + this.id_tovar 
+	        			+ ' TOV_DESCR: ' + this.tov_descr 
+	        			+ ' MAN: ' + this.manipulation +' ||');
 	    },
 
         // тип операции: insert, update, delete
@@ -108,8 +180,8 @@ $( document ).ready( function() {
 	// 
 	function inputEnable() {
 
-		$( '#input_descr' ).removeAttr( 'disabled' );
-		$( '#input_price' ).removeAttr( 'disabled' );
+		$( '#select_magazine' ).removeAttr( 'disabled' );
+		$( '#select_tovar' ).removeAttr( 'disabled' );
 		
 	};
 
@@ -119,8 +191,8 @@ $( document ).ready( function() {
 	// 
 	function inputDisable() {
 
-		$( '#input_descr' ).attr( 'disabled', true );
-		$( '#input_price' ).attr( 'disabled', true );
+		$( '#select_magazine' ).attr( 'disabled', true );
+		$( '#select_tovar' ).attr( 'disabled', true );
 
 	};
 

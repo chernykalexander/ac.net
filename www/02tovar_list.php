@@ -8,6 +8,8 @@
             require_once( 'template/head.php' ); 
         ?>
 
+    <script src="js/02tovar_list_edit.js"></script>
+    
     </head>
 
     <body>        
@@ -123,79 +125,106 @@
                     <p><input id="input_id" type="text" size="10" maxlength="10" disabled></p>
                 </div>
 
-                <div>
+<!--                 <div>
                     <p><label for="input_id_magazine">ID магазина </label></p>
                     <p><input id="input_id_magazine" type="text" size="10" maxlength="10" disabled></p>
-                </div>
-
-                <?php
-                include 'config.php'; 
-
-                // Пытаемся подключиться к БД
-                $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
-                if ($mysqli->connect_errno) {
-                    echo 'Не удалось подключиться к MySQL: (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error;
-                }
-                //echo $mysqli->host_info . "<br>";                
-
-                // Самый 100%ый код для 100%ого UTF-8 :D
-                $mysqli->query( 'SET NAMES \'utf8\'' );
-                $mysqli->query( 'SET CHARACTER SET \'utf8\'' );
-                $mysqli->query( 'SET SESSION collation_connection = \'utf8_general_ci\'' );
-
-                // Выбираем из таблицы mgz_tovar
-                $res = $mysqli->query('
-                                        select 
-                                            m.id, 
-                                            m.descr 
-                                        from mgz_magazine m
-                                        order by m.id
-                                    ');
-
-
-                echo '<p><select size="1" id="select_magazine">';
-                echo '<option selected disabled>Выберите магазин</option>';
-                //  Перемещает указатель результата на выбранную строку
-                $res->data_seek(0);
-                while ($row = $res->fetch_assoc()) 
-                {
-                    echo '<option value="' . $row[ 'id' ] . '">' . $row[ 'descr' ] . '</option>';
-                }
-                $mysqli->close();
-                echo '</select></p>';
-                ?>
-
-
-
-                <p><select size="1" name="select_magazine">
-                    <option disabled>Выберите героя</option>
-                    <option value="Чебурашка">Чебурашка</option>
-                    <option value="Крокодил Гена">Крокодил Гена</option>
-                    <option value="Шапокляк">Шапокляк</option>
-                    <option value="Крыса Лариса">Крыса Лариса</option>
-                </select></p>
+                </div> -->
 
 
 
 
 
                 <div>                
-                    <p><label for="input_descr">Описание: </label></p>
-                    <p>
-                        <input id="input_descr" type="text" size="30" maxlength="30" title="От 1 до 30 символов">
-                        <span id="span_descr" class="span_msg_err"></span>
-                    </p>
+                    <p><label for="select_magazine">Справочник магазинов: </label></p>
+                    <p> 
+                       <select size="1" id="select_magazine">
+                       <option value="none" selected disabled>Выберите магазин</option>
+                    <?php
+                    include 'config.php'; 
+
+                    // Пытаемся подключиться к БД
+                    $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
+                    if ($mysqli->connect_errno) {
+                        echo 'Не удалось подключиться к MySQL: (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error;
+                    }
+                    
+                    // Самый 100%ый код для 100%ого UTF-8 :D
+                    $mysqli->query( 'SET NAMES \'utf8\'' );
+                    $mysqli->query( 'SET CHARACTER SET \'utf8\'' );
+                    $mysqli->query( 'SET SESSION collation_connection = \'utf8_general_ci\'' );
+
+                    // Выбираем из таблицы mgz_tovar
+                    $res = $mysqli->query('
+                                            select 
+                                                m.id, 
+                                                m.descr 
+                                            from mgz_magazine m
+                                            order by m.id
+                                        ');
+
+                    //  Перемещает указатель результата на выбранную строку
+                    $res->data_seek(0);
+                    while ($row = $res->fetch_assoc()) 
+                    {
+                        echo '<option value="' . $row[ 'id' ] . '">' . $row[ 'descr' ] . '</option>';
+                    }
+                    $mysqli->close();
+                    ?>
+                    </select></p>
                 </div>
-                <div>
-                    <p><label for="input_price">Цена: </label></p>
-                    <p>
-                        <input id="input_price" type="text" size="10" maxlength="10" title="Цена должна быть положительной">
-                        <span id="span_price" class="span_msg_err"></span>
-                    </p> 
+
+<!--                 <div>
+                    <p><label for="input_id_tovar">ID товара </label></p>
+                    <p><input id="input_id_tovar" type="text" size="10" maxlength="10" disabled></p>
+                </div> -->
+
+
+
+
+
+
+                <div>                
+                    <p><label for="select_tovar">Справочник товаров: </label></p>
+                    <p> 
+                       <select size="1" id="select_tovar">
+                       <option value="none" selected disabled>Выберите товар</option>
+                    <?php
+                    include 'config.php'; 
+
+                    // Пытаемся подключиться к БД
+                    $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
+                    if ($mysqli->connect_errno) {
+                        echo 'Не удалось подключиться к MySQL: (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error;
+                    }
+                    
+                    // Самый 100%ый код для 100%ого UTF-8 :D
+                    $mysqli->query( 'SET NAMES \'utf8\'' );
+                    $mysqli->query( 'SET CHARACTER SET \'utf8\'' );
+                    $mysqli->query( 'SET SESSION collation_connection = \'utf8_general_ci\'' );
+
+                    // Выбираем из таблицы mgz_tovar
+                    $res = $mysqli->query('
+                                            select 
+                                                t.id, 
+                                                t.descr 
+                                            from mgz_tovar t
+                                            order by t.id
+                                        ');
+
+                    //  Перемещает указатель результата на выбранную строку
+                    $res->data_seek(0);
+                    while ($row = $res->fetch_assoc()) 
+                    {
+                        echo '<option value="' . $row[ 'id' ] . '">' . $row[ 'descr' ] . '</option>';
+                    }
+                    $mysqli->close();
+                    ?>
+                    </select></p>
                 </div>
 
                 <input id="button_ok" type="button"  value="    OK    ">
                 <input id="button_cancel" type="button"  value=" Отмена ">
+                <input id="button_test" type="button"  value=" Test ">
             </form>
 
             </div>
