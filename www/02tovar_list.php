@@ -137,8 +137,8 @@
                     include 'config.php'; 
 
                     // Пытаемся подключиться к БД
-                    $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
-                    if ($mysqli->connect_errno) {
+                    $mysqli = new mysqli( $dbHost, $dbUser, $dbPass, $dbName );
+                    if ( $mysqli->connect_errno ) {
                         echo 'Не удалось подключиться к MySQL: (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error;
                     }
                     
@@ -147,7 +147,7 @@
                     $mysqli->query( 'SET CHARACTER SET \'utf8\'' );
                     $mysqli->query( 'SET SESSION collation_connection = \'utf8_general_ci\'' );
 
-                    // Выбираем из таблицы mgz_tovar
+                    // Выбираем из таблицы mgz_magazine
                     $res = $mysqli->query('
                                             select 
                                                 m.id, 

@@ -1,63 +1,5 @@
 $( document ).ready( function() {
 	
-	// var	t_id = null,
-	// 	t_id_magazine = null, // idm
-	// 	t_mag_descr = null,
-	// 	t_id_tovar = null, // idt
-	// 	t_tov_descr = null;
-
-	// $( 'tr:eq(2)' ).addClass( 'marked' );
-
-	// console.log( '02tovar_list_edit.js подключен' );
-
-	// console.log( 't_id: ' + t_id );
-	// console.log( 't_id_magazine: ' + t_id_magazine );
-	// console.log( 't_mag_descr: ' + t_mag_descr );
-	// console.log( 't_id_tovar: ' + t_id_tovar );
-	// console.log( 't_tov_descr: ' + t_tov_descr );
-
-	// console.log( '-----------------------------------------------' );
-
-	// t_id = $( '.marked' ).find( 'td:eq(0)' ).html();
-	// t_id_magazine = $( '.marked' ).find( 'td:eq(1)' ).html();
-	// t_mag_descr = $( '.marked' ).find( 'td:eq(2)' ).html();
-	// t_id_tovar = $( '.marked' ).find( 'td:eq(3)' ).html();
-	// t_tov_descr = $( '.marked' ).find( 'td:eq(4)' ).html();
-
-
-	// console.log( 't_id: ' + t_id );
-	// console.log( 't_id_magazine: ' + t_id_magazine );
-	// console.log( 't_mag_descr: ' + t_mag_descr );
-	// console.log( 't_id_tovar: ' + t_id_tovar );
-	// console.log( 't_tov_descr: ' + t_tov_descr );
-
-	// // $( '#input_id' ).val( t_id );
-	// // $( '#select_magazine' ).val( t_id_magazine );
-	// // $( '#select_tovar' ).val( t_id_tovar );
-
-	// $( '#button_test' ).click( function() { 
-	// 	// 
-	// 	console.log( $( '#select_magazine' ).val() );
-	// 	// if ( $( '#select_magazine' ).val() === 'none' ) {
-	// 	// 	// 
-	// 	// 	console.log( 'none' );
-	// 	// };
-	// } );
-
-
-
-	// // $( '#input_id' ).val( '' );
-	// // $( '#select_magazine' ).val( 'none' );
-	// // $( '#select_tovar' ).val( 'none' );
-
-	// // $( '#select_magazine' ).attr( 'disabled', true );
-	// // $( '#select_tovar' ).attr( 'disabled', true );
-
-	// // $( '#select_magazine option:selected' ).text( t_mag_descr );
-	// // $( '#select_tovar option:selected' ).text( t_tov_descr );
-
-	// return;
-	
 	// Объект товара в магазине
 	var tovar_list = {
 	    
@@ -383,7 +325,8 @@ $( document ).ready( function() {
 
 		    	} else {
 		    		
-		    		console.log( 'Ошибка при выполнении серверного скрипта: ' + responseJSON[ 'message' ] );
+		    		console.log( 'Ошибка при выполнении серверного скрипта: ' 
+		    			          + responseJSON[ 'message' ] );
 
 		    	};
 
