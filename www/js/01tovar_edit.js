@@ -44,7 +44,10 @@ $( document ).ready( function() {
 	    	  // Добавляем новую строку в таблицу 
 	    	  case 'insert':
 	    	    
-	    	    $( '#dbtable' ).append( '<tr><td>' + this.id + '</td><td>' + this.descr + '</td><td>' + this.price + '</td></tr>' );
+	    	    $( '#dbtable' ).append( '<tr><td>' + this.id 
+	    	    					 + '</td><td>' + this.descr 
+	    	    					 + '</td><td>' + this.price 
+	    	    					 + '</td></tr>' );
 	    	    break;
 	    	  
 	    	  // Изменяем текущую строку таблицы
@@ -67,7 +70,10 @@ $( document ).ready( function() {
 	    // Вывести значения объекта в консоль
 	    writeConsole() {
 	        // 
-	        console.log ( '|| ID: ' + this.id + ' DESCR: ' + this.descr + ' PRICE: ' + this.price + ' MAN: ' + this.manipulation +' ||');
+	        console.log ( '|| ID: ' + this.id 
+	        			+ ' DESCR: ' + this.descr 
+	        			+ ' PRICE: ' + this.price 
+	        			+ ' MAN: ' + this.manipulation +' ||');
 	    },
 
         // тип операции: insert, update, delete

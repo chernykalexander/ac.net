@@ -61,7 +61,7 @@
                     order by tl.id; 
                 ' );
 
-                echo '<table class=\'dbtable\' width=\'100%\' cellspacing=\'0\' border=\'1\'>';
+                echo '<table id=\'dbtable\' width=\'100%\' cellspacing=\'0\' border=\'1\'>';
                 echo '<caption>Список товаров</caption>';
                 echo '<tbody>';
                 echo '<tr>';
@@ -114,7 +114,7 @@
             </form>
 
             <!-- Диалоговая форма добавление изменение списка товара -->
-            <form id="form_dialog" style="display: block">
+            <form id="form_dialog">
 
                 <strong>
                 <p id="p_message"></p>
@@ -170,7 +170,9 @@
                     }
                     $mysqli->close();
                     ?>
-                    </select></p>
+                    </select>
+                    <span id="span_magazine" class="span_msg_err"></span>
+                    </p>
                 </div>
 
 <!--                 <div>
@@ -219,12 +221,13 @@
                     }
                     $mysqli->close();
                     ?>
-                    </select></p>
+                    </select>
+                    <span id="span_tovar" class="span_msg_err"></span>
+                    </p>
                 </div>
 
                 <input id="button_ok" type="button"  value="    OK    ">
                 <input id="button_cancel" type="button"  value=" Отмена ">
-                <input id="button_test" type="button"  value=" Test ">
             </form>
 
             </div>

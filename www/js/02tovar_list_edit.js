@@ -1,62 +1,62 @@
 $( document ).ready( function() {
 	
-	var	t_id = null,
-		t_id_magazine = null, // idm
-		t_mag_descr = null,
-		t_id_tovar = null, // idt
-		t_tov_descr = null;
+	// var	t_id = null,
+	// 	t_id_magazine = null, // idm
+	// 	t_mag_descr = null,
+	// 	t_id_tovar = null, // idt
+	// 	t_tov_descr = null;
 
-	$( 'tr:eq(2)' ).addClass( 'marked' );
+	// $( 'tr:eq(2)' ).addClass( 'marked' );
 
-	console.log( '02tovar_list_edit.js подключен' );
+	// console.log( '02tovar_list_edit.js подключен' );
 
-	console.log( 't_id: ' + t_id );
-	console.log( 't_id_magazine: ' + t_id_magazine );
-	console.log( 't_mag_descr: ' + t_mag_descr );
-	console.log( 't_id_tovar: ' + t_id_tovar );
-	console.log( 't_tov_descr: ' + t_tov_descr );
+	// console.log( 't_id: ' + t_id );
+	// console.log( 't_id_magazine: ' + t_id_magazine );
+	// console.log( 't_mag_descr: ' + t_mag_descr );
+	// console.log( 't_id_tovar: ' + t_id_tovar );
+	// console.log( 't_tov_descr: ' + t_tov_descr );
 
-	console.log( '-----------------------------------------------' );
+	// console.log( '-----------------------------------------------' );
 
-	t_id = $( '.marked' ).find( 'td:eq(0)' ).html();
-	t_id_magazine = $( '.marked' ).find( 'td:eq(1)' ).html();
-	t_mag_descr = $( '.marked' ).find( 'td:eq(2)' ).html();
-	t_id_tovar = $( '.marked' ).find( 'td:eq(3)' ).html();
-	t_tov_descr = $( '.marked' ).find( 'td:eq(4)' ).html();
-
-
-	console.log( 't_id: ' + t_id );
-	console.log( 't_id_magazine: ' + t_id_magazine );
-	console.log( 't_mag_descr: ' + t_mag_descr );
-	console.log( 't_id_tovar: ' + t_id_tovar );
-	console.log( 't_tov_descr: ' + t_tov_descr );
-
-	// $( '#input_id' ).val( t_id );
-	// $( '#select_magazine' ).val( t_id_magazine );
-	// $( '#select_tovar' ).val( t_id_tovar );
-
-	$( '#button_test' ).click( function() { 
-		// 
-		console.log( $( '#select_magazine' ).val() );
-		// if ( $( '#select_magazine' ).val() === 'none' ) {
-		// 	// 
-		// 	console.log( 'none' );
-		// };
-	} );
+	// t_id = $( '.marked' ).find( 'td:eq(0)' ).html();
+	// t_id_magazine = $( '.marked' ).find( 'td:eq(1)' ).html();
+	// t_mag_descr = $( '.marked' ).find( 'td:eq(2)' ).html();
+	// t_id_tovar = $( '.marked' ).find( 'td:eq(3)' ).html();
+	// t_tov_descr = $( '.marked' ).find( 'td:eq(4)' ).html();
 
 
+	// console.log( 't_id: ' + t_id );
+	// console.log( 't_id_magazine: ' + t_id_magazine );
+	// console.log( 't_mag_descr: ' + t_mag_descr );
+	// console.log( 't_id_tovar: ' + t_id_tovar );
+	// console.log( 't_tov_descr: ' + t_tov_descr );
 
-	// $( '#input_id' ).val( '' );
-	// $( '#select_magazine' ).val( 'none' );
-	// $( '#select_tovar' ).val( 'none' );
+	// // $( '#input_id' ).val( t_id );
+	// // $( '#select_magazine' ).val( t_id_magazine );
+	// // $( '#select_tovar' ).val( t_id_tovar );
 
-	// $( '#select_magazine' ).attr( 'disabled', true );
-	// $( '#select_tovar' ).attr( 'disabled', true );
+	// $( '#button_test' ).click( function() { 
+	// 	// 
+	// 	console.log( $( '#select_magazine' ).val() );
+	// 	// if ( $( '#select_magazine' ).val() === 'none' ) {
+	// 	// 	// 
+	// 	// 	console.log( 'none' );
+	// 	// };
+	// } );
 
-	// $( '#select_magazine option:selected' ).text( t_mag_descr );
-	// $( '#select_tovar option:selected' ).text( t_tov_descr );
 
-	return;
+
+	// // $( '#input_id' ).val( '' );
+	// // $( '#select_magazine' ).val( 'none' );
+	// // $( '#select_tovar' ).val( 'none' );
+
+	// // $( '#select_magazine' ).attr( 'disabled', true );
+	// // $( '#select_tovar' ).attr( 'disabled', true );
+
+	// // $( '#select_magazine option:selected' ).text( t_mag_descr );
+	// // $( '#select_tovar option:selected' ).text( t_tov_descr );
+
+	// return;
 	
 	// Объект товара в магазине
 	var tovar_list = {
@@ -73,7 +73,7 @@ $( document ).ready( function() {
 
 	        $( '#input_id' ).val( $( '.marked' ).find( 'td:eq(0)' ).html() );
 	        $( '#select_magazine' ).val( $( '.marked' ).find( 'td:eq(1)' ).html() );
-	        $( '#select_tovar' ).val( $( '.marked' ).find( 'td:eq(2)' ).html() );
+	        $( '#select_tovar' ).val( $( '.marked' ).find( 'td:eq(3)' ).html() );
 
 	    },
 			    
@@ -201,38 +201,21 @@ $( document ).ready( function() {
 	// ----------------------- Проверка данных -------------------------------------------
 	// 
 	function CheckForma() {
-	    //
+
 	    // Очищаем все <span>ы от ошибок
 	    $( '.span_msg_err' ).text( '' );
 
-	    // Делаем валидацию для таблицы товаров
-	    if ( $( '#input_descr' ).val() === '' ) {
-	        $( '#span_descr' ).text( 'Описание товара не должно быть пустым' );
-	        $( '#input_descr' ).focus();
+	    // Проверка поля магазин
+	    if ( $( '#select_magazine option:selected' ).val() === 'none' ) {
+	        $( '#span_magazine' ).text( 'Вы не указали магазин' );
+	        $( '#select_magazine' ).focus();
 	        return false;
 	    };
 
-	    if ( $( '#input_descr' ).val().length >= 30 ) {
-	        $( '#span_descr' ).text( 'Описание товара не должно быть слишком длинным' );
-	        $( '#input_descr' ).focus();
-	        return false;
-	    };
-
-	    if ( $( '#input_price' ).val() === '' ) {
-	        $( '#span_price' ).text( 'Цена товара должна быть заполнена' );
-	        $( '#input_price' ).focus();
-	        return false;
-	    };
-
-	    if ( ! $.isNumeric( $( '#input_price' ).val() ) )  {
-	        $( '#span_price' ).text( 'Цена товара это числовое значение' );
-	        $( '#input_price' ).focus();
-	        return false;
-	    };
-
-	    if ( + $( '#input_price' ).val() <= 0)  {
-	        $( '#span_price' ).text( 'Число должно быть положительным' );
-	        $( '#input_price' ).focus();
+	    // Проверка поля товар
+	    if ( $( '#select_tovar option:selected' ).val() === 'none' ) {
+	        $( '#span_tovar' ).text( 'Вы не указали товар' );
+	        $( '#select_tovar' ).focus();
 	        return false;
 	    };
 
@@ -268,11 +251,11 @@ $( document ).ready( function() {
 	$( '#button_insert' ).click( function() {
 		
 		// Записываем тип операции
-		tovar.manipulation = 'insert';
-		$( '#p_message' ).text = 'Форма добавления товара в БД';
+		tovar_list.manipulation = 'insert';
+		$( '#p_message' ).text = 'Форма добавления списка товара в БД';
 
 		// Обнуление полей формы
-		tovar.ClearForma();
+		tovar_list.ClearForma();
 
 		// Поля формы делаем доступными для ввода
 		inputEnable();
@@ -292,11 +275,11 @@ $( document ).ready( function() {
 	$( '#button_update' ).click( function() {
 		
 		// Записываем тип операции
-		tovar.manipulation = 'update';
-		$( '#p_message' ).text = 'Что вы хотите поменять в товаре?';
+		tovar_list.manipulation = 'update';
+		$( '#p_message' ).text = 'Что вы хотите поменять в списке товара?';
 
 	    // Получить данные из текущей строки таблицы и записать их форму
-	    tovar.tableToForma();
+	    tovar_list.tableToForma();
 
 		// Поля формы делаем доступными для ввода
 		inputEnable();
@@ -316,11 +299,11 @@ $( document ).ready( function() {
 	$( '#button_delete' ).click( function() {
 		
 		// Записываем тип операции
-		tovar.manipulation = 'delete';
-		$( '#p_message' ).text = 'Вы действительно хотите удалить товар?';
+		tovar_list.manipulation = 'delete';
+		$( '#p_message' ).text = 'Вы действительно хотите удалить строку из списка товара?';
 
 		// Получить данные из текущей строки таблицы и записать их в форму
-		tovar.tableToForma( this );
+		tovar_list.tableToForma( this );
 		
 		// Поля формы делаем не доступными
 		inputDisable();
@@ -371,16 +354,16 @@ $( document ).ready( function() {
 		};
 
 		// Отправить данные из формы в объект 
-		tovar.formaToObject();
+		tovar_list.formaToObject();
 
 		// Вывести в консольсодержимое объекта товар
 		console.log( 'При нажатии кнопки ОК' );
-		tovar.writeConsole();
+		tovar_list.writeConsole();
 
 		$.ajax(
 		{
-		    url: 'model/01tovar_db.php', // Вызываем этот скрипт
-		    data: JSON.stringify( tovar ), // И отправляем ему данные
+		    url: 'model/02tovar_list_db.php', // Вызываем этот скрипт
+		    data: JSON.stringify( tovar_list ), // И отправляем ему данные
 		    type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
 		    dataType: 'json', // В каком формате получать данные от сервера
 		    success: function( responseJSON ) { 
@@ -393,10 +376,10 @@ $( document ).ready( function() {
 			        
 			        // При выполнении insert - сервер пришлет новый id
 			        if ( responseJSON[ 'id' ] !== null ) {
-			        	tovar.id = responseJSON[ 'id' ];
+			        	tovar_list.id = responseJSON[ 'id' ];
 			        };
 			        
-			        tovar.changeTable();
+			        tovar_list.changeTable();
 
 		    	} else {
 		    		
@@ -414,7 +397,7 @@ $( document ).ready( function() {
 		$( '#form_dialog' ).hide();
 
 		// Если произошло добавление или редактирование то все кнопки доступны
-		if ( tovar.manipulation !== 'delete' ) {
+		if ( tovar_list.manipulation !== 'delete' ) {
 			
 			buttonEnable( ['insert', 'update', 'delete'] );
 
