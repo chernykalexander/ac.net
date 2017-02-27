@@ -8,6 +8,8 @@
             require_once('template/head.php'); 
         ?>
 
+    <script src="js/06check_pokupki_edit.js"></script>
+    
     </head>
 
     <body>        
@@ -32,63 +34,88 @@
                 include 'config.php'; 
                 
                 // Пытаемся подключиться к БД
-                $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
-                if ($mysqli->connect_errno) {
-                    echo "Не удалось подключиться к MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+                $mysqli = new mysqli( $dbHost, $dbUser, $dbPass, $dbName );
+                if ( $mysqli->connect_errno ) {
+                    echo 'Не удалось подключиться к MySQL: (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error;
                 }
                 //echo $mysqli->host_info . "<br>";                
 
                 // Самый 100%ый код для 100%ого UTF-8 :D
-                $mysqli->query("SET NAMES 'utf8'"); 
-                $mysqli->query("SET CHARACTER SET 'utf8'");
-                $mysqli->query("SET SESSION collation_connection = 'utf8_general_ci'");
+                $mysqli->query( 'SET NAMES \'utf8\'' ); 
+                $mysqli->query( 'SET CHARACTER SET \'utf8\'' );
+                $mysqli->query( 'SET SESSION collation_connection = \'utf8_general_ci\'' );
 
-                // Выбираем из таблицы mgz_tovar_list
-                $res_tovar_list = $mysqli->query("
-                                                    select
-                                                      ch.id, 
-                                                      ch.id_pokupki, 
-                                                      ch.id_tovar, 
-                                                      ch.kolichestvo
-                                                    from
-                                                      mgz_check ch
-                                                    order by ch.id asc;
-                                                ");
+                // Выбираем из таблицы mgz_check
+                $res_check_pokupki = $mysqli->query( '
+                    select
+                      ch.id as id, 
+                      ch.id_pokupki as idp,
+                      concat(SUBSTRING_INDEX(c.fio, \' \', 1), \'/\', m.descr) as cli_mag,
+                      ch.id_tovar as idt, 
+                      t.descr as des_tov,
+                      ch.kolichestvo as kol
+                    from 
+                      mgz_check ch 
+                      left outer join mgz_pokupki p
+                      on ch.id_pokupki = p.id
+                      left outer join mgz_client c
+                      on p.id_client = c.id
+                      left outer join mgz_magazine m
+                      on p.id_magazine = m.id
+                      left outer join mgz_tovar t
+                      on ch.id_tovar = t.id
+                    order by ch.id asc;
+                ' );
 
-                echo "<table class='dbtable' width='100%'' cellspacing='0' border='1'>";
-                echo "<caption>Чек покупки</caption>";
-                echo "<tr>";
-                echo "<th>id</th>";
-                echo "<th>id_pokupki</th>";
-                echo "<th>id_tovar</th>";
-                echo "<th>kolichestvo</th>";
-                echo "</tr>";
+                echo '<table id=\'dbtable\' width=\'100%\' cellspacing=\'0\' border=\'1\'>';
+                echo '<caption>Чек покупки</caption>';
+                echo '<tbody>';
+                echo '<tr>';
+                echo '<th>id</th>';
+                echo '<th>idp</th>';
+                echo '<th>cli_mag</th>';
+                echo '<th>idt</th>';
+                echo '<th>des_tov</th>';
+                echo '<th>kol</th>';
+                echo '</tr>';
 
                 //  Перемещает указатель результата на выбранную строку
-                $res_tovar_list->data_seek(0);
-                while ($row = $res_tovar_list->fetch_assoc()) 
+                $res_check_pokupki->data_seek(0);
+                while ($row = $res_check_pokupki->fetch_assoc()) 
                 {
-                    echo "<tr>";
-                    echo "<td>" . $row['id'] . "</td>";
-                    echo "<td>" . $row['id_pokupki'] . "</td>";
-                    echo "<td>" . $row['id_tovar'] . "</td>";
-                    echo "<td>" . $row['kolichestvo'] . "</td>";
-                    echo "</tr>";                    
-                }
-                echo "</table>";
-                //$mysqli->close();
+                    echo '<tr>';
+                    echo '<td>' . $row[ 'id' ] . '</td>';
+                    echo '<td>' . $row[ 'idp' ] . '</td>';
+                    echo '<td>' . $row[ 'cli_mag' ] . '</td>';
+                    echo '<td>' . $row[ 'idt' ] . '</td>';
+                    echo '<td>' . $row[ 'des_tov' ] . '</td>';
+                    echo '<td>' . $row[ 'kol' ] . '</td>';
+                    echo '</tr>';
+                };
+                echo '</tbody>';
+                echo '</table>';
+                $mysqli->close();
 
-                echo "<pre class='code'>";
-
-                echo "selectselect <br>";
-                echo "select  ch.id, <br>";
-                echo "select  ch.id_pokupki, <br>";
-                echo "select  ch.id_tovar, <br>";
-                echo "select  ch.kolichestvo <br>";
-                echo "selectfrom <br>";
-                echo "select  check ch <br>";
-                echo "selectorder by ch.id asc; <br>";
-                echo "</pre>";                
+                echo '<pre class=\'code\'>';
+                echo 'select <br>';
+                echo '  ch.id as id, <br>';
+                echo '  ch.id_pokupki as idp, <br>';
+                echo '  concat(SUBSTRING_INDEX(c.fio, \' \', 1), \'/\', m.descr) as cli_mag, <br>';
+                echo '  ch.id_tovar as idt, <br>';
+                echo '  t.descr as des_tov, <br>';
+                echo '  ch.kolichestvo as kol <br>';
+                echo 'from  <br>';
+                echo '  mgz_check ch <br>';
+                echo'  left outer joi n mgz_pokupki p <br>';
+                echo'  on ch.id _pokupki = p.id <br>';
+                echo'  left outer jo in mgz_client c <br>';
+                echo'  on p.i d_client = c.id <br>';
+                echo'  left outer join  mgz_magazine m <br>';
+                echo'  on p.id_ magazine = m.id <br>';
+                echo'  left outer j oin mgz_tovar t <br>';
+                echo'  on ch. id_tovar = t.id <br>';
+                echo'orde r by ch.id asc; <br>';
+                echo '</pre>';
             ?>                               
 
 

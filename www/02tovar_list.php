@@ -34,8 +34,8 @@
                 include 'config.php'; 
                 
                 // Пытаемся подключиться к БД
-                $mysqli = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
-                if ($mysqli->connect_errno) {
+                $mysqli = new mysqli( $dbHost, $dbUser, $dbPass, $dbName );
+                if ( $mysqli->connect_errno ) {
                     echo 'Не удалось подключиться к MySQL: (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error;
                 }
 
@@ -105,6 +105,9 @@
                 echo '</pre>';
 
             ?>               
+            
+            <!-- Управление строкой -->
+
 
             <!-- Управляющие кнопки -->
             <form id="form_control">
@@ -124,15 +127,6 @@
                     <p><label for="input_id">ID: </label></p>
                     <p><input id="input_id" type="text" size="10" maxlength="10" disabled></p>
                 </div>
-
-<!--                 <div>
-                    <p><label for="input_id_magazine">ID магазина </label></p>
-                    <p><input id="input_id_magazine" type="text" size="10" maxlength="10" disabled></p>
-                </div> -->
-
-
-
-
 
                 <div>                
                     <p><label for="select_magazine">Справочник магазинов: </label></p>
@@ -174,16 +168,6 @@
                     <span id="span_magazine" class="span_msg_err"></span>
                     </p>
                 </div>
-
-<!--                 <div>
-                    <p><label for="input_id_tovar">ID товара </label></p>
-                    <p><input id="input_id_tovar" type="text" size="10" maxlength="10" disabled></p>
-                </div> -->
-
-
-
-
-
 
                 <div>                
                     <p><label for="select_tovar">Справочник товаров: </label></p>
@@ -229,6 +213,8 @@
                 <input id="button_ok" type="button"  value="    OK    ">
                 <input id="button_cancel" type="button"  value=" Отмена ">
             </form>
+
+            <!-- Управление строкой -->
 
             </div>
 
