@@ -1,21 +1,23 @@
 $( document ).ready( function() {
 	
 	// Объект товара в магазине
-	var tovar_list = {
+	var check_pokupki = {
 	    
 	    // Поля таблицы БД
-	    id : null,
-	    id_magazine : null, // idm
-	    mag_descr : null,
+	    id : null, // id
+	    id_pokupki : null, // idp
+	    cli_mag : null, // cli_mag
 	    id_tovar : null, // idt
-	    tov_descr : null,
+	    tov_descr : null, // des_tov
+	    kolichestvo : null, // kol
 
 	    // Получить данные из текущей строки html-таблицы и записать их в форму
 	    tableToForma() {
 
 	        $( '#input_id' ).val( $( '.marked' ).find( 'td:eq(0)' ).html() );
-	        $( '#select_magazine' ).val( $( '.marked' ).find( 'td:eq(1)' ).html() );
+	        $( '#select_pokupki' ).val( $( '.marked' ).find( 'td:eq(1)' ).html() );
 	        $( '#select_tovar' ).val( $( '.marked' ).find( 'td:eq(3)' ).html() );
+	        $( '#input_kolichestvo' ).val( $( '.marked' ).find( 'td:eq(5)' ).html() );
 
 	    },
 			    
@@ -23,10 +25,11 @@ $( document ).ready( function() {
         formaToObject() {
 
             this.id = $( '#input_id' ).val();
-            this.id_magazine = $( '#select_magazine' ).val();
-            this.mag_descr = $( '#select_magazine option:selected' ).text();
+            this.id_pokupki = $( '#select_pokupki' ).val();
+            this.cli_mag = $( '#select_pokupki option:selected' ).text();
             this.id_tovar = $( '#select_tovar' ).val();
             this.tov_descr = $( '#select_tovar option:selected' ).text();
+            this.kolichestvo = $( '#input_kolichestvo' ).val();
 
         },
 
@@ -34,8 +37,9 @@ $( document ).ready( function() {
         ClearForma() {
 
         	$( '#input_id' ).val( '' );
-        	$( '#select_magazine' ).val( 'none' );
+        	$( '#select_pokupki' ).val( 'none' );
         	$( '#select_tovar' ).val( 'none' );
+        	$( '#input_kolichestvo' ).val( '' );
 
         },
 
@@ -47,12 +51,13 @@ $( document ).ready( function() {
 	    	  
 	    	  // Добавляем новую строку в таблицу 
 	    	  case 'insert':
-	    	    
-	    	    $( '#dbtable' ).append( '<tr><td>' + this.id + 
-	    	    						'</td><td>' + this.id_magazine + 
-	    	    						'</td><td>' + this.mag_descr + 
+
+	    	    $( '#dbtable' ).append( '<tr><td>'  + this.id + 
+	    	    						'</td><td>' + this.id_pokupki + 
+	    	    						'</td><td>' + this.cli_mag + 
 	    	    						'</td><td>' + this.id_tovar + 
 	    	    						'</td><td>' + this.tov_descr + 
+	    	    						'</td><td>' + this.kolichestvo + 
 	    	    						'</td></tr>' );
 	    	    break;
 	    	  
@@ -60,10 +65,11 @@ $( document ).ready( function() {
 	    	  case 'update':
 	    	    
 	    	    $( '.marked' ).find( 'td:eq(0)' ).html( this.id );
-	    	    $( '.marked' ).find( 'td:eq(1)' ).html( this.id_magazine );
-	    	    $( '.marked' ).find( 'td:eq(2)' ).html( this.mag_descr );
+	    	    $( '.marked' ).find( 'td:eq(1)' ).html( this.id_pokupki );
+	    	    $( '.marked' ).find( 'td:eq(2)' ).html( this.cli_mag );
 	    	    $( '.marked' ).find( 'td:eq(3)' ).html( this.id_tovar );
 	    	    $( '.marked' ).find( 'td:eq(4)' ).html( this.tov_descr );
+	    	    $( '.marked' ).find( 'td:eq(4)' ).html( this.kolichestvo );
 	    	    break;
 	    	  
 	    	  // Удаляем текущую строку таблицы
@@ -79,11 +85,12 @@ $( document ).ready( function() {
 	    writeConsole() {
 	        // 
 	        console.log ( '|| ID: ' + this.id 
-	        			+ ' ID_MAGAZINE: ' + this.id_magazine 
-	        			+ ' MAG_DESCR: ' + this.mag_descr 
-	        			+ ' ID_TOVAR: ' + this.id_tovar 
-	        			+ ' TOV_DESCR: ' + this.tov_descr 
-	        			+ ' MAN: ' + this.manipulation +' ||');
+	        			  + ' ID_POKUPKI: ' + this.id_magazine 
+	        			  + ' CLI_MAG: ' + this.mag_descr 
+	        			  + ' ID_TOVAR: ' + this.id_tovar 
+	        			  + ' TOV_DESCR: ' + this.tov_descr 
+	        			  + ' KOLICHESTVO: ' + this.tov_descr 
+	        			  + ' MAN: ' + this.manipulation +' ||');
 	    },
 
         // тип операции: insert, update, delete
@@ -147,10 +154,10 @@ $( document ).ready( function() {
 	    // Очищаем все <span>ы от ошибок
 	    $( '.span_msg_err' ).text( '' );
 
-	    // Проверка поля магазин
-	    if ( $( '#select_magazine option:selected' ).val() === 'none' ) {
-	        $( '#span_magazine' ).text( 'Вы не указали магазин' );
-	        $( '#select_magazine' ).focus();
+	    // Проверка поля покупка
+	    if ( $( '#select_pokupki option:selected' ).val() === 'none' ) {
+	        $( '#span_pokupki' ).text( 'Вы не указали покупку' );
+	        $( '#select_pokupki' ).focus();
 	        return false;
 	    };
 
@@ -158,6 +165,24 @@ $( document ).ready( function() {
 	    if ( $( '#select_tovar option:selected' ).val() === 'none' ) {
 	        $( '#span_tovar' ).text( 'Вы не указали товар' );
 	        $( '#select_tovar' ).focus();
+	        return false;
+	    };
+
+	    if ( $( '#input_kolichestvo' ).val() === '' ) {
+	        $( '#span_kolichestvo' ).text( 'Количество товара должно быть заполнено' );
+	        $( '#input_kolichestvo' ).focus();
+	        return false;
+	    };
+
+	    if ( ! $.isNumeric( $( '#input_kolichestvo' ).val() ) )  {
+	        $( '#span_kolichestvo' ).text( 'Количество товара это числовое значение' );
+	        $( '#input_kolichestvo' ).focus();
+	        return false;
+	    };
+
+	    if ( + $( '#input_kolichestvo' ).val() <= 0)  {
+	        $( '#span_kolichestvo' ).text( 'Количество должно быть положительным' );
+	        $( '#input_kolichestvo' ).focus();
 	        return false;
 	    };
 
@@ -193,11 +218,11 @@ $( document ).ready( function() {
 	$( '#button_insert' ).click( function() {
 		
 		// Записываем тип операции
-		tovar_list.manipulation = 'insert';
-		$( '#p_message' ).text = 'Форма добавления списка товара в БД';
+		check_pokupki.manipulation = 'insert';
+		$( '#p_message' ).text = 'Форма добавления чека покупки в БД';
 
 		// Обнуление полей формы
-		tovar_list.ClearForma();
+		check_pokupki.ClearForma();
 
 		// Поля формы делаем доступными для ввода
 		inputEnable();
@@ -217,11 +242,11 @@ $( document ).ready( function() {
 	$( '#button_update' ).click( function() {
 		
 		// Записываем тип операции
-		tovar_list.manipulation = 'update';
-		$( '#p_message' ).text = 'Что вы хотите поменять в списке товара?';
+		check_pokupki.manipulation = 'update';
+		$( '#p_message' ).text = 'Что вы хотите поменять в чеке покупки?';
 
 	    // Получить данные из текущей строки таблицы и записать их форму
-	    tovar_list.tableToForma();
+	    check_pokupki.tableToForma();
 
 		// Поля формы делаем доступными для ввода
 		inputEnable();
@@ -241,11 +266,11 @@ $( document ).ready( function() {
 	$( '#button_delete' ).click( function() {
 		
 		// Записываем тип операции
-		tovar_list.manipulation = 'delete';
-		$( '#p_message' ).text = 'Вы действительно хотите удалить строку из списка товара?';
+		check_pokupki.manipulation = 'delete';
+		$( '#p_message' ).text = 'Вы действительно хотите удалить строку из чеков покупки?';
 
 		// Получить данные из текущей строки таблицы и записать их в форму
-		tovar_list.tableToForma( this );
+		check_pokupki.tableToForma( this );
 		
 		// Поля формы делаем не доступными
 		inputDisable();
@@ -296,16 +321,16 @@ $( document ).ready( function() {
 		};
 
 		// Отправить данные из формы в объект 
-		tovar_list.formaToObject();
+		check_pokupki.formaToObject();
 
 		// Вывести в консольсодержимое объекта товар
 		console.log( 'При нажатии кнопки ОК' );
-		tovar_list.writeConsole();
+		check_pokupki.writeConsole();
 
 		$.ajax(
 		{
-		    url: 'model/02tovar_list_db.php', // Вызываем этот скрипт
-		    data: JSON.stringify( tovar_list ), // И отправляем ему данные
+		    url: 'model/06check_pokupki_db.php', // Вызываем этот скрипт
+		    data: JSON.stringify( check_pokupki ), // И отправляем ему данные
 		    type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
 		    dataType: 'json', // В каком формате получать данные от сервера
 		    success: function( responseJSON ) { 
@@ -318,10 +343,10 @@ $( document ).ready( function() {
 			        
 			        // При выполнении insert - сервер пришлет новый id
 			        if ( responseJSON[ 'id' ] !== null ) {
-			        	tovar_list.id = responseJSON[ 'id' ];
+			        	check_pokupki.id = responseJSON[ 'id' ];
 			        };
 			        
-			        tovar_list.changeTable();
+			        check_pokupki.changeTable();
 
 		    	} else {
 		    		
@@ -340,7 +365,7 @@ $( document ).ready( function() {
 		$( '#form_dialog' ).hide();
 
 		// Если произошло добавление или редактирование то все кнопки доступны
-		if ( tovar_list.manipulation !== 'delete' ) {
+		if ( check_pokupki.manipulation !== 'delete' ) {
 			
 			buttonEnable( ['insert', 'update', 'delete'] );
 
