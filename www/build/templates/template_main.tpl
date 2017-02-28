@@ -1,19 +1,3 @@
-<?php 
-
-require( 'satellite/setup.php' );
-
-$MagIndex = new ClassMagazine();
-
-$MagIndex->assign( 'name','Novoe Imya' );
-
-$MagIndex->display( 'template_main.tpl' );
-
-exit;
-?> 
-
-
-
-
 <!DOCTYPE html>
 <html>
 
@@ -58,9 +42,6 @@ exit;
             </div>
 
         </div>        
-
-<?php 
-    require_once('template/footer.php'); 
-?>         
+        {include file='footer.tpl'}
     </body>
 </html>
