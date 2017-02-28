@@ -2,83 +2,83 @@ $( document ).ready( function() {
 	
 	// Объект товара в магазине
 	var tovar = {
-	    
-	    // Поля таблицы БД
-	    id : null,
-	    descr : null,
-	    price : null,
+		
+		// Поля таблицы БД
+		id : null,
+		descr : null,
+		price : null,
 
-	    // Получить данные из текущей строки html-таблицы и записать их в форму
-	    tableToForma() {
+		// Получить данные из текущей строки html-таблицы и записать их в форму
+		tableToForma() {
 
-	        $( '#input_id' ).val( $( '.marked' ).find( 'td:eq(0)' ).html() );
-	        $( '#input_descr' ).val( $( '.marked' ).find( 'td:eq(1)' ).html() );
-	        $( '#input_price' ).val( $( '.marked' ).find( 'td:eq(2)' ).html() );
+			$( '#input_id' ).val( $( '.marked' ).find( 'td:eq(0)' ).html() );
+			$( '#input_descr' ).val( $( '.marked' ).find( 'td:eq(1)' ).html() );
+			$( '#input_price' ).val( $( '.marked' ).find( 'td:eq(2)' ).html() );
 
-	    },
-			    
-        // Отправить данные из формы в объект
-        formaToObject() {
+		},
+				
+		// Отправить данные из формы в объект
+		formaToObject() {
 
-            this.id = $( '#input_id' ).val();
-            this.descr = $( '#input_descr' ).val();
-            this.price = $( '#input_price' ).val();
+			this.id = $( '#input_id' ).val();
+			this.descr = $( '#input_descr' ).val();
+			this.price = $( '#input_price' ).val();
 
-        },
+		},
 
-        // Очищаем форму
-        ClearForma() {
+		// Очищаем форму
+		ClearForma() {
 
-        	$( '#input_id' ).val( '' );
-        	$( '#input_descr' ).val( '' );
-        	$( '#input_price' ).val( '' );
+			$( '#input_id' ).val( '' );
+			$( '#input_descr' ).val( '' );
+			$( '#input_price' ).val( '' );
 
-        },
+		},
 
-	    // Переносит данные из объекта в таблицу
-	    changeTable() {
-	    	
-	    	// В зависимости от операции над объектом
-	    	switch ( this.manipulation ) {
-	    	  
-	    	  // Добавляем новую строку в таблицу 
-	    	  case 'insert':
-	    	    
-	    	    $( '#dbtable' ).append( '<tr><td>' + this.id 
-	    	    					 + '</td><td>' + this.descr 
-	    	    					 + '</td><td>' + this.price 
-	    	    					 + '</td></tr>' );
-	    	    break;
-	    	  
-	    	  // Изменяем текущую строку таблицы
-	    	  case 'update':
-	    	    
-	    	    $( '.marked' ).find( 'td:eq(0)' ).html( this.id );
-	    	    $( '.marked' ).find( 'td:eq(1)' ).html( this.descr );
-	    	    $( '.marked' ).find( 'td:eq(2)' ).html( this.price );	    	    
-	    	    break;
-	    	  
-	    	  // Удаляем текущую строку таблицы
-	    	  case 'delete':
-	    	    
-	    	    $( '.marked' ).remove();	    	    
-	    	    break;
+		// Переносит данные из объекта в таблицу
+		changeTable() {
+			
+			// В зависимости от операции над объектом
+			switch ( this.manipulation ) {
+			  
+			  // Добавляем новую строку в таблицу 
+			  case 'insert':
+				
+				$( '#dbtable' ).append( '<tr><td>' + this.id 
+									 + '</td><td>' + this.descr 
+									 + '</td><td>' + this.price 
+									 + '</td></tr>' );
+				break;
+			  
+			  // Изменяем текущую строку таблицы
+			  case 'update':
+				
+				$( '.marked' ).find( 'td:eq(0)' ).html( this.id );
+				$( '.marked' ).find( 'td:eq(1)' ).html( this.descr );
+				$( '.marked' ).find( 'td:eq(2)' ).html( this.price );	    	    
+				break;
+			  
+			  // Удаляем текущую строку таблицы
+			  case 'delete':
+				
+				$( '.marked' ).remove();	    	    
+				break;
 
-	    	};
-	    },
+			};
+		},
 
-	    // Вывести значения объекта в консоль
-	    writeConsole() {
-	        // 
-	        console.log ( '|| ID: ' + this.id 
-	        			+ ' DESCR: ' + this.descr 
-	        			+ ' PRICE: ' + this.price 
-	        			+ ' MAN: ' + this.manipulation +' ||');
-	    },
+		// Вывести значения объекта в консоль
+		writeConsole() {
+			// 
+			console.log ( '|| ID: ' + this.id 
+						+ ' DESCR: ' + this.descr 
+						+ ' PRICE: ' + this.price 
+						+ ' MAN: ' + this.manipulation +' ||');
+		},
 
-        // тип операции: insert, update, delete
-        manipulation: null,
-        foo: null
+		// тип операции: insert, update, delete
+		manipulation: null,
+		foo: null
 
 	};
 
@@ -133,43 +133,43 @@ $( document ).ready( function() {
 	// ----------------------- Проверка данных -------------------------------------------
 	// 
 	function CheckForma() {
-	    //
-	    // Очищаем все <span>ы от ошибок
-	    $( '.span_msg_err' ).text( '' );
+		//
+		// Очищаем все <span>ы от ошибок
+		$( '.span_msg_err' ).text( '' );
 
-	    // Делаем валидацию для таблицы товаров
-	    if ( $( '#input_descr' ).val() === '' ) {
-	        $( '#span_descr' ).text( 'Описание товара не должно быть пустым' );
-	        $( '#input_descr' ).focus();
-	        return false;
-	    };
+		// Делаем валидацию для таблицы товаров
+		if ( $( '#input_descr' ).val() === '' ) {
+			$( '#span_descr' ).text( 'Описание товара не должно быть пустым' );
+			$( '#input_descr' ).focus();
+			return false;
+		};
 
-	    if ( $( '#input_descr' ).val().length >= 30 ) {
-	        $( '#span_descr' ).text( 'Описание товара не должно быть слишком длинным' );
-	        $( '#input_descr' ).focus();
-	        return false;
-	    };
+		if ( $( '#input_descr' ).val().length >= 30 ) {
+			$( '#span_descr' ).text( 'Описание товара не должно быть слишком длинным' );
+			$( '#input_descr' ).focus();
+			return false;
+		};
 
-	    if ( $( '#input_price' ).val() === '' ) {
-	        $( '#span_price' ).text( 'Цена товара должна быть заполнена' );
-	        $( '#input_price' ).focus();
-	        return false;
-	    };
+		if ( $( '#input_price' ).val() === '' ) {
+			$( '#span_price' ).text( 'Цена товара должна быть заполнена' );
+			$( '#input_price' ).focus();
+			return false;
+		};
 
-	    if ( ! $.isNumeric( $( '#input_price' ).val() ) )  {
-	        $( '#span_price' ).text( 'Цена товара это числовое значение' );
-	        $( '#input_price' ).focus();
-	        return false;
-	    };
+		if ( ! $.isNumeric( $( '#input_price' ).val() ) )  {
+			$( '#span_price' ).text( 'Цена товара это числовое значение' );
+			$( '#input_price' ).focus();
+			return false;
+		};
 
-	    if ( + $( '#input_price' ).val() <= 0)  {
-	        $( '#span_price' ).text( 'Число должно быть положительным' );
-	        $( '#input_price' ).focus();
-	        return false;
-	    };
+		if ( + $( '#input_price' ).val() <= 0)  {
+			$( '#span_price' ).text( 'Число должно быть положительным' );
+			$( '#input_price' ).focus();
+			return false;
+		};
 
-	    // Все проверки пройдены
-	    return true;
+		// Все проверки пройдены
+		return true;
 	};
 
 
@@ -177,19 +177,19 @@ $( document ).ready( function() {
 	// ----------------------- При клике на строку таблицы -------------------------------------
 	// 
 	$( '#dbtable tr' ).not( ':first' ).click( function() {
-	    
-	    // Если вызвана диалоговая форма добавить/изменить/удалить
-	    // то переходить на другие строки нельзя
-	    if ( $( '#form_dialog' ).is( ':visible' ) ) {
-	        return;
-	    };
+		
+		// Если вызвана диалоговая форма добавить/изменить/удалить
+		// то переходить на другие строки нельзя
+		if ( $( '#form_dialog' ).is( ':visible' ) ) {
+			return;
+		};
 
-	    // Красим строку
-	    $( '#dbtable tr' ).removeClass( 'marked' );
-	    $( this ).addClass( 'marked' );
+		// Красим строку
+		$( '#dbtable tr' ).removeClass( 'marked' );
+		$( this ).addClass( 'marked' );
 
-	    // поскольку строка выбрана то кнопки изменить и удалить сделаем активными
-	    buttonEnable( ['update', 'delete'] );
+		// поскольку строка выбрана то кнопки изменить и удалить сделаем активными
+		buttonEnable( ['update', 'delete'] );
 
 	} );
 
@@ -227,8 +227,8 @@ $( document ).ready( function() {
 		tovar.manipulation = 'update';
 		$( '#p_message' ).text = 'Что вы хотите поменять в товаре?';
 
-	    // Получить данные из текущей строки таблицы и записать их форму
-	    tovar.tableToForma();
+		// Получить данные из текущей строки таблицы и записать их форму
+		tovar.tableToForma();
 
 		// Поля формы делаем доступными для ввода
 		inputEnable();
@@ -311,35 +311,35 @@ $( document ).ready( function() {
 
 		$.ajax(
 		{
-		    url: 'model/01tovar_db.php', // Вызываем этот скрипт
-		    data: JSON.stringify( tovar ), // И отправляем ему данные
-		    type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
-		    dataType: 'json', // В каком формате получать данные от сервера
-		    success: function( responseJSON ) { 
-		        console.log( 'Сервер прислал корректный json' );
+			url: 'model/01tovar_db.php', // Вызываем этот скрипт
+			data: JSON.stringify( tovar ), // И отправляем ему данные
+			type: 'POST', // HTTP запрос методом POST (например POST, GET и т.д.)
+			dataType: 'json', // В каком формате получать данные от сервера
+			success: function( responseJSON ) { 
+				console.log( 'Сервер прислал корректный json' );
 
-		        // Если серверный скрипт выполнился без ошибок
-		        if ( responseJSON[ 'error' ] === false) {
-		        	
-		        	console.log( 'Серверный скрипт выполнен успешно: ' + responseJSON[ 'message' ] );
-			        
-			        // При выполнении insert - сервер пришлет новый id
-			        if ( responseJSON[ 'id' ] !== null ) {
-			        	tovar.id = responseJSON[ 'id' ];
-			        };
-			        
-			        tovar.changeTable();
+				// Если серверный скрипт выполнился без ошибок
+				if ( responseJSON[ 'error' ] === false) {
+					
+					console.log( 'Серверный скрипт выполнен успешно: ' + responseJSON[ 'message' ] );
+					
+					// При выполнении insert - сервер пришлет новый id
+					if ( responseJSON[ 'id' ] !== null ) {
+						tovar.id = responseJSON[ 'id' ];
+					};
+					
+					tovar.changeTable();
 
-		    	} else {
-		    		
-		    		console.log( 'Ошибка при выполнении серверного скрипта: ' + responseJSON[ 'message' ] );
+				} else {
+					
+					console.log( 'Ошибка при выполнении серверного скрипта: ' + responseJSON[ 'message' ] );
 
-		    	};
+				};
 
-		    },
-		    error: function( responseJSON ) { 
-		        console.log( 'От сервера пришол НЕ валидный json: ' + responseJSON[ 'message' ] ); 
-		    }
+			},
+			error: function( responseJSON ) { 
+				console.log( 'От сервера пришол НЕ валидный json: ' + responseJSON[ 'message' ] ); 
+			}
 		});
 
 		// Прячем диалоговую форму

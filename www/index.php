@@ -1,25 +1,16 @@
-<?php
+<?php 
 
-// require_once( SMARTY_DIR . 'lib/smarty/Smarty.class.php' );
-require_once( 'lib/smarty/Smarty.class.php' );
+require( 'satellite/setup.php' );
 
-$smarty = new Smarty();
+$tmp = new ClassMagazine();
 
-$smarty->template_dir = 'build/templates/';
-$smarty->compile_dir = 'build/templates_c/';
-$smarty->config_dir = 'build/configs/';
-$smarty->cache_dir = 'build/cache/';
+$tmp->assign( 'name','Novoe Imya' );
 
-$smarty->assign('name', 'Катруська');
-
-//** раскомментируйте следующую строку для отображения отладочной консоли
-//$smarty->debugging = true;
-
-$smarty->display('index.tpl');
+$tmp->display( 'index.tpl' );
 
 exit;
+?> 
 
-?>
 
 
 
@@ -61,7 +52,7 @@ exit;
             <!-- This text -->
             <?php
                 require_once( 'lib/smarty/Smarty.class.php' );
-                $smarty = new Smarty();
+                // $smarty = new Smarty();
             ?>
 
             </div>
