@@ -1,13 +1,14 @@
 <?php
 
-require_once( SMARTY_DIR . 'lib/smarty/Smarty.class.php' );
+// require_once( SMARTY_DIR . 'lib/smarty/Smarty.class.php' );
+require_once( 'lib/smarty/Smarty.class.php' );
 
 $smarty = new Smarty();
 
-$smarty->template_dir = '/build/templates/';
-$smarty->compile_dir = '/build/templates_c/';
-$smarty->config_dir = '/build/configs/';
-$smarty->cache_dir = '/build/cache/';
+$smarty->template_dir = 'build/templates/';
+$smarty->compile_dir = 'build/templates_c/';
+$smarty->config_dir = 'build/configs/';
+$smarty->cache_dir = 'build/cache/';
 
 $smarty->assign('name', 'Катруська');
 
