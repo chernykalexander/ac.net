@@ -162,7 +162,7 @@
                     $res = $mysqli->query( '
                         select
                           p.id as id,
-                          concat(c.fio, \'/\' , m.descr) as descr
+                          concat(SUBSTRING_INDEX(c.fio, \' \', 1), \'/\', m.descr) as descr
                         from 
                           mgz_pokupki p
                           left outer join mgz_client c

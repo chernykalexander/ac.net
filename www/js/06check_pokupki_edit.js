@@ -69,7 +69,7 @@ $( document ).ready( function() {
 	    	    $( '.marked' ).find( 'td:eq(2)' ).html( this.cli_mag );
 	    	    $( '.marked' ).find( 'td:eq(3)' ).html( this.id_tovar );
 	    	    $( '.marked' ).find( 'td:eq(4)' ).html( this.tov_descr );
-	    	    $( '.marked' ).find( 'td:eq(4)' ).html( this.kolichestvo );
+	    	    $( '.marked' ).find( 'td:eq(5)' ).html( this.kolichestvo );
 	    	    break;
 	    	  
 	    	  // Удаляем текущую строку таблицы

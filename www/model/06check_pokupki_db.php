@@ -69,12 +69,13 @@
             
             $mysqli->query(' update mgz_check
                           set id_pokupki =  ' . $request_client[ id_pokupki ] . ' , 
-                              id_tovar = ' . $request_client[ id_tovar ] . '
-                              kolichestvo = ' . $request_client[ kolichestvo ] . '
+                              id_tovar = ' . $request_client[ id_tovar ] . ',
+                              kolichestvo = ' . $request_client[ kolichestvo ] . ' 
                           where id = ' . $request_client[ id ] .'; ');
 
             if ( $mysqli->error ) {        
                 $response_server[ message ] = 'Не удалось выполнить UPDATE: (' . $request_client[ id ] . ') ';
+                // $response_server[ message ] = 'Не уд ' . $mysqli->error . ') ';
                 $response_server[ error ] = true;
                 // exit( json_encode( $response_server ) );
             } else {
