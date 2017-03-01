@@ -3,26 +3,18 @@
 
     <head>
 
-        <?php
-            $page_title = 'Система управления магазином';
-            require_once('template/head.php'); 
-        ?>
+        {include file='head.tpl'}
 
     </head>
 
     <body>        
 
-        <?php 
-            require_once('template/header.php'); 
-        ?>        
-        
+        {include file='header.tpl'}
 
         <div class="MainClass">
 
 
-            <?php 
-                require_once('template/sidebar.php'); 
-            ?>                               
+            {include file='sidebar.tpl'}
     
          
             <div class="ContentClass">            
@@ -34,10 +26,7 @@
             </p>
 
             <!-- This text -->
-            <?php
-                require_once( 'lib/smarty/Smarty.class.php' );
-                // $smarty = new Smarty();
-            ?>
+            {$main_text}
 
             </div>
 
