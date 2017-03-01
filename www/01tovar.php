@@ -131,6 +131,7 @@ exit;
                     <p><label for="input_id">ID: </label></p>
                     <p><input id="input_id" type="text" size="10" maxlength="10" disabled></p>
                 </div>
+                
                 <div>                
                     <p><label for="input_descr">Описание: </label></p>
                     <p>
