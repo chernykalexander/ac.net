@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-03-01 11:42:20
+/* Smarty version 3.1.30, created on 2017-03-01 12:23:43
   from "Z:\home\ac.net\www\build\templates\template_main.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58b67b5c651104_33445138',
+  'unifunc' => 'content_58b6850fcba234_58647046',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0cd1ad99519c39acb16a84558f9b0a0323c5cea1' => 
     array (
       0 => 'Z:\\home\\ac.net\\www\\build\\templates\\template_main.tpl',
-      1 => 1488354120,
+      1 => 1488356535,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_58b67b5c651104_33445138 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58b6850fcba234_58647046 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,6 +34,11 @@ function content_58b67b5c651104_33445138 (Smarty_Internal_Template $_smarty_tpl)
         <?php $_smarty_tpl->_subTemplateRender("file:head.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
+
+        <?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['scriptjs']->value;?>
+"><?php echo '</script'; ?>
+>        
 
     </head>
 
@@ -53,13 +58,10 @@ function content_58b67b5c651104_33445138 (Smarty_Internal_Template $_smarty_tpl)
          
             <div class="ContentClass">            
 
-            <h1>Структура базы данных</h1>
+            <h1><?php echo $_smarty_tpl->tpl_vars['page_title']->value;?>
+</h1>
 
-            <p>               
-               <img id="ImgStructira" src="img/shema_struct2.png" align="center" alt="Структура базы данных">
-            </p>
-
-            <!-- This text -->
+            
             <?php echo $_smarty_tpl->tpl_vars['main_text']->value;?>
 
 

@@ -1,7 +1,7 @@
 <?php
 
-$color = 'green';
-$fruit = 'apple';
+// $color = 'green';
+// $fruit = 'apple';
 
 $dbHost = 'localhost';
 $dbUser = 'user_magazine';

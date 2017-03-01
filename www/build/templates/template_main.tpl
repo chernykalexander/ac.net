@@ -5,6 +5,8 @@
 
         {include file='head.tpl'}
 
+        <script src="{$scriptjs}"></script>        
+
     </head>
 
     <body>        
@@ -19,13 +21,9 @@
          
             <div class="ContentClass">            
 
-            <h1>Структура базы данных</h1>
+            <h1>{$page_title}</h1>
 
-            <p>               
-               <img id="ImgStructira" src="img/shema_struct2.png" align="center" alt="Структура базы данных">
-            </p>
-
-            <!-- This text -->
+            
             {$main_text}
 
             </div>
