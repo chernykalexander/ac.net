@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-03-02 13:53:19
+/* Smarty version 3.1.30, created on 2017-03-02 15:48:43
   from "Z:\home\ac.net\www\build\templates\template_main.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58b7eb8f0f61b9_52455442',
+  'unifunc' => 'content_58b8069ba1bc87_53651454',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0cd1ad99519c39acb16a84558f9b0a0323c5cea1' => 
     array (
       0 => 'Z:\\home\\ac.net\\www\\build\\templates\\template_main.tpl',
-      1 => 1488448373,
+      1 => 1488455319,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_58b7eb8f0f61b9_52455442 (Smarty_Internal_Template $_smarty_tpl) {
+function content_58b8069ba1bc87_53651454 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -74,6 +74,18 @@ function content_58b7eb8f0f61b9_52455442 (Smarty_Internal_Template $_smarty_tpl)
                 
                 
                 <?php echo $_smarty_tpl->tpl_vars['form_control']->value;?>
+
+                
+                
+                <?php echo $_smarty_tpl->tpl_vars['form_dialog_header']->value;?>
+
+                
+                
+                <?php echo $_smarty_tpl->tpl_vars['form_dialog_element']->value;?>
+
+
+                
+                <?php echo $_smarty_tpl->tpl_vars['form_dialog_footer']->value;?>
 
 
                 

@@ -149,13 +149,35 @@ class ClassMagazine extends Smarty {
         // return $ResultTable;
     }
 
+
+    // -----------------------------------------------------------------------------------
+    // Управление формами
+    // -----------------------------------------------------------------------------------
+
+
     // Получить html-текст управляющей формы
     public function GetFormControl() {
         // 
         // $this->assign( 'form_control', $ResultTable );
         $this->assign( 'form_control', file_get_contents( 'build/templates/form_control.tpl' ) );
     }
+    
+    
+    // Получить шапку диалоговой формы
+    public function GetFormDialogHeader() {
 
+        $this->assign( 'form_dialog_header', file_get_contents( 'build/templates/form_dialog_header.tpl' ) );
+
+    }
+    
+
+    // Получить подвал диалоговой формы
+    public function GetFormDialogFooter() {
+
+        $this->assign( 'form_dialog_footer', file_get_contents( 'build/templates/form_dialog_footer.tpl' ) );
+
+    }
+    
 
 }; // Конец объявления класса ClassMagazine 
 
