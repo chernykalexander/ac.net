@@ -182,6 +182,25 @@ class ClassMagazine extends Smarty {
     }
     
 
+    // Возвращает список <option> для тега select
+    public function GetOptionSelect() {
+
+        // Выполняем запрос к БД и записываем результат 
+        $ResultQuery = $this->ConnectorDB->query( $this->QueryDB );
+        
+        //  Перемещает указатель результата на выбранную строку
+        $ResultQuery->data_seek(0);
+
+        // Каждая строка это новый option
+        while ( $RowQuery = $ResultQuery->fetch_assoc() ) 
+        {
+            $OptionSelect .= '<option value="' . $RowQuery[ 'id' ] . '">' . $RowQuery[ 'descr' ] . '</option>';
+        };
+
+        return $OptionSelect;
+
+    }
+
 }; // Конец объявления класса ClassMagazine 
 
 

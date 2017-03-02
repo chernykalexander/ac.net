@@ -19,7 +19,8 @@ $MagTovar->SetQueryDB( '
         t.descr, 
         t.price 
     from mgz_tovar t 
-    order by t.id ' );
+    order by t.id 
+' );
 
 // Получим html-код таблицы
 $MagTovar->GetTable();
@@ -38,13 +39,9 @@ $MagTovar->GetFormControl();
 // Получить шаблон - шапка диалоговой формы
 $MagTovar->GetFormDialogHeader();
 
-// require_once( 'control/01tovar_forma.php' );
-$MagTovar->assign( 'form_dialog_element', file_get_contents( 'control/01tovar_forma.php' ) );
-// $MagTovar->assign( 'form_dialog_element', "{include_php file='control/01tovar_forma.php'}" );
+$MagTovar->assign( 'form_dialog_element', 'build/templates/01tovar_forma.tpl' );
 
-// $MagTovar->assign( 'form_dialog_element', "{include_php file='control/01tovar_forma.php'}" );
-
-// {include_php file='/path/to/load_nav.php'}
+// $MagTovar->assign( 'form_dialog_element', file_get_contents( 'control/01tovar_forma.php' ) );
 
 // Получить шаблон - подвал диалоговой формы
 $MagTovar->GetFormDialogFooter();

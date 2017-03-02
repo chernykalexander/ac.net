@@ -35,19 +35,17 @@
                 {* Выводим управляющую форму *}
                 {$form_control}
                 
-                                
-                {*if $form_dialog_element != ''*}
+                               
                     
                     {* Выводим ШАПКУ диалоговой формы *}
                     {$form_dialog_header}
 
                     {* Выводим элементы диалоговой формы *}
-                    {$form_dialog_element}
+                    {include file="$form_dialog_element"}
                     
                     {* Выводим ПОДВАЛ управляющей формы *}
                     {$form_dialog_footer}
 
-                {*/if*}
 
 
                 {* Основной описательный текст страницы *}
