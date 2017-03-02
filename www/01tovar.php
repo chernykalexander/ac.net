@@ -39,9 +39,11 @@ $MagTovar->GetFormControl();
 $MagTovar->GetFormDialogHeader();
 
 // require_once( 'control/01tovar_forma.php' );
-// $MagTovar->assign( 'form_dialog_element', file_get_contents( 'control/01tovar_forma.php' ) );
+$MagTovar->assign( 'form_dialog_element', file_get_contents( 'control/01tovar_forma.php' ) );
 // $MagTovar->assign( 'form_dialog_element', "{include_php file='control/01tovar_forma.php'}" );
+
 // $MagTovar->assign( 'form_dialog_element', "{include_php file='control/01tovar_forma.php'}" );
+
 // {include_php file='/path/to/load_nav.php'}
 
 // Получить шаблон - подвал диалоговой формы
@@ -57,6 +59,7 @@ $MagTovar->DisconnectDB();
 
 // Вызываем шаблон
 $MagTovar->display( 'template_main.tpl' );
+// $MagTovar->display( 'form_control.tpl' );
 
 exit;
 ?> 

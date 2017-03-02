@@ -3,8 +3,11 @@
 //  Подключаем смарти
 require( 'lib/smarty/Smarty.class.php' ); 
 
+$smarty = new Smarty();
+
 // Занаследуемся от смарти
 class ClassMagazine extends Smarty { 
+// class ClassMagazine extends Smarty { 
 
     // Конструктор класса. Он автоматически вызывается при создании нового экземпляра.
     public function __construct() {      
