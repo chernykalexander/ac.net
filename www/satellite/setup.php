@@ -60,10 +60,7 @@ class ClassMagazine extends Smarty {
             $MsgErrorDB = 'Не удалось подключиться к MySQL: (' 
             . $this->ConnectorDB->connect_errno . ') ' 
             . $this->ConnectorDB->connect_error;
-            echo $this->$MsgErrorDB;
-        } else {
-            //
-            echo 'Подключение к БД произошло успешно'; 
+            // echo $this->$MsgErrorDB;
         };
 
         // Устанавливаем кодировку для БД
@@ -92,7 +89,8 @@ class ClassMagazine extends Smarty {
     // Геттер SQL запроса
     public function GetQueryDB() {
         
-        return '<pre class="code">' . $this->QueryDB . '</pre>';
+        $this->assign( 'text_query', '<pre class="code">' . $this->QueryDB . '</pre>' );
+        // return '<pre class="code">' . $this->QueryDB . '</pre>';
 
     }
 
@@ -117,33 +115,45 @@ class ClassMagazine extends Smarty {
         $ResultTable .=  '</tr> ';
 
 
-        echo print_r( $ResultQuery->fetch_assoc() );
         // Формируем тело таблицы
         // Переход к заданной строке в результирующем наборе
         $ResultQuery->data_seek( 0 );
+        
         // Для каждой итерации цикла 
-        // извлекаем результирующий ряд в виде ассоциативного массива
-        while ( $RowTable = $ResultQuery->fetch_assoc() ) 
+        // извлекаем одну строку из результирующего набора и помещает ее в обычный массив
+        while ( $RowTable = $ResultQuery->fetch_array( MYSQLI_NUM ) ) 
         {
-            $ResultTable .= 
-            '<tr>' .
-            '<td>' . $RowTable[ id ] . '</td>' .
-            '<td>' . $RowTable[ descr ] . '</td>' .
-            '<td>' . $RowTable[0]  . '</td>' .
-            // '<td>' . count( $RowTable ) . '</td>' .
-            // '<td>' . $RowTable[ price ] . '</td>' .
-            '</tr>';
+            $ResultTable .=  '<tr>';
+            
+            // Формируем ячейки для строки
+            for ( $i = 0; $i <  count( $RowTable ); $i++ ) {
+                $ResultTable .= '<td>' . $RowTable[ $i ] . '</td>';
+            };
+            
+            $ResultTable .= '</tr>';
         }
 
         // Закрываем таблицу
-
         $ResultTable .=  
             '</tr> ' .
             '</tbody> ' .
             '</table> ' ;
 
+        // очищаем результаты выборки 
+        $ResultQuery->free();
+
+        // Связываем переменную шаблона с таблицей
+        $this->assign( 'main_table', $ResultTable );
+
         // // Возвращем сформированную таблицу
-        return $ResultTable;
+        // return $ResultTable;
+    }
+
+    // Получить html-текст управляющей формы
+    public function GetFormControl() {
+        // 
+        // $this->assign( 'form_control', $ResultTable );
+        $this->assign( 'form_control', file_get_contents( 'build/templates/form_control.tpl' ) );
     }
 
 

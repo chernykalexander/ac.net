@@ -2,12 +2,39 @@
 
 require( 'satellite/setup.php' );
 
-$MagIndex = new ClassMagazine();
+$MagTovar = new ClassMagazine();
 
-$MagIndex->assign( 'page_title', 'Справочник товаров' );
-$MagIndex->assign( 'scriptjs', 'js/01tovar_edit.js' );
+// Дадим странице имя
+$MagTovar->assign( 'page_title', 'Справочник товаров' );
+// Подключим скрипт JS
+$MagTovar->assign( 'scriptjs', 'js/01tovar_edit.js' );
 
-$MagIndex->display( 'template_main.tpl' );
+// Соединяемся с БД
+$MagTovar->ConnectDB();
+
+// Запрос к БД
+$MagTovar->SetQueryDB( '
+    select 
+        t.id, 
+        t.descr, 
+        t.price 
+    from mgz_tovar t 
+    order by t.id ' );
+
+// Получим html-код таблицы
+$MagTovar->GetTable();
+
+// Получим текст запроса
+$MagTovar->GetQueryDB();
+
+// Получим и отрисуем управляющую форму
+$MagTovar->GetFormControl();
+
+// Закрываем сессию с БД
+$MagTovar->DisconnectDB();
+
+// Вызываем шаблон
+$MagTovar->display( 'template_main.tpl' );
 
 exit;
 ?> 
@@ -87,11 +114,11 @@ exit;
                 echo '<tr>';
                 echo '<th>id</th>';
                 echo '<th>descr</th>';
-                echo '<th>price</th>';                
+                echo '<th>price</th>';
                 echo '</tr>';
                 //  Перемещает указатель результата на выбранную строку
                 $res->data_seek(0);
-                while ($row = $res->fetch_assoc()) 
+                while ( $row = $res->fetch_assoc() ) 
                 {
                     echo '<tr>';
                     echo '<td>' . $row[ 'id' ] . '</td>';
@@ -131,7 +158,7 @@ exit;
                     <p><label for="input_id">ID: </label></p>
                     <p><input id="input_id" type="text" size="10" maxlength="10" disabled></p>
                 </div>
-                
+
                 <div>                
                     <p><label for="input_descr">Описание: </label></p>
                     <p>
