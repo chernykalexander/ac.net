@@ -1,3 +1,76 @@
+<?php 
+
+require( 'satellite/setup.php' );
+
+$MagPokupateli = new ClassMagazine();
+
+// Дадим странице имя
+$MagPokupateli->assign( 'page_title', 'Покупатели' );
+// Подключим скрипт JS
+$MagPokupateli->assign( 'scriptjs', 'js/04pokupateli_edit.js' );
+
+// Соединяемся с БД
+$MagPokupateli->ConnectDB();
+
+// Запрос к БД
+$MagPokupateli->SetQueryDB( '
+    select
+      c.id, 
+      c.fio
+    from
+      mgz_client c
+    order by c.id asc
+' );
+
+// Получим html-код таблицы
+$MagPokupateli->GetTable();
+
+// Получим текст запроса
+$MagPokupateli->GetQueryDB();
+
+// Получим и отрисуем управляющую форму
+$MagPokupateli->GetFormControl();
+
+
+// 
+// НАЧАЛО: построение диалоговой формы
+// 
+
+// Получить шаблон - шапка диалоговой формы
+$MagPokupateli->GetFormDialogHeader();
+
+$MagPokupateli->assign( 'form_dialog_element', 'build/templates/04pokupateli_forma.tpl' );
+
+// Получить шаблон - подвал диалоговой формы
+$MagPokupateli->GetFormDialogFooter();
+
+// 
+// КОНЕЦ: построение диалоговой формы
+// 
+
+
+// Закрываем сессию с БД
+$MagPokupateli->DisconnectDB();
+
+// Вызываем шаблон
+$MagPokupateli->display( 'template_main.tpl' );
+// $MagPokupateli->display( 'form_control.tpl' );
+
+
+exit;
+?>
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -104,7 +177,7 @@
                     <p><label for="input_id">ID: </label></p>
                     <p><input id="input_id" type="text" size="10" maxlength="10" disabled></p>
                 </div>
-                <div>                
+                <div>
                     <p><label for="input_fio">ФИО: </label></p>
                     <p>
                         <input id="input_fio" type="text" size="60" maxlength="60" title="От 1 до 60 символов">
