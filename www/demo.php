@@ -73,11 +73,13 @@
                 echo '<th>price</th>';
                 echo '</tr>';
 
+
+
                 //  Перемещает указатель результата на выбранную строку
                 $res_list_tovar->data_seek(0);
                 while ($row = $res_list_tovar->fetch_assoc()) 
                 {
-                    echo '<tr>' 
+                    echo '<tr>';
                     echo '<td>' . $row['id'] . '</td>';
                     echo '<td>' . $row['id_magazine'] . '</td>';
                     echo '<td>' . $row['descr_magazine'] . '</td>';
@@ -172,7 +174,7 @@
                 echo '<pre class=\'code\'>';
                 echo 'select <br>';
                 echo '  ch.id, <br>';
-                echo '  c.fio, <br>"' 
+                echo '  c.fio, <br>"'; 
                 echo '  m.descr as descr_magaine, <br>';
                 echo '  p.data_pokupki, <br>';
                 echo '  t.descr as descr_tovara, <br>';

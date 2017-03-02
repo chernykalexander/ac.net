@@ -85,7 +85,7 @@
                 echo 'from <br>';
                 echo '  client c <br>';
                 echo '  right outer join pokupki p <br>';
-                echo '  on c.id = p.id_client <br>' 
+                echo '  on c.id = p.id_client <br>';
                 echo '  right outer join check ch <br>';
                 echo '  on p.id = ch.id_pokupki <br>';
                 echo '  left outer join tovar t <br>';
